@@ -18,10 +18,10 @@ var OOP_CHAPTER_1 = {
             id: 1,
             text: "The main difference between Structured Programming and OOP is that OOP represents a program using:",
             options: [
-                "A) A set of modules.",
-                "B) A set of functions.",
-                "C) A set of objects and their interactions.",
-                "D) A single main module."
+                "A set of modules.",
+                "A set of functions.",
+                "A set of objects and their interactions.",
+                "A single main module."
             ],
             correct: 2,
             explanation: "OOP organizes software as a collection of objects that contain both data and behavior, unlike structured programming which focuses on functions and procedures.",
@@ -33,10 +33,10 @@ var OOP_CHAPTER_1 = {
             id: 2,
             text: "In OOP, an object is defined as any entity that has:",
             options: [
-                "A) Only a name.",
-                "B) Only attributes.",
-                "C) A state and a behavior.",
-                "D) Only operations."
+                "Only a name.",
+                "Only attributes.",
+                "A state and a behavior.",
+                "Only operations."
             ],
             correct: 2,
             explanation: "An object combines state (attributes/properties) and behavior (methods) into a single unit.",
@@ -48,10 +48,10 @@ var OOP_CHAPTER_1 = {
             id: 3,
             text: "A ________ is a template or blueprint for objects, while an ________ is an instance of that class.",
             options: [
-                "A) Object, Class.",
-                "B) Class, Object.",
-                "C) Field, Method.",
-                "D) Reference, Value."
+                "Object, Class.",
+                "Class, Object.",
+                "Field, Method.",
+                "Reference, Value."
             ],
             correct: 1,
             explanation: "Class defines the structure and behavior, Object is a concrete instance created from that class.",
@@ -62,10 +62,10 @@ var OOP_CHAPTER_1 = {
             id: 4,
             text: "In C#, attributes (characteristics) are represented using ________, while operations (behaviors) are represented using ________.",
             options: [
-                "A) Methods, Fields.",
-                "B) Fields, Methods.",
-                "C) Classes, Objects.",
-                "D) Stack, Heap."
+                "Methods, Fields.",
+                "Fields, Methods.",
+                "Classes, Objects.",
+                "Stack, Heap."
             ],
             correct: 1,
             explanation: "Fields store the state/attributes of an object, Methods define the operations/behavior.",
@@ -76,10 +76,10 @@ var OOP_CHAPTER_1 = {
             id: 5,
             text: "Which of the following is the correct syntax to create an object named x from class Car?",
             options: [
-                "A) Car x;",
-                "B) new Car x();",
-                "C) Car x = new Car();",
-                "D) Car x = Car();"
+                "Car x;",
+                "new Car x();",
+                "Car x = new Car();",
+                "Car x = Car();"
             ],
             correct: 2,
             explanation: "In C#, object creation requires the 'new' keyword followed by the constructor call.",
@@ -92,10 +92,10 @@ var OOP_CHAPTER_1 = {
             id: 6,
             text: "A program in execution is called a ________.",
             options: [
-                "A) Thread.",
-                "B) Process.",
-                "C) Text section.",
-                "D) Stack."
+                "Thread.",
+                "Process.",
+                "Text section.",
+                "Stack."
             ],
             correct: 1,
             explanation: "A process is an instance of a program in execution, containing memory sections and resources.",
@@ -106,10 +106,10 @@ var OOP_CHAPTER_1 = {
             id: 7,
             text: "Which memory section is used to store local (automatic) variables?",
             options: [
-                "A) Heap.",
-                "B) Data section.",
-                "C) Stack.",
-                "D) Text section."
+                "Heap.",
+                "Data section.",
+                "Stack.",
+                "Text section."
             ],
             correct: 2,
             explanation: "Stack stores local variables, method parameters, and return addresses.",
@@ -120,10 +120,10 @@ var OOP_CHAPTER_1 = {
             id: 8,
             text: "Dynamically allocated data, such as objects and arrays, are stored in the ________.",
             options: [
-                "A) Stack.",
-                "B) Heap.",
-                "C) Data section.",
-                "D) Text section."
+                "Stack.",
+                "Heap.",
+                "Data section.",
+                "Text section."
             ],
             correct: 1,
             explanation: "Heap memory is used for dynamic allocation at runtime.",
@@ -134,10 +134,10 @@ var OOP_CHAPTER_1 = {
             id: 9,
             text: "Value-type variables (like int) store the ________ in their memory location, while reference-type variables (like objects) store a ________.",
             options: [
-                "A) Reference, Value.",
-                "B) Actual value, Reference (Address).",
-                "C) Memory address, Data.",
-                "D) Code, Data."
+                "Reference, Value.",
+                "Actual value, Reference (Address).",
+                "Memory address, Data.",
+                "Code, Data."
             ],
             correct: 1,
             explanation: "Value types store the actual data, reference types store memory addresses pointing to the data.",
@@ -148,10 +148,10 @@ var OOP_CHAPTER_1 = {
             id: 10,
             text: "In the line 'int[] a = new int[10];', the variable a is stored in the ________ while the array itself is stored in the ________.",
             options: [
-                "A) Heap, Stack.",
-                "B) Stack, Heap.",
-                "C) Data section, Text section.",
-                "D) Stack, Stack."
+                "Heap, Stack.",
+                "Stack, Heap.",
+                "Data section, Text section.",
+                "Stack, Stack."
             ],
             correct: 1,
             explanation: "Reference 'a' is in Stack, the actual array of 10 integers is in Heap.",
@@ -164,10 +164,10 @@ var OOP_CHAPTER_1 = {
             id: 11,
             text: "When you execute 'Car c2 = c1;' (where c1 is an existing object), what happens?",
             options: [
-                "A) A new Car object is created in the heap.",
-                "B) The attributes of c1 are copied to a new object.",
-                "C) c2 becomes another reference to the same Car object in the heap.",
-                "D) An error occurs."
+                "A new Car object is created in the heap.",
+                "The attributes of c1 are copied to a new object.",
+                "c2 becomes another reference to the same Car object in the heap.",
+                "An error occurs."
             ],
             correct: 2,
             explanation: "Reference assignment copies the memory address, not the object itself.",
@@ -178,10 +178,10 @@ var OOP_CHAPTER_1 = {
             id: 12,
             text: "Predict the output of this code",
             options: [
-                "A) Red.",
-                "B) Blue.",
-                "C) Null.",
-                "D) Error."
+                "Red.",
+                "Blue.",
+                "Null.",
+                "Error."
             ],
             correct: 1,
             explanation: "c1 and c2 refer to the same object, so changing c2.color affects c1.color.",
@@ -193,10 +193,10 @@ var OOP_CHAPTER_1 = {
             id: 13,
             text: "If you have two Car objects created as 'Car c1 = new Car(); Car c2 = new Car();', how many objects exist in the Heap?",
             options: [
-                "A) 1.",
-                "B) 2.",
-                "C) 3.",
-                "D) 0."
+                "1.",
+                "2.",
+                "3.",
+                "0."
             ],
             correct: 1,
             explanation: "Each 'new' creates a separate object in the heap.",
@@ -207,10 +207,10 @@ var OOP_CHAPTER_1 = {
             id: 14,
             text: "(Advanced) If a variable 'Car c1;' is declared but new is not used, its initial value in the stack is:",
             options: [
-                "A) A default object.",
-                "B) null.",
-                "C) 0.",
-                "D) Error."
+                "A default object.",
+                "null.",
+                "0.",
+                "Error."
             ],
             correct: 1,
             explanation: "Uninitialized reference variables in C# have null value by default.",
@@ -221,10 +221,10 @@ var OOP_CHAPTER_1 = {
             id: 15,
             text: "What does the \"Text Section\" of the memory layout store?",
             options: [
-                "A) Global variables.",
-                "B) Local variables.",
-                "C) Program instructions.",
-                "D) Dynamic objects."
+                "Global variables.",
+                "Local variables.",
+                "Program instructions.",
+                "Dynamic objects."
             ],
             correct: 2,
             explanation: "Text section contains the executable code (machine instructions).",
@@ -237,10 +237,10 @@ var OOP_CHAPTER_1 = {
             id: 16,
             text: "According to C# naming conventions, it is a good practice to start naming a Class with:",
             options: [
-                "A) Lowercase letter.",
-                "B) Uppercase letter.",
-                "C) Underscore.",
-                "D) Any character."
+                "Lowercase letter.",
+                "Uppercase letter.",
+                "Underscore.",
+                "Any character."
             ],
             correct: 1,
             explanation: "C# naming convention: Classes use PascalCase (starting with uppercase).",
@@ -251,10 +251,10 @@ var OOP_CHAPTER_1 = {
             id: 17,
             text: "If three objects are created from the Car class, which of the following is TRUE?",
             options: [
-                "A) They all share the same state.",
-                "B) Each object has its own state (attribute values).",
-                "C) They are all stored in the Stack.",
-                "D) They must have the same color."
+                "They all share the same state.",
+                "Each object has its own state (attribute values).",
+                "They are all stored in the Stack.",
+                "They must have the same color."
             ],
             correct: 1,
             explanation: "Each object maintains its own separate copy of instance variables.",
@@ -273,10 +273,10 @@ const OOP_CHAPTER_1_EXTRA_QUESTIONS = [
         id: 18,
         text: "What is the purpose of the 'new' keyword in C#?",
         options: [
-            "A) To declare a variable.",
-            "B) To allocate memory for an object.",
-            "C) To import namespaces.",
-            "D) To define a class."
+            "To declare a variable.",
+            "To allocate memory for an object.",
+            "To import namespaces.",
+            "To define a class."
         ],
         correct: 1,
         explanation: "'new' allocates memory in the heap and calls the constructor.",
@@ -287,10 +287,10 @@ const OOP_CHAPTER_1_EXTRA_QUESTIONS = [
         id: 19,
         text: "Which memory area grows and shrinks dynamically during program execution?",
         options: [
-            "A) Text Section.",
-            "B) Data Section.",
-            "C) Both Stack and Heap.",
-            "D) Neither."
+            "Text Section.",
+            "Data Section.",
+            "Both Stack and Heap.",
+            "Neither."
         ],
         correct: 2,
         explanation: "Both Stack (for method calls) and Heap (for dynamic allocation) change size.",
@@ -301,10 +301,10 @@ const OOP_CHAPTER_1_EXTRA_QUESTIONS = [
         id: 20,
         text: "What will be the output of this code?\n\nint x = 5;\nint y = x;\nx = 10;\nConsole.WriteLine(y);",
         options: [
-            "A) 5",
-            "B) 10",
-            "C) 15",
-            "D) Error"
+            "5",
+            "10",
+            "15",
+            "Error"
         ],
         correct: 0,
         explanation: "Value types are copied by value, so y remains 5.",
