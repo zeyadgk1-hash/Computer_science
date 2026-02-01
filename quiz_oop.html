@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محرك اختبارات OOP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --primary-dark: #1e293b;
+            --accent: #3b82f6;
+            --accent-dark: #2563eb;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --dark: #0f172a;
+            --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            --border-radius: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: var(--light);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: var(--dark);
+            text-align: right;
+        }
+        
+        /* Navigation */
+        .quiz-nav {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid rgba(59, 130, 246, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .quiz-info h2 {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+        
+        .quiz-info p {
+            color: #93c5fd;
+            font-size: 0.9rem;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn.danger {
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+        
+        .nav-btn.danger:hover {
+            background: rgba(239, 68, 68, 0.2);
+        }
+        
+        /* Main Container */
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        /* Stats Bar */
+        .stats-bar {
+            background: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            border: 2px solid rgba(59, 130, 246, 0.1);
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat .value {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--accent);
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .stat .label {
+            color: var(--gray);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        /* Progress Bar */
+        .progress-container {
+            margin: 30px 0;
+        }
+        
+        .progress-bar {
+            height: 12px;
+            background: #e2e8f0;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+            width: 0%;
+            transition: width 0.5s;
+            border-radius: 6px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.3), 
+                transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            color: var(--gray);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        /* Question Card */
+        .question-card {
+            background: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+        
+        .question-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .question-number {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+        
+        .question-difficulty {
+            background: linear-gradient(135deg, var(--warning), #d97706);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .question-topic {
+            background: linear-gradient(135deg, var(--success), #059669);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+        
+        .question-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: var(--dark);
+            font-weight: 600;
+        }
+        
+        /* Question Image Container */
+        .question-image-container {
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .question-image {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            border: 2px solid rgba(59, 130, 246, 0.1);
+            transition: var(--transition);
+            cursor: zoom-in;
+            background-color: #f8fafc;
+        }
+        
+        .question-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .image-caption {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        
+        .image-fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 3000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .image-fullscreen.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .fullscreen-image {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+        
+        .close-fullscreen {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--danger);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+        }
+        
+        .close-fullscreen:hover {
+            background: #dc2626;
+            transform: rotate(90deg);
+        }
+        
+        /* Options */
+        .options-grid {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .option {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .option:hover {
+            border-color: var(--accent);
+            background: rgba(59, 130, 246, 0.05);
+            transform: translateX(-5px);
+        }
+        
+        .option.selected {
+            border-color: var(--accent);
+            background: rgba(59, 130, 246, 0.1);
+        }
+        
+        .option-letter {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 8px rgba(59, 130, 246, 0.2);
+        }
+        
+        .option-text {
+            flex: 1;
+            font-size: 1rem;
+            color: var(--dark);
+        }
+        
+        /* Review Mode */
+        .review-mode .option.correct {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.1);
+        }
+        
+        .review-mode .option.correct .option-letter {
+            background: linear-gradient(135deg, var(--success), #059669);
+        }
+        
+        .review-mode .option.wrong {
+            border-color: var(--danger);
+            background: rgba(239, 68, 68, 0.1);
+        }
+        
+        .review-mode .option.wrong .option-letter {
+            background: linear-gradient(135deg, var(--danger), #dc2626);
+        }
+        
+        /* Explanation */
+        .explanation {
+            background: #f0f9ff;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            display: none;
+            border-right: 4px solid var(--accent);
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .explanation.show {
+            display: block;
+        }
+        
+        .explanation-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            color: var(--accent);
+            font-weight: 700;
+        }
+        
+        /* Controls */
+        .controls {
+            background: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            margin-top: 40px;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            border: 2px solid rgba(59, 130, 246, 0.1);
+        }
+        
+        .control-btn {
+            padding: 15px 40px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+            font-family: 'Cairo', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .control-btn.primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: white;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+        
+        .control-btn.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        .control-btn.secondary {
+            background: linear-gradient(135deg, var(--warning), #d97706);
+            color: white;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
+        }
+        
+        .control-btn.secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            border: 2px solid var(--accent);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(30px) scale(0.95); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
+        }
+        
+        .score {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 20px 0;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        /* Loader */
+        .loader {
+            text-align: center;
+            padding: 100px 20px;
+        }
+        
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid #e2e8f0;
+            border-top: 5px solid var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Chapter Badge */
+        .chapter-badge {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: inline-block;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+        
+        /* Source */
+        .source {
+            color: var(--gray);
+            font-size: 0.8rem;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .stats-bar {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .question-text {
+                font-size: 1.1rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+            
+            .modal-buttons {
+                flex-direction: column;
+            }
+            
+            .question-image {
+                max-height: 300px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .stats-bar {
+                grid-template-columns: 1fr;
+            }
+            
+            .question-card {
+                padding: 20px;
+            }
+            
+            .question-number {
+                padding: 8px 15px;
+                font-size: 1rem;
+            }
+            
+            .question-image {
+                max-height: 250px;
+            }
+            
+            .question-header {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+        }
+        
+        /* Debug Info */
+        .debug-info {
+            background: #f8fafc;
+            border: 2px solid var(--accent);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: var(--gray);
+            display: none;
+        }
+        
+        .debug-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .toggle-debug {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        
+        /* Image Loading State */
+        .image-loading {
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8fafc;
+            border-radius: 12px;
+        }
+        
+        .image-loading .spinner {
+            width: 40px;
+            height: 40px;
+            border-width: 3px;
+        }
+        
+        /* Code Snippet */
+        .code-snippet {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 20px 0;
+            overflow-x: auto;
+            direction: ltr;
+            text-align: left;
+            border: 2px solid #334155;
+        }
+        
+        .code-keyword {
+            color: #60a5fa;
+        }
+        
+        .code-string {
+            color: #10b981;
+        }
+        
+        .code-comment {
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="quiz-nav">
+        <div class="nav-container">
+            <div class="quiz-info">
+                <h2 id="quiz-title">تحميل اختبار OOP...</h2>
+                <p id="quiz-info">جاري التحميل</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="saveProgress()">
+                    <i class="fas fa-save"></i> حفظ التقدم
+                </button>
+                <button class="nav-btn danger" onclick="exitQuiz()">
+                    <i class="fas fa-sign-out-alt"></i> خروج
+                </button>
+                <button class="nav-btn" onclick="toggleDebug()" style="font-size: 0.8rem;">
+                    <i class="fas fa-bug"></i> Debug
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Loader -->
+        <div id="loader" class="loader">
+            <div class="spinner"></div>
+            <h3>جاري تحميل الأسئلة...</h3>
+            <p id="loader-text">تحميل من مصادر مختلفة: GeeksforGeeks, Stack Overflow, والكتب الجامعية</p>
+            <div id="file-status" style="margin-top: 20px; color: var(--gray);"></div>
+        </div>
+
+        <!-- Debug Info -->
+        <div id="debug-info" class="debug-info">
+            <div class="debug-header">
+                <h4>معلومات التصحيح</h4>
+                <button class="toggle-debug" onclick="toggleDebug()">إغلاق</button>
+            </div>
+            <div id="debug-content"></div>
+        </div>
+
+        <!-- Stats Bar -->
+        <div id="stats-bar" class="stats-bar" style="display: none;">
+            <div class="stat">
+                <span class="value" id="total-questions">0</span>
+                <span class="label">إجمالي الأسئلة</span>
+            </div>
+            <div class="stat">
+                <span class="value" id="answered">0</span>
+                <span class="label">تم الإجابة</span>
+            </div>
+            <div class="stat">
+                <span class="value" id="timer">00:00</span>
+                <span class="label">الوقت</span>
+            </div>
+            <div class="stat">
+                <span class="value" id="progress-percent">0%</span>
+                <span class="label">التقدم</span>
+            </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div id="progress-container" class="progress-container" style="display: none;">
+            <div class="progress-bar">
+                <div class="progress" id="progress-bar"></div>
+            </div>
+            <div class="progress-info">
+                <span>التقدم</span>
+                <span id="progress-text">0/0</span>
+            </div>
+        </div>
+
+        <!-- Questions Container -->
+        <div id="questions-container"></div>
+
+        <!-- Controls -->
+        <div id="controls" class="controls" style="display: none;">
+            <button class="control-btn primary" onclick="submitQuiz()" id="submit-btn">
+                <i class="fas fa-paper-plane"></i> إنهاء الاختبار
+            </button>
+            <button class="control-btn secondary" onclick="reviewMode()" id="review-btn" style="display: none;">
+                <i class="fas fa-search"></i> مراجعة الإجابات
+            </button>
+        </div>
+    </div>
+
+    <!-- Result Modal -->
+    <div id="result-modal" class="modal">
+        <div class="modal-content">
+            <h2>تم إنهاء الاختبار بنجاح! 🎉</h2>
+            <div class="score" id="final-score">0%</div>
+            <div id="performance-text"></div>
+            
+            <div class="modal-buttons">
+                <button class="control-btn primary" onclick="reviewMode()">
+                    <i class="fas fa-search"></i> مراجعة الإجابات
+                </button>
+                <button class="nav-btn" onclick="goToExercises()">
+                    <i class="fas fa-book"></i> العودة للفصول
+                </button>
+                <button class="nav-btn" onclick="restartQuiz()">
+                    <i class="fas fa-redo"></i> إعادة المحاولة
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fullscreen Image Modal -->
+    <div id="image-fullscreen" class="image-fullscreen">
+        <button class="close-fullscreen" onclick="closeFullscreenImage()">
+            <i class="fas fa-times"></i>
+        </button>
+        <img id="fullscreen-image" class="fullscreen-image" src="" alt="صورة السؤال">
+    </div>
+
+    <script>
+    // ===== محرك الكويز المحسن مع دعم الصور =====
+    class QuizEngine {
+        constructor() {
+            this.questions = [];
+            this.userAnswers = {};
+            this.timeElapsed = 0;
+            this.timerInterval = null;
+            this.isReviewMode = false;
+            this.quizCompleted = false;
+            this.chapterInfo = null;
+            this.loadedFiles = {};
+            this.imageCache = {};
+            
+            console.log("🚀 بدء محرك الكويز المحسن مع دعم الصور...");
+            this.init();
+        }
+        
+        async init() {
+            // تحديث حالة التحميل
+            this.updateLoaderText('جاري تحميل ملفات الأسئلة...');
+            
+            // تحديد الفصل من الرابط
+            const urlParams = new URLSearchParams(window.location.search);
+            const chapterId = parseInt(urlParams.get('level') || '1');
+            
+            // تحميل ملفات الأسئلة أولاً
+            await this.loadQuestionFiles(chapterId);
+            
+            // ثم تهيئة المحرك
+            this.loadQuestions();
+            this.startTimer();
+            this.renderQuestions();
+            this.updateStats();
+            
+            // إضافة مستمعين للأحداث
+            this.addEventListeners();
+        }
+        
+        addEventListeners() {
+            // إغلاق صورة ملء الشاشة بالزر ESC
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    this.closeFullscreenImage();
+                }
+            });
+            
+            // إغلاق صورة ملء الشاشة بالنقر خارجها
+            document.getElementById('image-fullscreen').addEventListener('click', (e) => {
+                if (e.target.id === 'image-fullscreen') {
+                    this.closeFullscreenImage();
+                }
+            });
+        }
+        
+        updateLoaderText(text) {
+            const loaderText = document.getElementById('loader-text');
+            if (loaderText) loaderText.textContent = text;
+        }
+        
+        updateFileStatus(status) {
+            const fileStatus = document.getElementById('file-status');
+            if (fileStatus) fileStatus.innerHTML = status;
+        }
+        
+        async loadQuestionFiles(chapterId) {
+            console.log(`📂 محاولة تحميل ملفات الأسئلة للفصل ${chapterId}`);
+            
+            const filesToLoad = [];
+            
+            // تحديد الملفات المطلوبة بناءً على الفصل
+            if (chapterId === 1) filesToLoad.push('oop1_data.js');
+            if (chapterId === 2) filesToLoad.push('oop2_data.js');
+            if (chapterId === 3) filesToLoad.push('oop3_data.js');
+            if (chapterId === 4) filesToLoad.push('oop4_data.js');
+            if (chapterId === 5) filesToLoad.push('oop5_data.js');
+            if (chapterId === 6) filesToLoad.push('oop6_data.js');
+            if (chapterId === 7) filesToLoad.push('oop7_data.js');
+            if (chapterId === 8) filesToLoad.push('oop8_data.js');
+            if (chapterId === 9) filesToLoad.push('oop9_data.js');
+            if (chapterId === 10) filesToLoad.push('oop10_data.js');
+            if (chapterId === 11) filesToLoad.push('oop11_data.js');
+            if (chapterId === 12) filesToLoad.push('oop12_data.js');
+            // تحميل ملفات إضافية إذا كانت موجودة
+            filesToLoad.push('questions.js');
+            
+            let loadedCount = 0;
+            const totalFiles = filesToLoad.length;
+            
+            // تحديث حالة التحميل
+            this.updateFileStatus(`تحميل الملفات: 0/${totalFiles}`);
+            
+            // تحميل كل الملفات بالتسلسل
+            for (const file of filesToLoad) {
+                try {
+                    await this.loadScript(file);
+                    loadedCount++;
+                    this.updateFileStatus(`تحميل الملفات: ${loadedCount}/${totalFiles} - ${file} محمل`);
+                    console.log(`✅ تم تحميل ${file}`);
+                } catch (error) {
+                    console.warn(`⚠️ لم يتم تحميل ${file}:`, error.message);
+                }
+            }
+            
+            console.log(`📊 تم تحميل ${loadedCount} من ${totalFiles} ملفات`);
+            
+            // إذا لم يتم تحميل أي ملف، ننتظر قليلاً ونحاول مرة أخرى
+            if (loadedCount === 0 && chapterId <= 3) {
+                this.updateLoaderText('جاري المحاولة مرة أخرى...');
+                await new Promise(resolve => setTimeout(resolve, 500));
+                
+                // محاولة تحميل مباشرة للملفات
+                await this.loadScriptFallback(chapterId);
+            }
+        }
+        
+        loadScript(src) {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = src;
+                script.async = true;
+                
+                script.onload = () => {
+                    this.loadedFiles[src] = true;
+                    resolve();
+                };
+                
+                script.onerror = () => {
+                    console.warn(`❌ فشل تحميل ${src}`);
+                    reject(new Error(`فشل تحميل ${src}`));
+                };
+                
+                document.head.appendChild(script);
+            });
+        }
+        
+        async loadScriptFallback(chapterId) {
+            console.log(`🔄 محاولة بديلة لتحميل الفصل ${chapterId}`);
+            
+            const fallbackFiles = {
+                1: 'oop1_data.js',
+                2: 'oop2_data.js',
+                3: 'oop3_data.js',
+                4: 'oop4_data.js',
+                5: 'oop5_data.js',
+                6: 'oop6_data.js',
+                7: 'oop7_data.js',
+                8: 'oop8_data.js',
+                9: 'oop9_data.js',
+                10: 'oop10_data.js',
+                11: 'oop11_data.js',
+                12: 'oop12_data.js'
+            };
+            
+            const file = fallbackFiles[chapterId];
+            if (!file) return;
+            
+            try {
+                const response = await fetch(file);
+                if (response.ok) {
+                    const scriptContent = await response.text();
+                    // تنفيذ محتوى الملف مباشرة
+                    eval(scriptContent);
+                    console.log(`✅ تم تحميل ${file} بالطريقة البديلة`);
+                }
+            } catch (error) {
+                console.error(`❌ فشل تحميل ${file} بالطريقة البديلة:`, error);
+            }
+        }
+        
+        // دالة محسنة للبحث عن أسئلة الفصل
+        getChapterQuestions(chapterId) {
+            console.log(`🔍 البحث عن أسئلة الفصل ${chapterId}...`);
+            
+            let foundQuestions = [];
+            
+            // الطريقة 1: البحث في المتغيرات المباشرة
+            const chapterVar = `OOP_CHAPTER_${chapterId}`;
+            if (window[chapterVar] && window[chapterVar].questions) {
+                console.log(`✅ وجدت ${window[chapterVar].questions.length} سؤال في ${chapterVar}`);
+                foundQuestions = window[chapterVar].questions;
+            }
+            
+            // الطريقة 2: البحث في الفصول الفردية
+            if (foundQuestions.length === 0) {
+                if (chapterId === 1 && window.OOP_CHAPTER_1 && window.OOP_CHAPTER_1.questions) {
+                    console.log(`✅ وجدت ${window.OOP_CHAPTER_1.questions.length} سؤال في OOP_CHAPTER_1`);
+                    foundQuestions = window.OOP_CHAPTER_1.questions;
+                }
+                else if (chapterId === 2 && window.OOP_CHAPTER_2 && window.OOP_CHAPTER_2.questions) {
+                    console.log(`✅ وجدت ${window.OOP_CHAPTER_2.questions.length} سؤال في OOP_CHAPTER_2`);
+                    foundQuestions = window.OOP_CHAPTER_2.questions;
+                }
+                else if (chapterId === 3 && window.OOP_CHAPTER_3 && window.OOP_CHAPTER_3.questions) {
+                    console.log(`✅ وجدت ${window.OOP_CHAPTER_3.questions.length} سؤال في OOP_CHAPTER_3`);
+                    foundQuestions = window.OOP_CHAPTER_3.questions;
+                }
+            }
+            
+            // الطريقة 3: البحث في OOP_CHAPTERS إذا كان موجوداً
+            if (foundQuestions.length === 0 && window.OOP_CHAPTERS && Array.isArray(window.OOP_CHAPTERS)) {
+                const chapter = window.OOP_CHAPTERS.find(ch => ch.id === chapterId);
+                if (chapter && chapter.questions) {
+                    console.log(`✅ وجدت ${chapter.questions.length} سؤال في OOP_CHAPTERS`);
+                    foundQuestions = chapter.questions;
+                }
+            }
+            
+            // الطريقة 4: البحث في جميع المتغيرات
+            if (foundQuestions.length === 0) {
+                console.log("🔎 البحث في جميع المتغيرات المتاحة...");
+                
+                // قائمة بالمتغيرات المحتملة
+                const potentialVars = [
+                    'oop1_data', 'oop2_data', 'oop3_data',
+                  'oop4_data',
+                  'oop5_data',
+                  'oop6_data',
+                  'oop7_data',
+                  'oop8_data',
+                  'oop9_data',
+                  'oop10_data',
+                  'oop11_data',
+                  'oop12_data',
+                    'oopData', 'questionsData', 'quizData'
+                ];
+                
+                for (const varName of potentialVars) {
+                    if (window[varName] && Array.isArray(window[varName])) {
+                        console.log(`✅ وجدت ${window[varName].length} سؤال في ${varName}`);
+                        foundQuestions = window[varName];
+                        break;
+                    }
+                }
+            }
+            
+            // إذا لم نجد أي أسئلة، نستخدم الأسئلة التجريبية مع صور
+            if (foundQuestions.length === 0) {
+                console.warn('⚠️ لم يتم العثور على أسئلة، استخدام الأسئلة التجريبية مع صور');
+                foundQuestions = this.getSampleQuestions();
+            }
+            
+            // تسجيل عدد الأسئلة التي تم العثور عليها
+            console.log(`📊 تم العثور على ${foundQuestions.length} سؤال للفصل ${chapterId}`);
+            
+            return foundQuestions;
+        }
+        
+        loadQuestions() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const level = urlParams.get('level') || '1';
+            const type = urlParams.get('type') || 'chapter';
+            
+            console.log(`🎯 تحميل الكويز: الفصل=${level}, النوع=${type}`);
+            
+            if (type === 'chapter') {
+                const chapterId = parseInt(level);
+                this.questions = this.getChapterQuestions(chapterId);
+                
+                // تحديث حالة التحميل
+                this.updateLoaderText(`تم تحميل ${this.questions.length} سؤال`);
+                this.updateFileStatus(`جاري إعداد الأسئلة للعرض...`);
+                
+                console.log(`📚 تم تحميل ${this.questions.length} سؤال للفصل ${chapterId}`);
+                
+                // تسجيل تفاصيل الأسئلة للتصحيح
+                if (this.questions.length > 0) {
+                    console.log("📝 عينة من الأسئلة:");
+                    this.questions.slice(0, 2).forEach((q, i) => {
+                        console.log(`  ${i+1}. ${q.text.substring(0, 50)}...`);
+                        if (q.image) console.log(`     📷 يحتوي على صورة: ${q.image}`);
+                    });
+                }
+            }
+            
+            this.updateQuizInfo(level, type);
+            this.loadProgress(level, type);
+            this.updateDebugInfo();
+        }
+        
+        getSampleQuestions() {
+            return [
+                {
+                    id: 1,
+                    text: "ما هو الفرق بين البرمجة الهيكلية والبرمجة كائنية التوجه؟",
+                    image: "https://via.placeholder.com/600x300/3b82f6/ffffff?text=OOP+vs+Procedural+Programming",
+                    imageCaption: "مقارنة بين البرمجة الهيكلية والبرمجة كائنية التوجه",
+                    options: [
+                        "أ) البرمجة الهيكلية تستخدم الدوال فقط",
+                        "ب) البرمجة كائنية التوجه تستخدم الكائنات وتفاعلاتها",
+                        "ج) لا يوجد فرق",
+                        "د) البرمجة الهيكلية أسرع"
+                    ],
+                    correct: 1,
+                    explanation: "البرمجة كائنية التوجه تنظم البرنامج كمجموعة من الكائنات التي تحتوي على البيانات والسلوك.",
+                    topic: "مفاهيم أساسية",
+                    difficulty: "مبتدئ"
+                },
+                {
+                    id: 2,
+                    text: "ماذا يسمى القالب الذي يحدد خصائص وسلوك الكائنات؟",
+                    image: "https://via.placeholder.com/600x200/10b981/ffffff?text=Class+Diagram+Example",
+                    options: [
+                        "أ) كائن",
+                        "ب) صنف",
+                        "ج) دالة",
+                        "د) متغير"
+                    ],
+                    correct: 1,
+                    explanation: "الصنف هو القالب الذي يحدد خصائص وسلوك الكائنات.",
+                    topic: "الصنف مقابل الكائن",
+                    difficulty: "مبتدئ",
+                    codeSnippet: `class Car {
+  String brand;
+  int year;
+  
+  void startEngine() {
+    System.out.println("Engine started!");
+  }
+}`
+                }
+            ];
+        }
+        
+        updateQuizInfo(chapterId, type) {
+            const chapterTitles = {
+                1: "الفصل 1: المبادئ الأساسية",
+                2: "الفصل 2: أعضاء الكلاس",
+                3: "الفصل 3: الوراثة"
+            };
+            
+            const typeTitles = {
+                'chapter': 'تدريب الفصل',
+                'review': 'مراجعة',
+                'midterm': 'اختبار ميدترم',
+                'final': 'اختبار نهائي',
+                'marathon': 'ماراثون OOP'
+            };
+            
+            let title = chapterTitles[chapterId] || `الفصل ${chapterId}`;
+            let info = `${this.questions.length} سؤال`;
+            
+            if (type !== 'chapter') {
+                title = `${typeTitles[type] || 'اختبار'} - OOP`;
+                info = `${this.questions.length} سؤال | جميع المستويات`;
+            }
+            
+            document.getElementById('quiz-title').textContent = title;
+            document.getElementById('quiz-info').textContent = info;
+            
+            this.chapterInfo = { id: chapterId, type: type, title: title };
+        }
+        
+        loadProgress(chapterId, type) {
+            try {
+                const progressKey = `oop_quiz_progress_${type}_${chapterId}`;
+                const saved = localStorage.getItem(progressKey);
+                
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    if (confirm('هل تريد استئناف التقدم السابق؟')) {
+                        this.userAnswers = data.userAnswers || {};
+                        this.timeElapsed = data.timeElapsed || 0;
+                        console.log('✅ تم تحميل التقدم السابق');
+                    }
+                }
+            } catch (error) {
+                console.error('❌ خطأ في تحميل التقدم:', error);
+            }
+        }
+        
+        startTimer() {
+            this.timerInterval = setInterval(() => {
+                this.timeElapsed++;
+                this.updateTimer();
+            }, 1000);
+        }
+        
+        updateTimer() {
+            const minutes = Math.floor(this.timeElapsed / 60);
+            const seconds = this.timeElapsed % 60;
+            document.getElementById('timer').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        renderQuestions() {
+            const container = document.getElementById('questions-container');
+            container.innerHTML = '';
+            
+            if (this.chapterInfo && this.chapterInfo.type === 'chapter') {
+                container.innerHTML += `
+                    <div style="text-align: center; margin-bottom: 30px;">
+                        <div class="chapter-badge">
+                            <i class="fas fa-book"></i> ${this.chapterInfo.title}
+                        </div>
+                        <p style="color: var(--gray); margin-top: 10px; font-size: 1.1rem;">
+                            <i class="fas fa-question-circle"></i> ${this.questions.length} سؤال | اختبار الفصل الدراسي
+                        </p>
+                    </div>
+                `;
+            }
+            
+            this.questions.forEach((question, index) => {
+                // بناء HTML للصورة إذا كانت موجودة
+                let imageHTML = '';
+                if (question.image) {
+                    imageHTML = `
+                        <div class="question-image-container">
+                            <img src="${question.image}" 
+                                 alt="صورة توضيحية للسؤال ${index + 1}" 
+                                 class="question-image"
+                                 onclick="quiz.openFullscreenImage('${question.image}', '${question.imageCaption || ''}')"
+                                 onload="this.style.display='block'"
+                                 onerror="this.style.display='none'; console.error('❌ فشل تحميل الصورة:', '${question.image}')">
+                            ${question.imageCaption ? `<div class="image-caption">${question.imageCaption}</div>` : ''}
+                        </div>
+                    `;
+                }
+                
+                // بناء HTML للكود إذا كان موجوداً
+                let codeHTML = '';
+                if (question.codeSnippet) {
+                    const formattedCode = this.formatCodeSnippet(question.codeSnippet);
+                    codeHTML = `
+                        <div class="code-snippet">
+                            <div style="color: #94a3b8; margin-bottom: 10px; font-size: 0.8rem;">
+                                <i class="fas fa-code"></i> مثال كود
+                            </div>
+                            <pre>${formattedCode}</pre>
+                        </div>
+                    `;
+                }
+                
+                const questionHTML = `
+                    <div class="question-card" id="question-${index}">
+                        <div class="question-header">
+                            <div class="question-number">سؤال ${index + 1}</div>
+                            <div style="display: flex; gap: 10px;">
+                                <div class="question-difficulty">${question.difficulty || 'مبتدئ'}</div>
+                                <div class="question-topic">${question.topic || 'عام'}</div>
+                            </div>
+                        </div>
+                        <div class="question-text">${question.text}</div>
+                        ${imageHTML}
+                        ${codeHTML}
+                        <div class="options-grid">
+                            ${question.options.map((option, optIndex) => `
+                                <div class="option" onclick="quiz.selectAnswer(${index}, ${optIndex})" 
+                                     data-question="${index}" data-option="${optIndex}">
+                                    <div class="option-letter">${String.fromCharCode(65 + optIndex)}</div>
+                                    <div class="option-text">${option}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="explanation" id="explanation-${index}">
+                            <div class="explanation-header">
+                                <i class="fas fa-lightbulb"></i> الشرح
+                            </div>
+                            ${question.explanation || 'شرح السؤال سيظهر هنا.'}
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += questionHTML;
+            });
+            
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('stats-bar').style.display = 'grid';
+            document.getElementById('progress-container').style.display = 'block';
+            document.getElementById('controls').style.display = 'flex';
+            document.getElementById('total-questions').textContent = this.questions.length;
+            
+            setTimeout(() => {
+                Object.keys(this.userAnswers).forEach(qIndex => {
+                    const optionIndex = this.userAnswers[qIndex];
+                    const optionElement = document.querySelector(`[data-question="${qIndex}"][data-option="${optionIndex}"]`);
+                    if (optionElement) {
+                        optionElement.classList.add('selected');
+                    }
+                });
+            }, 100);
+            
+            this.updateDebugInfo();
+        }
+        
+        formatCodeSnippet(code) {
+            // تلوين بسيط للكود
+            let formatted = code
+                .replace(/class\b/g, '<span class="code-keyword">class</span>')
+                .replace(/void\b|int\b|String\b|boolean\b/g, '<span class="code-keyword">$&</span>')
+                .replace(/System\.out\.println/g, '<span class="code-keyword">System.out.println</span>')
+                .replace(/".*?"/g, '<span class="code-string">$&</span>')
+                .replace(/\/\/.*/g, '<span class="code-comment">$&</span>');
+            
+            return formatted;
+        }
+        
+        selectAnswer(questionIndex, optionIndex) {
+            if (this.isReviewMode || this.quizCompleted) return;
+            
+            const questionElement = document.getElementById(`question-${questionIndex}`);
+            questionElement.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            const selectedOption = document.querySelector(`[data-question="${questionIndex}"][data-option="${optionIndex}"]`);
+            if (selectedOption) {
+                selectedOption.classList.add('selected');
+            }
+            
+            this.userAnswers[questionIndex] = optionIndex;
+            this.updateStats();
+        }
+        
+        updateStats() {
+            const answered = Object.keys(this.userAnswers).length;
+            const total = this.questions.length;
+            const progress = Math.round((answered / total) * 100);
+            
+            document.getElementById('answered').textContent = answered;
+            document.getElementById('progress-percent').textContent = `${progress}%`;
+            document.getElementById('progress-text').textContent = `${answered}/${total}`;
+            document.getElementById('progress-bar').style.width = `${progress}%`;
+        }
+        
+        submitQuiz() {
+            const answered = Object.keys(this.userAnswers).length;
+            const total = this.questions.length;
+            
+            if (answered < total && !confirm(`أجبت على ${answered} من ${total} سؤال. هل تريد إنهاء الاختبار؟`)) {
+                return;
+            }
+            
+            this.quizCompleted = true;
+            clearInterval(this.timerInterval);
+            this.showResults();
+        }
+        
+        showResults() {
+            let correct = 0;
+            this.questions.forEach((question, index) => {
+                if (this.userAnswers[index] === question.correct) correct++;
+            });
+            
+            const score = Math.round((correct / this.questions.length) * 100);
+            document.getElementById('final-score').textContent = `${score}%`;
+            
+            let performanceText = '';
+            if (score >= 90) performanceText = "ممتاز! أنت خبير في OOP! 🏆";
+            else if (score >= 70) performanceText = "ممتاز! معرفة قوية بمبادئ OOP! ⭐";
+            else if (score >= 50) performanceText = "جيد جداً! استمر في الممارسة! 👍";
+            else if (score >= 30) performanceText = "مقبول! راجع الدروس مرة أخرى! 📚";
+            else performanceText = "يحتاج تحسين! راجع المفاهيم الأساسية! 💪";
+            
+            document.getElementById('performance-text').innerHTML = `
+                <p style="font-size: 1.2rem; margin: 10px 0;">${correct} من أصل ${this.questions.length} سؤال صحيح</p>
+                <p style="font-size: 1.3rem; font-weight: 700; color: var(--accent); margin: 15px 0;">${performanceText}</p>
+            `;
+            
+            document.getElementById('result-modal').style.display = 'flex';
+            document.getElementById('submit-btn').style.display = 'none';
+            document.getElementById('review-btn').style.display = 'block';
+            
+            this.saveResults(score, correct);
+        }
+        
+        saveResults(score, correct) {
+            try {
+                if (this.chapterInfo) {
+                    const progressKey = `oop_quiz_progress_${this.chapterInfo.type}_${this.chapterInfo.id}`;
+                    const progress = {
+                        score: score,
+                        correct: correct,
+                        total: this.questions.length,
+                        time: this.timeElapsed,
+                        date: new Date().toISOString(),
+                        userAnswers: this.userAnswers
+                    };
+                    localStorage.setItem(progressKey, JSON.stringify(progress));
+                }
+            } catch (error) {
+                console.error('❌ خطأ في حفظ النتائج:', error);
+            }
+        }
+        
+        reviewMode() {
+            this.isReviewMode = true;
+            document.body.classList.add('review-mode');
+            document.getElementById('result-modal').style.display = 'none';
+            
+            this.questions.forEach((question, index) => {
+                const questionElement = document.getElementById(`question-${index}`);
+                const options = questionElement.querySelectorAll('.option');
+                
+                options.forEach((option, optIndex) => {
+                    if (optIndex === question.correct) {
+                        option.classList.add('correct');
+                    } else if (this.userAnswers[index] === optIndex && this.userAnswers[index] !== question.correct) {
+                        option.classList.add('wrong');
+                    }
+                });
+                
+                document.getElementById(`explanation-${index}`).classList.add('show');
+            });
+        }
+        
+        saveProgress() {
+            try {
+                if (!this.chapterInfo) return;
+                
+                const progressKey = `oop_quiz_progress_${this.chapterInfo.type}_${this.chapterInfo.id}`;
+                const progress = {
+                    userAnswers: this.userAnswers,
+                    timeElapsed: this.timeElapsed,
+                    timestamp: new Date().toISOString()
+                };
+                localStorage.setItem(progressKey, JSON.stringify(progress));
+                alert('تم حفظ التقدم بنجاح!');
+            } catch (error) {
+                console.error('❌ خطأ في حفظ التقدم:', error);
+                alert('خطأ في حفظ التقدم!');
+            }
+        }
+        
+        openFullscreenImage(imageUrl, caption = '') {
+            const fullscreenModal = document.getElementById('image-fullscreen');
+            const fullscreenImage = document.getElementById('fullscreen-image');
+            
+            fullscreenImage.src = imageUrl;
+            fullscreenImage.alt = caption || 'صورة توضيحية';
+            
+            // عرض التسمية التوضيحية إذا كانت موجودة
+            if (caption) {
+                if (!document.getElementById('fullscreen-caption')) {
+                    const captionEl = document.createElement('div');
+                    captionEl.id = 'fullscreen-caption';
+                    captionEl.style.cssText = `
+                        position: absolute;
+                        bottom: 20px;
+                        left: 0;
+                        right: 0;
+                        text-align: center;
+                        color: white;
+                        font-size: 1.2rem;
+                        padding: 10px;
+                        background: rgba(0,0,0,0.5);
+                    `;
+                    fullscreenModal.appendChild(captionEl);
+                }
+                document.getElementById('fullscreen-caption').textContent = caption;
+            }
+            
+            fullscreenModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // منع التمرير
+        }
+        
+        closeFullscreenImage() {
+            const fullscreenModal = document.getElementById('image-fullscreen');
+            fullscreenModal.classList.remove('active');
+            document.body.style.overflow = ''; // إعادة التمرير
+        }
+        
+        updateDebugInfo() {
+            const debugContent = document.getElementById('debug-content');
+            if (!debugContent) return;
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            const chapterId = urlParams.get('level') || '1';
+            
+            // حساب عدد الأسئلة التي تحتوي على صور
+            const questionsWithImages = this.questions.filter(q => q.image).length;
+            const questionsWithCode = this.questions.filter(q => q.codeSnippet).length;
+            
+            let debugHTML = `
+                <h5>معلومات التحميل:</h5>
+                <p><strong>الفصل الحالي:</strong> ${chapterId}</p>
+                <p><strong>عدد الأسئلة:</strong> ${this.questions.length}</p>
+                <p><strong>أسئلة تحتوي على صور:</strong> ${questionsWithImages}</p>
+                <p><strong>أسئلة تحتوي على كود:</strong> ${questionsWithCode}</p>
+                <p><strong>الملفات المحملة:</strong></p>
+                <ul>
+            `;
+            
+            // عرض الملفات المحملة
+            Object.keys(this.loadedFiles).forEach(file => {
+                debugHTML += `<li>${file}: ✅ محمل</li>`;
+            });
+            
+            // التحقق من المتغيرات
+            debugHTML += `
+                </ul>
+                <h5>المتغيرات المتاحة:</h5>
+                <ul>
+            `;
+            
+            const checkVars = [
+                'OOP_CHAPTER_1', 'OOP_CHAPTER_2', 'OOP_CHAPTER_3',
+                  'OOP_CHAPTER_4',
+                  'OOP_CHAPTER_5',
+                  'OOP_CHAPTER_6',
+                  'OOP_CHAPTER_7',
+                  'OOP_CHAPTER_8',
+                  'OOP_CHAPTER_9',
+                  'OOP_CHAPTER_10',
+                  'OOP_CHAPTER_11',
+                  'OOP_CHAPTER_12',
+                'OOP_CHAPTERS', 'oop1_data', 'oop2_data', 'oop3_data',
+                  'oop4_data',
+                  'oop5_data',
+                  'oop6_data',
+                  'oop7_data',
+                  'oop8_data',
+                  'oop9_data',
+                  'oop10_data',
+                  'oop11_data',
+                  'oop12_data'
+            ];
+            
+            checkVars.forEach(varName => {
+                const exists = window[varName] ? '✅ موجود' : '❌ غير موجود';
+                const type = window[varName] ? typeof window[varName] : 'N/A';
+                debugHTML += `<li>${varName}: ${exists} (${type})</li>`;
+            });
+            
+            debugHTML += `
+                </ul>
+                <h5>عينة من الأسئلة (الأولى):</h5>
+            `;
+            
+            if (this.questions.length > 0) {
+                const sampleQuestion = { ...this.questions[0] };
+                // تقليل حجم النص للعرض
+                if (sampleQuestion.text && sampleQuestion.text.length > 100) {
+                    sampleQuestion.text = sampleQuestion.text.substring(0, 100) + '...';
+                }
+                debugHTML += `<pre>${JSON.stringify(sampleQuestion, null, 2)}</pre>`;
+            } else {
+                debugHTML += `<p>لا توجد أسئلة محملة</p>`;
+            }
+            
+            debugContent.innerHTML = debugHTML;
+        }
+    }
+    
+    // ===== متغيرات ودوال عامة =====
+    let quiz = null;
+    
+    // تهيئة المحرك بعد تحميل الصفحة
+    window.addEventListener('DOMContentLoaded', () => {
+        console.log('📄 تم تحميل DOM، بدء تهيئة المحرك...');
+        
+        // بدء المحرك
+        try {
+            quiz = new QuizEngine();
+            window.quiz = quiz;
+        } catch (error) {
+            console.error('❌ خطأ في بدء المحرك:', error);
+            
+            // محاولة بديلة
+            setTimeout(() => {
+                alert('محاولة تحميل الأسئلة مرة أخرى...');
+                try {
+                    quiz = new QuizEngine();
+                    window.quiz = quiz;
+                } catch (error2) {
+                    alert('فشل تحميل الاختبار. تأكد من وجود ملفات الأسئلة في نفس المجلد.');
+                    document.getElementById('loader').innerHTML = `
+                        <div style="color: var(--danger);">
+                            <h3>❌ فشل تحميل الأسئلة</h3>
+                            <p>تأكد من وجود ملفات الأسئلة في نفس المجلد:</p>
+                            <ul>
+                                <li>oop1_data.js للفصل 1</li>
+                                <li>oop2_data.js للفصل 2</li>
+                                <li>oop3_data.js للفصل 3</li>
+                                <li>oop4_data.js للفصل 4</li>
+                                <li>oop5_data.js للفصل 5</li>
+                                <li>oop6_data.js للفصل 6</li>
+                                <li>oop7_data.js للفصل 7</li>
+                                <li>oop8_data.js للفصل 8</li>
+                                <li>oop9_data.js للفصل 9</li>
+                                <li>oop10_data.js للفصل 10</li>
+                                <li>oop11_data.js للفصل 11</li>
+                                <li>oop12_data.js للفصل 12</li>
+                            </ul>
+                            <button onclick="window.location.reload()" class="control-btn primary">
+                                <i class="fas fa-redo"></i> إعادة المحاولة
+                            </button>
+                        </div>
+                    `;
+                }
+            }, 2000);
+        }
+    });
+    
+    function saveProgress() {
+        if (quiz) quiz.saveProgress();
+    }
+    
+    function submitQuiz() {
+        if (quiz) quiz.submitQuiz();
+    }
+    
+    function reviewMode() {
+        if (quiz) quiz.reviewMode();
+    }
+    
+    function exitQuiz() {
+        if (confirm('هل تريد الخروج؟')) {
+            if (quiz) quiz.saveProgress();
+            window.location.href = 'exercises.html';
+        }
+    }
+    
+    function goToExercises() {
+        window.location.href = 'exercises.html';
+    }
+    
+    function restartQuiz() {
+        if (confirm('هل تريد إعادة الاختبار من البداية؟')) {
+            if (quiz && quiz.chapterInfo) {
+                const progressKey = `oop_quiz_progress_${quiz.chapterInfo.type}_${quiz.chapterInfo.id}`;
+                localStorage.removeItem(progressKey);
+            }
+            window.location.reload();
+        }
+    }
+    
+    function toggleDebug() {
+        const debugInfo = document.getElementById('debug-info');
+        if (debugInfo.style.display === 'block') {
+            debugInfo.style.display = 'none';
+        } else {
+            debugInfo.style.display = 'block';
+            if (quiz) quiz.updateDebugInfo();
+        }
+    }
+    
+    // دالة مساعدة لعرض الصور في وضع ملء الشاشة
+    function openFullscreenImage(imageUrl, caption) {
+        if (quiz) quiz.openFullscreenImage(imageUrl, caption);
+    }
+    
+    function closeFullscreenImage() {
+        if (quiz) quiz.closeFullscreenImage();
+    }
+    </script>
+</body>
+</html>

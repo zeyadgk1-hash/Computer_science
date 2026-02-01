@@ -1,0 +1,4864 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>كويز الرياضيات | جامعة المنصورة الجديدة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- إضافة MathJax لدعم LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            startup: {
+                pageReady: () => {
+                    return MathJax.startup.defaultPageReady();
+                }
+            }
+        };
+    </script>
+    
+    <style>
+        /* إعادة ضبط كاملة */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        :root {
+            --primary: #0f172a;
+            --primary-dark: #1e293b;
+            --accent: #4ECDC4; /* أخضر مائي فاتح/تركواز */
+            --accent-dark: #26A69A; /* أخضر مائي داكن */
+            --accent-light: #80CBC4; /* أخضر مائي فاتح جداً */
+            --accent-blue: #80DEEA; /* أزرق مائي فاتح */
+            --correct: #26A69A; /* أخضر مائي للصواب */
+            --incorrect: #EF5350; /* أحمر للخطأ */
+            --selected: #4ECDC4; /* أخضر مائي للاختيار */
+            --light: #f8fafc;
+            --gray: #64748b;
+            --gray-light: #e2e8f0;
+            --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            --border-radius: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #E0F7FA 0%, #E0F2F1 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: var(--primary);
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* تحسين عرض الصيغ الرياضية */
+        mjx-container {
+            display: inline-block !important;
+            margin: 0 2px !important;
+            line-height: 1.2 !important;
+        }
+        
+        .option-text mjx-container,
+        .question-text mjx-container {
+            font-size: 1em !important;
+            vertical-align: middle !important;
+        }
+        
+        /* النافبار */
+        .navbar {
+            background: linear-gradient(135deg, #00897B, #00695C);
+            padding: 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border-bottom: 2px solid rgba(78, 205, 196, 0.4);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .logo:hover {
+            transform: translateY(-2px);
+        }
+        
+        .logo-icon {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .uni-name { 
+            font-weight: 900; 
+            font-size: 1rem; 
+            color: white; 
+            line-height: 1.2;
+        }
+        
+        .app-tag { 
+            font-size: 0.75rem; 
+            color: #E0F2F1; 
+            font-weight: 700; 
+            margin-top: 2px;
+        }
+        
+        /* شريط التقدم العلوي */
+        .quiz-header {
+            background: white;
+            margin: 100px auto 0;
+            max-width: 1200px;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            border: 2px solid var(--accent-light);
+        }
+        
+        .lecture-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .lecture-title {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .lecture-number {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-weight: 700;
+        }
+        
+        .timer-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #f8fafc;
+            padding: 8px 15px;
+            border-radius: 50px;
+            border: 2px solid var(--accent-light);
+        }
+        
+        .timer {
+            font-weight: 900;
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+        
+        .quiz-progress-bar {
+            width: 100%;
+            height: 12px;
+            background: var(--gray-light);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        
+        .quiz-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+            border-radius: 6px;
+            transition: width 0.5s ease;
+        }
+        
+        /* المحتوى الرئيسي */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto 40px;
+            padding: 0 20px;
+            display: flex;
+            gap: 30px;
+        }
+        
+        /* قسم الأسئلة */
+        .questions-section {
+            flex: 3;
+        }
+        
+        .question-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: var(--card-shadow);
+            border: 2px solid transparent;
+            transition: var(--transition);
+            animation: slideIn 0.5s ease;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(30px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .question-card.active {
+            border-color: var(--accent);
+            box-shadow: 0 15px 35px rgba(78, 205, 196, 0.15);
+        }
+        
+        .question-number {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .question-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--primary);
+            line-height: 1.5;
+        }
+        
+        /* خيارات الإجابة */
+        .options-container {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .option {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+        }
+        
+        .option:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-light);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .option.selected {
+            border-color: var(--selected);
+            background: rgba(78, 205, 196, 0.1);
+        }
+        
+        .option.correct {
+            border-color: var(--correct);
+            background: rgba(38, 166, 154, 0.1);
+        }
+        
+        .option.incorrect {
+            border-color: var(--incorrect);
+            background: rgba(239, 83, 80, 0.1);
+        }
+        
+        .option-letter {
+            width: 40px;
+            height: 40px;
+            background: var(--gray-light);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.1rem;
+            color: var(--primary);
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+        
+        .option.selected .option-letter {
+            background: var(--selected);
+            color: white;
+        }
+        
+        .option.correct .option-letter {
+            background: var(--correct);
+            color: white;
+        }
+        
+        .option.incorrect .option-letter {
+            background: var(--incorrect);
+            color: white;
+        }
+        
+        .option-text {
+            flex: 1;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            line-height: 1.4;
+        }
+        
+        .option-status {
+            opacity: 0;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+        
+        .option.correct .option-status,
+        .option.incorrect .option-status {
+            opacity: 1;
+        }
+        
+        /* قسم التحكم */
+        .controls-section {
+            flex: 1;
+            position: sticky;
+            top: 120px;
+            height: fit-content;
+        }
+        
+        .controls-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 20px;
+            border: 2px solid var(--accent-light);
+        }
+        
+        .controls-title {
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* شبكة الأسئلة السريعة */
+        .questions-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .question-indicator {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+        
+        .question-indicator:hover {
+            transform: scale(1.1);
+        }
+        
+        .question-indicator.unanswered {
+            background: var(--gray-light);
+            color: var(--gray);
+        }
+        
+        .question-indicator.answered {
+            background: rgba(78, 205, 196, 0.2);
+            color: var(--accent);
+            border-color: var(--accent-light);
+        }
+        
+        .question-indicator.current {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 4px 12px rgba(78, 205, 196, 0.3);
+        }
+        
+        .question-indicator.marked {
+            background: #FFB74D;
+            color: white;
+        }
+        
+        /* أزرار التحكم */
+        .control-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .btn {
+            padding: 15px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(78, 205, 196, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #f8fafc;
+            color: var(--primary);
+            border: 2px solid var(--accent-light);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--accent-light);
+            color: white;
+        }
+        
+        .btn-warning {
+            background: linear-gradient(135deg, #FFB74D, #FF8A65);
+            color: white;
+        }
+        
+        .btn-warning:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 183, 77, 0.3);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, var(--incorrect), #D32F2F);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(239, 83, 80, 0.3);
+        }
+        
+        /* قسم الإحصائيات */
+        .stats-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            border: 2px solid var(--accent-light);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 10px;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+        
+        .stat-item:hover {
+            border-color: var(--accent-light);
+            transform: translateY(-2px);
+        }
+        
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--accent);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+            font-weight: 600;
+        }
+        
+        /* نافذة النتائج */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 3px solid var(--accent);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+        }
+        
+        .results-header {
+            margin-bottom: 30px;
+        }
+        
+        .results-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: white;
+            box-shadow: 0 15px 35px rgba(78, 205, 196, 0.3);
+        }
+        
+        .score-percentage {
+            font-size: 3rem;
+            line-height: 1;
+        }
+        
+        .score-label {
+            font-size: 1.2rem;
+            margin-top: 5px;
+        }
+        
+        .results-details {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border: 2px solid var(--accent-light);
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--gray-light);
+        }
+        
+        .result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .result-label {
+            color: var(--gray);
+            font-weight: 600;
+        }
+        
+        .result-value {
+            color: var(--primary);
+            font-weight: 900;
+        }
+        
+        .result-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        /* إشعارات */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: var(--accent);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideInRight 0.3s ease;
+            max-width: 300px;
+            border: 2px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+        
+        /* الفوتر */
+        .footer {
+            text-align: center;
+            padding: 25px 20px;
+            color: var(--gray);
+            font-size: 1rem;
+            font-weight: 600;
+            background: white;
+            margin-top: 60px;
+            border-top: 1px solid var(--gray-light);
+        }
+        
+        /* تحسينات للموبايل */
+        @media (max-width: 992px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .controls-section {
+                position: static;
+            }
+            
+            .questions-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 90px auto 30px;
+                padding: 0 15px;
+            }
+            
+            .quiz-header {
+                margin: 90px 15px 0;
+                padding: 15px;
+            }
+            
+            .lecture-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .question-card {
+                padding: 20px;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .option {
+                padding: 15px;
+            }
+            
+            .option-text {
+                font-size: 1rem;
+            }
+            
+            .questions-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+            
+            .question-indicator {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .modal-content {
+                padding: 25px;
+            }
+            
+            .result-actions {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .questions-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .question-indicator {
+                width: 30px;
+                height: 30px;
+                font-size: 0.9rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .score-circle {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .score-percentage {
+                font-size: 2.5rem;
+            }
+        }
+        
+        /* تحسينات للوصول */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- النافبار -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo" onclick="window.location.href='exercises.html'">
+                <div class="logo-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="uni-name">جامعة المنصورة الجديدة</span>
+                    <span class="app-tag">كويز الرياضيات</span>
+                </div>
+            </div>
+            
+            <div class="timer-container">
+                <i class="fas fa-clock"></i>
+                <span class="timer" id="timer">00:00</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- شريط معلومات المحاضرة -->
+    <header class="quiz-header">
+        <div class="lecture-info">
+            <div class="lecture-title">
+                <span class="lecture-number" id="lecture-number">Lec 01</span>
+                <span id="lecture-title">التكامل</span>
+            </div>
+            <div>
+                <span id="current-question">سؤال 1 من 10</span>
+            </div>
+        </div>
+        
+        <div class="quiz-progress-bar">
+            <div class="quiz-progress-fill" id="quiz-progress"></div>
+        </div>
+    </header>
+
+    <!-- المحتوى الرئيسي -->
+    <main class="container">
+        <!-- قسم الأسئلة -->
+        <section class="questions-section">
+            <!-- الأسئلة ستظهر هنا ديناميكياً -->
+        </section>
+        
+        <!-- قسم التحكم -->
+        <section class="controls-section">
+            <div class="controls-card">
+                <div class="controls-title">
+                    <i class="fas fa-th"></i>
+                    الأسئلة
+                </div>
+                
+                <div class="questions-grid" id="questions-grid">
+                    <!-- المؤشرات ستظهر هنا ديناميكياً -->
+                </div>
+                
+                <div class="control-buttons">
+                    <button class="btn btn-primary" onclick="submitQuiz()">
+                        <i class="fas fa-check-circle"></i>
+                        إنهاء الكويز
+                    </button>
+                    <button class="btn btn-secondary" onclick="nextQuestion()">
+                        <i class="fas fa-arrow-left"></i>
+                        السؤال التالي
+                    </button>
+                    <button class="btn btn-secondary" onclick="prevQuestion()">
+                        <i class="fas fa-arrow-right"></i>
+                        السؤال السابق
+                    </button>
+                    <button class="btn btn-warning" onclick="markQuestion()">
+                        <i class="fas fa-flag"></i>
+                        وضع علامة
+                    </button>
+                    <button class="btn btn-danger" onclick="exitQuiz()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        خروج
+                    </button>
+                </div>
+            </div>
+            
+            <div class="stats-card">
+                <div class="controls-title">
+                    <i class="fas fa-chart-bar"></i>
+                    الإحصائيات
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value" id="answered-count">0</div>
+                        <div class="stat-label">تمت الإجابة</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="remaining-count">10</div>
+                        <div class="stat-label">متبقي</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="marked-count">0</div>
+                        <div class="stat-label">معلمة</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="score-preview">0%</div>
+                        <div class="stat-label">النسبة الحالية</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>بنك تدريبات الرياضيات - جامعة المنصورة الجديدة</p>
+            <p style="margin-top: 10px; font-size: 0.9rem; color: var(--accent);">∫ تمرين تفاعلي للرياضيات</p>
+        </div>
+    </footer>
+    
+    <!-- نافذة النتائج -->
+    <div id="resultsModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="results-header">
+                <div class="results-icon" id="result-icon">🎉</div>
+                <h2 id="result-title">مبروك! أكملت الكويز</h2>
+            </div>
+            
+            <div class="score-circle" id="score-circle">
+                <div class="score-percentage" id="final-score">85%</div>
+                <div class="score-label">نتيجتك</div>
+            </div>
+            
+            <div class="results-details">
+                <div class="result-item">
+                    <span class="result-label">عدد الأسئلة:</span>
+                    <span class="result-value" id="total-questions-result">10</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">الإجابات الصحيحة:</span>
+                    <span class="result-value" id="correct-answers">8</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">الإجابات الخاطئة:</span>
+                    <span class="result-value" id="wrong-answers">2</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">الوقت المستغرق:</span>
+                    <span class="result-value" id="time-taken">15:30</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">الدرجة النهائية:</span>
+                    <span class="result-value" id="final-grade">85/100</span>
+                </div>
+            </div>
+            
+            <div class="result-actions">
+                <button class="btn btn-primary" onclick="reviewQuiz()">
+                    <i class="fas fa-eye"></i>
+                    مراجعة الإجابات
+                </button>
+                <button class="btn btn-secondary" onclick="retryQuiz()">
+                    <i class="fas fa-redo"></i>
+                    إعادة المحاولة
+                </button>
+                <button class="btn btn-danger" onclick="closeResults()">
+                    <i class="fas fa-times"></i>
+                    العودة للقائمة
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+    // بيانات الأسئلة حسب المحاضرة - مع LaTeX
+    const QUIZ_DATA = {
+    1: { // التكامل
+    title: "Integration - (30 Questions)",
+    questions: [
+        {
+            id: 1,
+            text: "What is the integral \\(\\int dx\\)?",
+            options: [
+                "\\(x + C\\)",
+                "\\(1 + C\\)",
+                "\\(0 + C\\)",
+                "\\(x^2 + C\\)"
+            ],
+            correct: 0,
+            explanation: "Rule 1: \\(\\int dx = x + C\\)"
+        },
+        {
+            id: 2,
+            text: "Find \\(\\int x^7 dx\\).",
+            options: [
+                "\\(7x^6 + C\\)",
+                "\\(\\frac{x^8}{8} + C\\)",
+                "\\(\\frac{x^7}{7} + C\\)",
+                "\\(8x^8 + C\\)"
+            ],
+            correct: 1,
+            explanation: "Rule 2: \\(\\int x^n dx = \\frac{x^{n+1}}{n+1} + C\\)"
+        },
+        {
+            id: 3,
+            text: "Evaluate \\(\\int \\frac{1}{x^4} dx\\).",
+            options: [
+                "\\(\\ln|x^4| + C\\)",
+                "\\(\\frac{x^{-5}}{-5} + C\\)",
+                "\\(-\\frac{1}{3x^3} + C\\)",
+                "\\(\\frac{1}{5x^5} + C\\)"
+            ],
+            correct: 2,
+            explanation: "Rule 9: \\(\\int x^{-4} dx = \\frac{x^{-3}}{-3} + C = -\\frac{1}{3x^3} + C\\)"
+        },
+        {
+            id: 4,
+            text: "Solve \\(\\int 5 dx\\).",
+            options: [
+                "\\(5 + C\\)",
+                "\\(\\frac{5x^2}{2} + C\\)",
+                "\\(5x + C\\)",
+                "\\(0 + C\\)"
+            ],
+            correct: 2,
+            explanation: "Rule 3: \\(\\int a f(x) dx = a \\int f(x) dx\\)"
+        },
+        {
+            id: 5,
+            text: "Find the indefinite integral of \\(\\int x^{1/2} dx\\).",
+            options: [
+                "\\(\\frac{2}{3}x^{3/2} + C\\)",
+                "\\(\\frac{1}{2}x^{-1/2} + C\\)",
+                "\\(\\frac{3}{2}x^{3/2} + C\\)",
+                "\\(x^{3/2} + C\\)"
+            ],
+            correct: 0,
+            explanation: "\\(\\frac{x^{1/2+1}}{1/2+1} = \\frac{x^{3/2}}{3/2} = \\frac{2}{3}x^{3/2}\\)"
+        },
+        {
+            id: 6,
+            text: "Evaluate \\(\\int (x^2 + 3x - 1) dx\\).",
+            options: [
+                "\\(2x + 3 + C\\)",
+                "\\(\\frac{x^3}{3} + \\frac{3x^2}{2} - x + C\\)",
+                "\\(x^3 + 3x^2 - x + C\\)",
+                "\\(\\frac{x^3}{3} + 3x^2 - 1 + C\\)"
+            ],
+            correct: 1,
+            explanation: "Rule 4: Integrate each term separately"
+        },
+        {
+            id: 7,
+            text: "Find \\(\\int 4x^3 dx\\).",
+            options: [
+                "\\(12x^2 + C\\)",
+                "\\(x^4 + C\\)",
+                "\\(\\frac{4x^4}{3} + C\\)",
+                "\\(4x^4 + C\\)"
+            ],
+            correct: 1,
+            explanation: "\\(4 \\times \\frac{x^4}{4} = x^4\\)"
+        },
+        {
+            id: 8,
+            text: "Solve \\(\\int (e^x + x) dx\\).",
+            options: [
+                "\\(e^x + \\frac{x^2}{2} + C\\)",
+                "\\(e^x + 1 + C\\)",
+                "\\(e^x + x^2 + C\\)",
+                "\\(\\frac{e^{x+1}}{x+1} + \\frac{x^2}{2} + C\\)"
+            ],
+            correct: 0,
+            explanation: "Sum of integrals of \\(e^x\\) and \\(x\\)"
+        },
+        {
+            id: 9,
+            text: "Evaluate \\(\\int 2(x+5) dx\\).",
+            options: [
+                "\\((x+5)^2 + C\\)",
+                "\\(2x + 10 + C\\)",
+                "\\(x^2 + 10x + C\\)",
+                "Both A and C are correct"
+            ],
+            correct: 3,
+            explanation: "Both simplify to \\(x^2 + 10x + \\) constant"
+        },
+        {
+            id: 10,
+            text: "Find \\(\\int (3x^2 - \\frac{1}{x}) dx\\).",
+            options: [
+                "\\(x^3 - \\ln|x| + C\\)",
+                "\\(x^3 + \\frac{1}{x^2} + C\\)",
+                "\\(6x - \\ln|x| + C\\)",
+                "\\(x^3 - 1 + C\\)"
+            ],
+            correct: 0,
+            explanation: "Integration of \\(3x^2\\) is \\(x^3\\) and \\(\\frac{1}{x}\\) is \\(\\ln|x|\\)"
+        },
+        {
+            id: 11,
+            text: "Solve \\(\\int (x+5)^3 dx\\).",
+            options: [
+                "\\(\\frac{(x+5)^4}{4} + C\\)",
+                "\\(3(x+5)^2 + C\\)",
+                "\\(\\frac{x^4}{4} + 5x + C\\)",
+                "\\((x+5)^4 + C\\)"
+            ],
+            correct: 0,
+            explanation: "Rule 5: \\(\\int (f)^n f' dx = \\frac{f^{n+1}}{n+1} + C\\) where \\(f'=1\\)"
+        },
+        {
+            id: 12,
+            text: "Evaluate \\(\\int x(x^2+5)^3 dx\\).",
+            options: [
+                "\\(\\frac{(x^2+5)^4}{4} + C\\)",
+                "\\(\\frac{(x^2+5)^4}{8} + C\\)",
+                "\\(\\frac{x^2(x^2+5)^4}{4} + C\\)",
+                "\\(\\frac{(x^2+5)^2}{2} + C\\)"
+            ],
+            correct: 1,
+            explanation: "Requires \\(f'=2x\\), so multiply by \\(\\frac{1}{2}\\)"
+        },
+        {
+            id: 13,
+            text: "Find \\(\\int \\sin x \\cos x dx\\).",
+            options: [
+                "\\(\\frac{\\sin^2 x}{2} + C\\)",
+                "\\(-\\frac{\\cos^2 x}{2} + C\\)",
+                "\\(\\frac{\\cos^2 x}{2} + C\\)",
+                "Both A and B are correct"
+            ],
+            correct: 3,
+            explanation: "Using Rule 6: \\(\\int f f' dx = \\frac{f^2}{2} + C\\)"
+        },
+        {
+            id: 14,
+            text: "Solve \\(\\int \\frac{(\\sqrt{x}+1)^4}{\\sqrt{x}} dx\\).",
+            options: [
+                "\\(\\frac{(\\sqrt{x}+1)^5}{5} + C\\)",
+                "\\(\\frac{2(\\sqrt{x}+1)^5}{5} + C\\)",
+                "\\(\\frac{(\\sqrt{x}+1)^5}{10} + C\\)",
+                "\\(2(\\sqrt{x}+1)^5 + C\\)"
+            ],
+            correct: 1,
+            explanation: "Derivative of \\(\\sqrt{x}+1\\) is \\(\\frac{1}{2\\sqrt{x}}\\), need to multiply by 2"
+        },
+        {
+            id: 15,
+            text: "Evaluate \\(\\int (3x^2+1)^2 (6x) dx\\).",
+            options: [
+                "\\(\\frac{(3x^2+1)^3}{3} + C\\)",
+                "\\((3x^2+1)^3 + C\\)",
+                "\\(\\frac{(3x^2+1)^3}{18} + C\\)",
+                "\\(\\frac{(3x^2+1)^3}{6} + C\\)"
+            ],
+            correct: 0,
+            explanation: "Direct application of \\(\\int f^n f' dx\\)"
+        },
+        {
+            id: 16,
+            text: "What is \\(\\int \\frac{1}{x} dx\\)?",
+            options: [
+                "\\(x^{-1} + C\\)",
+                "\\(\\ln|x| + C\\)",
+                "\\(e^x + C\\)",
+                "\\(-x^{-2} + C\\)"
+            ],
+            correct: 1,
+            explanation: "Rule 7 example"
+        },
+        {
+            id: 17,
+            text: "Evaluate \\(\\int \\frac{x}{x^2+1} dx\\).",
+            options: [
+                "\\(\\ln|x^2+1| + C\\)",
+                "\\(2\\ln|x^2+1| + C\\)",
+                "\\(\\frac{1}{2}\\ln|x^2+1| + C\\)",
+                "\\(\\sqrt{x^2+1} + C\\)"
+            ],
+            correct: 2,
+            explanation: "\\(f=x^2+1, f'=2x\\), so we need \\(\\frac{1}{2} \\int \\frac{2x}{x^2+1}\\)"
+        },
+        {
+            id: 18,
+            text: "Find \\(\\int \\frac{1}{\\sqrt{x}} dx\\).",
+            options: [
+                "\\(\\sqrt{x} + C\\)",
+                "\\(2\\sqrt{x} + C\\)",
+                "\\(\\frac{1}{2\\sqrt{x}} + C\\)",
+                "\\(\\ln|\\sqrt{x}| + C\\)"
+            ],
+            correct: 1,
+            explanation: "Rule 8: \\(\\int \\frac{f'}{\\sqrt{f}} dx = 2\\sqrt{f} + C\\)"
+        },
+        {
+            id: 19,
+            text: "Solve \\(\\int \\frac{x}{\\sqrt{x^2+1}} dx\\).",
+            options: [
+                "\\(\\sqrt{x^2+1} + C\\)",
+                "\\(2\\sqrt{x^2+1} + C\\)",
+                "\\(\\frac{1}{2}\\sqrt{x^2+1} + C\\)",
+                "\\(\\ln|\\sqrt{x^2+1}| + C\\)"
+            ],
+            correct: 0,
+            explanation: "\\(\\frac{1}{2}(2\\sqrt{x^2+1}) = \\sqrt{x^2+1}\\)"
+        },
+        {
+            id: 20,
+            text: "Evaluate \\(\\int \\frac{\\ln x}{x} dx\\).",
+            options: [
+                "\\(\\ln(\\ln x) + C\\)",
+                "\\(\\frac{(\\ln x)^2}{2} + C\\)",
+                "\\(\\frac{1}{x^2} + C\\)",
+                "\\((\\ln x)^2 + C\\)"
+            ],
+            correct: 1,
+            explanation: "Rule 6: \\(f=\\ln x, f'=\\frac{1}{x}\\)"
+        },
+        {
+            id: 21,
+            text: "What is \\(\\int e^{2x} dx\\)?",
+            options: [
+                "\\(e^{2x} + C\\)",
+                "\\(2e^{2x} + C\\)",
+                "\\(\\frac{1}{2}e^{2x} + C\\)",
+                "\\(\\frac{e^{2x+1}}{2x+1} + C\\)"
+            ],
+            correct: 2,
+            explanation: "Rule 1: \\(\\int f' e^f dx = e^f + C\\)"
+        },
+        {
+            id: 22,
+            text: "Evaluate \\(\\int \\frac{e^{\\sqrt{x}}}{\\sqrt{x}} dx\\).",
+            options: [
+                "\\(e^{\\sqrt{x}} + C\\)",
+                "\\(2e^{\\sqrt{x}} + C\\)",
+                "\\(\\frac{1}{2}e^{\\sqrt{x}} + C\\)",
+                "\\(\\sqrt{x} e^{\\sqrt{x}} + C\\)"
+            ],
+            correct: 1,
+            explanation: "\\(f=\\sqrt{x}, f'=\\frac{1}{2\\sqrt{x}}\\), need factor of 2"
+        },
+        {
+            id: 23,
+            text: "Solve \\(\\int 3^x dx\\).",
+            options: [
+                "\\(3^x + C\\)",
+                "\\(3^x \\ln 3 + C\\)",
+                "\\(\\frac{3^x}{\\ln 3} + C\\)",
+                "\\(\\frac{3^{x+1}}{x+1} + C\\)"
+            ],
+            correct: 2,
+            explanation: "Rule 2: \\(\\int a^f f' dx = \\frac{a^f}{\\ln a} + C\\)"
+        },
+        {
+            id: 24,
+            text: "Evaluate \\(\\int 3^{2x} dx\\).",
+            options: [
+                "\\(\\frac{3^{2x}}{\\ln 3} + C\\)",
+                "\\(\\frac{3^{2x}}{2\\ln 3} + C\\)",
+                "\\(2 \\cdot 3^{2x} \\ln 3 + C\\)",
+                "\\(\\frac{3^{2x}}{2} + C\\)"
+            ],
+            correct: 1,
+            explanation: "\\(f=2x, f'=2\\), so we need \\(\\frac{1}{2}\\)"
+        },
+        {
+            id: 25,
+            text: "Find \\(\\int e^{-x} dx\\).",
+            options: [
+                "\\(e^{-x} + C\\)",
+                "\\(-e^{-x} + C\\)",
+                "\\(\\frac{e^{-x+1}}{-x+1} + C\\)",
+                "\\(\\ln|e^{-x}| + C\\)"
+            ],
+            correct: 1,
+            explanation: "\\(f=-x, f'=-1\\), so multiply by -1"
+        },
+        {
+            id: 26,
+            text: "Evaluate the definite integral \\(\\int_{0}^{1} x^2 dx\\).",
+            options: [
+                "1",
+                "\\(\\frac{1}{3}\\)",
+                "3",
+                "\\(\\frac{1}{2}\\)"
+            ],
+            correct: 1,
+            explanation: "\\(\\left[ \\frac{x^3}{3} \\right]_0^1 = \\frac{1}{3} - 0 = \\frac{1}{3}\\)"
+        },
+        {
+            id: 27,
+            text: "Solve \\(\\int \\frac{1}{(x+2)^3} dx\\).",
+            options: [
+                "\\(\\ln|x+2|^3 + C\\)",
+                "\\(-\\frac{1}{2(x+2)^2} + C\\)",
+                "\\(\\frac{1}{4(x+2)^4} + C\\)",
+                "\\(-\\frac{2}{(x+2)^2} + C\\)"
+            ],
+            correct: 1,
+            explanation: "\\(\\int (x+2)^{-3} dx = \\frac{(x+2)^{-2}}{-2} + C\\)"
+        },
+        {
+            id: 28,
+            text: "Find \\(\\int (2x+3)^5 dx\\).",
+            options: [
+                "\\(\\frac{(2x+3)^6}{6} + C\\)",
+                "\\(\\frac{(2x+3)^6}{12} + C\\)",
+                "\\((2x+3)^6 + C\\)",
+                "\\(10(2x+3)^4 + C\\)"
+            ],
+            correct: 1,
+            explanation: "\\(f=2x+3, f'=2\\), need factor \\(\\frac{1}{2} \\times \\frac{1}{6} = \\frac{1}{12}\\)"
+        },
+        {
+            id: 29,
+            text: "What is \\(\\int \\frac{f'(x)}{f(x)} dx\\)?",
+            options: [
+                "\\(f(x) + C\\)",
+                "\\(\\ln|f(x)| + C\\)",
+                "\\(\\frac{f(x)^2}{2} + C\\)",
+                "\\(e^{f(x)} + C\\)"
+            ],
+            correct: 1,
+            explanation: "Rule 7"
+        },
+        {
+            id: 30,
+            text: "Evaluate \\(\\int a^x dx\\) where a is a constant.",
+            options: [
+                "\\(a^x + C\\)",
+                "\\(x a^{x-1} + C\\)",
+                "\\(\\frac{a^x}{\\ln a} + C\\)",
+                "\\(\\frac{a^{x+1}}{x+1} + C\\)"
+            ],
+            correct: 2,
+            explanation: "General rule for exponential base a"
+        }
+    ]
+},
+        2: { // Trigonometric Functions
+    title: "Trigonometric Functions Integration - (30 Questions)",
+    questions: [
+        {
+            id: 1,
+            text: "Find the integral \\(\\int \\sin x \\, dx\\).",
+            options: [
+                "\\(\\cos x + C\\)",
+                "\\(-\\cos x + C\\)",
+                "\\(\\sin x + C\\)",
+                "\\(-\\sin x + C\\)"
+            ],
+            correct: 1,
+            explanation: "The basic rule is \\(\\int \\sin f \\, df = -\\cos f + C\\)."
+        },
+        {
+            id: 2,
+            text: "Evaluate \\(\\int \\cos(2x) \\, dx\\).",
+            options: [
+                "\\(\\sin(2x) + C\\)",
+                "\\(2 \\sin(2x) + C\\)",
+                "\\(\\frac{1}{2} \\sin(2x) + C\\)",
+                "\\(-\\frac{1}{2} \\sin(2x) + C\\)"
+            ],
+            correct: 2,
+            explanation: "Using \\(\\int f' \\cos f \\, dx = \\sin f + C\\), where \\(f=2x\\) and \\(f'=2\\). Multiply by \\(\\frac{1}{2}\\)."
+        },
+        {
+            id: 3,
+            text: "Solve \\(\\int \\sin(5x) \\, dx\\).",
+            options: [
+                "\\(-\\frac{1}{5} \\cos(5x) + C\\)",
+                "\\(\\frac{1}{5} \\cos(5x) + C\\)",
+                "\\(-5 \\cos(5x) + C\\)",
+                "\\(\\cos(5x) + C\\)"
+            ],
+            correct: 0,
+            explanation: "Similar to the \\(\\sin(2x)\\) example, we use the factor \\(\\frac{1}{k}\\) for \\(\\sin(kx)\\)."
+        },
+        {
+            id: 4,
+            text: "Find the integral \\(\\int \\cos x \\, dx\\).",
+            options: [
+                "\\(-\\sin x + C\\)",
+                "\\(\\cos x + C\\)",
+                "\\(\\sin x + C\\)",
+                "\\(-\\cos x + C\\)"
+            ],
+            correct: 2,
+            explanation: "Direct application of the rule \\(\\int \\cos f \\, df = \\sin f + C\\)."
+        },
+        {
+            id: 5,
+            text: "Evaluate \\(\\int 3 \\sin x \\, dx\\).",
+            options: [
+                "\\(3 \\cos x + C\\)",
+                "\\(-3 \\cos x + C\\)",
+                "\\(\\frac{1}{3} \\cos x + C\\)",
+                "\\(-3 \\sin x + C\\)"
+            ],
+            correct: 1,
+            explanation: "Constant multiple rule: \\(3 \\int \\sin x \\, dx = 3(-\\cos x) + C\\)."
+        },
+        {
+            id: 6,
+            text: "What is the result of \\(\\int \\tan x \\, dx\\)?",
+            options: [
+                "\\(\\sec^2 x + C\\)",
+                "\\(\\ln|\\cos x| + C\\)",
+                "\\(-\\ln|\\cos x| + C\\)",
+                "\\(\\ln|\\sin x| + C\\)"
+            ],
+            correct: 2,
+            explanation: "The rule is \\(\\int \\tan f \\, f' \\, dx = -\\ln|\\cos f| + C\\)."
+        },
+        {
+            id: 7,
+            text: "Evaluate \\(\\int \\cot(3x) \\, dx\\).",
+            options: [
+                "\\(\\frac{1}{3} \\ln|\\sin(3x)| + C\\)",
+                "\\(3 \\ln|\\sin(3x)| + C\\)",
+                "\\(-\\frac{1}{3} \\ln|\\cos(3x)| + C\\)",
+                "\\(\\ln|\\sin(3x)| + C\\)"
+            ],
+            correct: 0,
+            explanation: "Rule 4: \\(\\int \\cot f \\, f' \\, dx = \\ln|\\sin f| + C\\) with the factor \\(\\frac{1}{3}\\)."
+        },
+        {
+            id: 8,
+            text: "Find \\(\\int \\sec x \\, dx\\).",
+            options: [
+                "\\(\\ln|\\sec x| + C\\)",
+                "\\(\\ln|\\sec x + \\tan x| + C\\)",
+                "\\(\\tan x + C\\)",
+                "\\(\\sec x \\tan x + C\\)"
+            ],
+            correct: 1,
+            explanation: "Rule 5: \\(\\int \\sec f \\, f' \\, dx = \\ln|\\sec f + \\tan f| + C\\)."
+        },
+        {
+            id: 9,
+            text: "Solve \\(\\int \\csc(3x) \\, dx\\).",
+            options: [
+                "\\(\\ln|\\csc(3x) - \\cot(3x)| + C\\)",
+                "\\(\\frac{1}{3} \\ln|\\csc(3x) - \\cot(3x)| + C\\)",
+                "\\(-\\frac{1}{3} \\ln|\\csc(3x) + \\cot(3x)| + C\\)",
+                "\\(3 \\ln|\\csc(3x) - \\cot(3x)| + C\\)"
+            ],
+            correct: 1,
+            explanation: "Rule 6 with adjustment for the constant in the angle."
+        },
+        {
+            id: 10,
+            text: "Evaluate \\(\\int \\tan(5x) \\, dx\\).",
+            options: [
+                "\\(-\\frac{1}{5} \\ln|\\cos(5x)| + C\\)",
+                "\\(\\frac{1}{5} \\ln|\\sec(5x)| + C\\)",
+                "\\(\\frac{1}{5} \\ln|\\sin(5x)| + C\\)",
+                "Both A and B are correct"
+            ],
+            correct: 3,
+            explanation: "\\(-\\ln|\\cos f|\\) is equivalent to \\(\\ln|\\sec f|\\)."
+        },
+        {
+            id: 11,
+            text: "Find \\(\\int \\sec^2 x \\, dx\\).",
+            options: [
+                "\\(\\tan x + C\\)",
+                "\\(-\\tan x + C\\)",
+                "\\(\\sec x + C\\)",
+                "\\(\\tan^2 x + C\\)"
+            ],
+            correct: 0,
+            explanation: "Rule 9: \\(\\int \\sec^2 f \\, f' \\, dx = \\tan f + C\\)."
+        },
+        {
+            id: 12,
+            text: "Evaluate \\(\\int \\csc^2(3x) \\, dx\\).",
+            options: [
+                "\\(\\frac{1}{3} \\cot(3x) + C\\)",
+                "\\(-\\frac{1}{3} \\cot(3x) + C\\)",
+                "\\(-3 \\cot(3x) + C\\)",
+                "\\(\\tan(3x) + C\\)"
+            ],
+            correct: 1,
+            explanation: "Rule 10 with the coefficient \\(\\frac{1}{3}\\) and negative sign for \\(\\csc^2\\) integration."
+        },
+        {
+            id: 13,
+            text: "Solve \\(\\int \\sec x \\tan x \\, dx\\).",
+            options: [
+                "\\(\\tan x + C\\)",
+                "\\(\\sec x + C\\)",
+                "\\(\\ln|\\sec x| + C\\)",
+                "\\(\\sec^2 x + C\\)"
+            ],
+            correct: 1,
+            explanation: "Rule 7: \\(\\int \\sec f \\tan f \\, f' \\, dx = \\sec f + C\\)."
+        },
+        {
+            id: 14,
+            text: "Evaluate \\(\\int \\csc(3x) \\cot(3x) \\, dx\\).",
+            options: [
+                "\\(-\\frac{1}{3} \\csc(3x) + C\\)",
+                "\\(\\frac{1}{3} \\csc(3x) + C\\)",
+                "\\(-3 \\csc(3x) + C\\)",
+                "\\(-\\csc(3x) + C\\)"
+            ],
+            correct: 0,
+            explanation: "Rule 8: \\(\\int \\csc f \\cot f \\, f' \\, dx = -\\csc f + C\\) with the adjustment factor."
+        },
+        {
+            id: 15,
+            text: "Find \\(\\int \\sec^2(5x) \\, dx\\).",
+            options: [
+                "\\(5 \\tan(5x) + C\\)",
+                "\\(\\frac{1}{5} \\tan(5x) + C\\)",
+                "\\(\\tan(5x) + C\\)",
+                "\\(-\\frac{1}{5} \\tan(5x) + C\\)"
+            ],
+            correct: 1,
+            explanation: "Using the rule for \\(\\sec^2\\) with a constant inside the angle."
+        },
+        {
+            id: 16,
+            text: "Evaluate \\(\\int \\tan^2 x \\, dx\\).",
+            options: [
+                "\\(\\frac{\\tan^3 x}{3} + C\\)",
+                "\\(\\tan x - x + C\\)",
+                "\\(\\sec^2 x - x + C\\)",
+                "\\(\\tan x + x + C\\)"
+            ],
+            correct: 1,
+            explanation: "Use the identity \\(\\tan^2 x = \\sec^2 x - 1\\)."
+        },
+        {
+            id: 17,
+            text: "Solve \\(\\int \\cot^2 x \\, dx\\).",
+            options: [
+                "\\(-\\cot x - x + C\\)",
+                "\\(\\cot x - x + C\\)",
+                "\\(-\\csc^2 x - x + C\\)",
+                "\\(-\\cot x + x + C\\)"
+            ],
+            correct: 0,
+            explanation: "Use the identity \\(\\cot^2 x = \\csc^2 x - 1\\)."
+        },
+        {
+            id: 18,
+            text: "Evaluate \\(\\int \\sin^2 x \\, dx\\).",
+            options: [
+                "\\(\\frac{1}{2}(x - \\frac{1}{2} \\sin(2x)) + C\\)",
+                "\\(\\frac{1}{2}(x + \\frac{1}{2} \\sin(2x)) + C\\)",
+                "\\(-\\frac{1}{3} \\sin^3 x + C\\)",
+                "\\(\\cos^2 x + C\\)"
+            ],
+            correct: 0,
+            explanation: "Use the half-angle identity \\(\\sin^2 x = \\frac{1}{2}(1 - \\cos(2x))\\)."
+        },
+        {
+            id: 19,
+            text: "Find \\(\\int \\cos^2 x \\, dx\\).",
+            options: [
+                "\\(\\frac{1}{2}(x - \\frac{1}{2} \\sin(2x)) + C\\)",
+                "\\(\\frac{1}{2}(x + \\frac{1}{2} \\sin(2x)) + C\\)",
+                "\\(\\sin^2 x + C\\)",
+                "\\(x + \\sin(2x) + C\\)"
+            ],
+            correct: 1,
+            explanation: "Use the half-angle identity \\(\\cos^2 x = \\frac{1}{2}(1 + \\cos(2x))\\)."
+        },
+        {
+            id: 20,
+            text: "What is the identity used to integrate \\(\\sin^2 x\\)?",
+            options: [
+                "\\(1 - \\cos^2 x\\)",
+                "\\(\\frac{1}{2}(1 - \\cos(2x))\\)",
+                "\\(\\frac{1}{2}(1 + \\cos(2x))\\)",
+                "\\(2 \\sin x \\cos x\\)"
+            ],
+            correct: 1,
+            explanation: "This identity simplifies the power into a first-degree cosine function."
+        },
+        {
+            id: 21,
+            text: "Evaluate \\(\\int \\frac{1}{\\sqrt{1-x^2}} \\, dx\\).",
+            options: [
+                "\\(\\sin^{-1} x + C\\)",
+                "\\(\\tan^{-1} x + C\\)",
+                "\\(\\cos^{-1} x + C\\)",
+                "Both A and \\(-\\cos^{-1} x + C\\) are correct"
+            ],
+            correct: 3,
+            explanation: "The standard form for the derivative of \\(\\sin^{-1} x\\) (or negative \\(\\cos^{-1} x\\))."
+        },
+        {
+            id: 22,
+            text: "Find \\(\\int \\frac{1}{\\sqrt{9-x^2}} \\, dx\\).",
+            options: [
+                "\\(\\sin^{-1} \\frac{x}{9} + C\\)",
+                "\\(\\sin^{-1} \\frac{x}{3} + C\\)",
+                "\\(\\frac{1}{3} \\sin^{-1} \\frac{x}{3} + C\\)",
+                "\\(3 \\sin^{-1} \\frac{x}{3} + C\\)"
+            ],
+            correct: 1,
+            explanation: "Rule 1: \\(\\int \\frac{f'}{\\sqrt{a^2-f^2}} \\, dx = \\sin^{-1} \\frac{f}{a} + C\\), where \\(a=3\\)."
+        },
+        {
+            id: 23,
+            text: "Solve \\(\\int \\frac{1}{1+x^2} \\, dx\\).",
+            options: [
+                "\\(\\sin^{-1} x + C\\)",
+                "\\(\\tan^{-1} x + C\\)",
+                "\\(\\sec^{-1} x + C\\)",
+                "\\(\\ln|1+x^2| + C\\)"
+            ],
+            correct: 1,
+            explanation: "Standard derivative form for \\(\\tan^{-1} x\\)."
+        },
+        {
+            id: 24,
+            text: "Evaluate \\(\\int \\frac{1}{16+x^2} \\, dx\\).",
+            options: [
+                "\\(\\tan^{-1} \\frac{x}{4} + C\\)",
+                "\\(\\frac{1}{4} \\tan^{-1} \\frac{x}{4} + C\\)",
+                "\\(4 \\tan^{-1} \\frac{x}{4} + C\\)",
+                "\\(\\frac{1}{16} \\tan^{-1} \\frac{x}{16} + C\\)"
+            ],
+            correct: 1,
+            explanation: "Rule 2: \\(\\int \\frac{f'}{a^2+f^2} \\, dx = \\frac{1}{a} \\tan^{-1} \\frac{f}{a} + C\\), where \\(a=4\\)."
+        },
+        {
+            id: 25,
+            text: "Find \\(\\int \\frac{1}{x \\sqrt{x^2-1}} \\, dx\\).",
+            options: [
+                "\\(\\sin^{-1} x + C\\)",
+                "\\(\\sec^{-1} x + C\\)",
+                "\\(\\tan^{-1} x + C\\)",
+                "\\(\\csc^{-1} x + C\\)"
+            ],
+            correct: 1,
+            explanation: "Rule 3: This is the standard derivative of \\(\\sec^{-1} x\\)."
+        },
+        {
+            id: 26,
+            text: "Solve \\(\\int \\frac{1}{x \\sqrt{x^2-25}} \\, dx\\).",
+            options: [
+                "\\(\\sec^{-1} \\frac{x}{5} + C\\)",
+                "\\(\\frac{1}{5} \\sec^{-1} \\frac{x}{5} + C\\)",
+                "\\(5 \\sec^{-1} \\frac{x}{5} + C\\)",
+                "\\(\\sin^{-1} \\frac{x}{5} + C\\)"
+            ],
+            correct: 1,
+            explanation: "Rule 3 with \\(a=5\\) gives \\(\\frac{1}{a} \\sec^{-1} \\frac{x}{a}\\)."
+        },
+        {
+            id: 27,
+            text: "Evaluate \\(\\int \\frac{e^x}{\\sqrt{9-e^{2x}}} \\, dx\\).",
+            options: [
+                "\\(\\sin^{-1} \\frac{e^x}{3} + C\\)",
+                "\\(\\frac{1}{3} \\sin^{-1} \\frac{e^x}{3} + C\\)",
+                "\\(\\sin^{-1} e^x + C\\)",
+                "\\(\\tan^{-1} \\frac{e^x}{3} + C\\)"
+            ],
+            correct: 0,
+            explanation: "Here \\(f=e^x\\) and \\(a=3\\). Note that for \\(\\sin^{-1}\\) there is NO \\(\\frac{1}{a}\\) in front."
+        },
+        {
+            id: 28,
+            text: "Solve \\(\\int \\frac{e^x}{16+e^{2x}} \\, dx\\).",
+            options: [
+                "\\(\\tan^{-1} \\frac{e^x}{4} + C\\)",
+                "\\(\\frac{1}{4} \\tan^{-1} \\frac{e^x}{4} + C\\)",
+                "\\(4 \\tan^{-1} e^x + C\\)",
+                "\\(\\sin^{-1} \\frac{e^x}{4} + C\\)"
+            ],
+            correct: 1,
+            explanation: "Rule 2 with \\(f=e^x\\) and \\(a=4\\)."
+        },
+        {
+            id: 29,
+            text: "What is the result of \\(\\int \\frac{1}{\\sqrt{25-x^2}} \\, dx\\)?",
+            options: [
+                "\\(\\frac{1}{5} \\sin^{-1} \\frac{x}{5} + C\\)",
+                "\\(\\sin^{-1} \\frac{x}{5} + C\\)",
+                "\\(\\tan^{-1} \\frac{x}{5} + C\\)",
+                "\\(5 \\sin^{-1} \\frac{x}{5} + C\\)"
+            ],
+            correct: 1,
+            explanation: "Applying rule 1 for inverse sine."
+        },
+        {
+            id: 30,
+            text: "Identify the rule: \\(\\int \\frac{f'}{a^2+f^2} \\, dx\\).",
+            options: [
+                "\\(\\frac{1}{a} \\sin^{-1} \\frac{f}{a} + C\\)",
+                "\\(\\frac{1}{a} \\tan^{-1} \\frac{f}{a} + C\\)",
+                "\\(\\sin^{-1} \\frac{f}{a} + C\\)",
+                "\\(\\sec^{-1} \\frac{f}{a} + C\\)"
+            ],
+            correct: 1,
+            explanation: "This is the general formula for the inverse tangent integration rule."
+        }
+    ]
+},
+3: { // Integration by Parts & Substitution
+    title: "Integration by Parts & Substitution - (30 Questions)",
+    questions: [
+        {
+            id: 1,
+            text: "What is the correct formula for Integration by Parts?",
+            options: [
+                "\\(\\int u \\, dv = uv + \\int v \\, du\\)",
+                "\\(\\int u \\, dv = uv - \\int v \\, du\\)",
+                "\\(\\int u \\, dv = u'v - uv'\\)",
+                "\\(\\int u \\, dv = \\frac{u}{v} - \\int v \\, du\\)"
+            ],
+            correct: 1,
+            explanation: "This is the standard formula derived from the product rule of differentiation."
+        },
+        {
+            id: 2,
+            text: "According to the lecture, which functions have the highest priority to be selected as u?",
+            options: [
+                "Polynomials",
+                "Exponential functions",
+                "Inverse trigonometric or Logarithmic functions",
+                "Constants"
+            ],
+            correct: 2,
+            explanation: "The selection order priority starts with inverse trig or log functions."
+        },
+        {
+            id: 3,
+            text: "In the integral \\(\\int x e^x \\, dx\\), what is the best choice for u?",
+            options: [
+                "\\(e^x\\)",
+                "\\(dx\\)",
+                "\\(x\\)",
+                "\\(x e^x\\)"
+            ],
+            correct: 2,
+            explanation: "x is a polynomial, and following the selection order, it is simpler to differentiate."
+        },
+        {
+            id: 4,
+            text: "If \\(u = \\ln x\\), what is \\(du\\)?",
+            options: [
+                "\\(x \\, dx\\)",
+                "\\(\\frac{1}{x} dx\\)",
+                "\\(e^x dx\\)",
+                "\\(\\frac{1}{x^2} dx\\)"
+            ],
+            correct: 1,
+            explanation: "The derivative of \\(\\ln x\\) is \\(1/x\\)."
+        },
+        {
+            id: 5,
+            text: "In the tabular method (differentiation/integration table), what happens to the signs of the terms?",
+            options: [
+                "They are all positive",
+                "They are all negative",
+                "They alternate (+, -, +, -)",
+                "They stay the same as the original function"
+            ],
+            correct: 2,
+            explanation: "The method requires alternating signs for each row in the multiplication."
+        },
+        {
+            id: 6,
+            text: "Evaluate \\(\\int x e^x \\, dx\\).",
+            options: [
+                "\\(x e^x + e^x + C\\)",
+                "\\(x e^x - e^x + C\\)",
+                "\\(e^x(x - 1) + C\\)",
+                "Both B and C are correct"
+            ],
+            correct: 3,
+            explanation: "The result \\(x e^x - e^x\\) can be factored as \\(e^x(x - 1)\\)."
+        },
+        {
+            id: 7,
+            text: "Find \\(\\int x \\sin x \\, dx\\).",
+            options: [
+                "\\(-x \\cos x + \\sin x + C\\)",
+                "\\(x \\cos x - \\sin x + C\\)",
+                "\\(-x \\sin x + \\cos x + C\\)",
+                "\\(x \\sin x + \\cos x + C\\)"
+            ],
+            correct: 0,
+            explanation: "Using parts with \\(u=x\\) and \\(dv=\\sin x \\, dx\\) yields \\(-x \\cos x - \\int (-\\cos x) \\, dx\\)."
+        },
+        {
+            id: 8,
+            text: "What is the integral \\(\\int \\ln x \\, dx\\)?",
+            options: [
+                "\\(\\frac{1}{x} + C\\)",
+                "\\(x \\ln x + x + C\\)",
+                "\\(x \\ln x - x + C\\)",
+                "\\(\\ln x - 1 + C\\)"
+            ],
+            correct: 2,
+            explanation: "Applying parts with \\(u=\\ln x\\) and \\(dv=dx\\) gives \\(x \\ln x - \\int x(1/x) \\, dx\\)."
+        },
+        {
+            id: 9,
+            text: "Evaluate \\(\\int x \\ln x \\, dx\\).",
+            options: [
+                "\\(\\frac{x^2}{2} \\ln x - \\frac{x^2}{2} + C\\)",
+                "\\(\\frac{x^2}{2} \\ln x - \\frac{x^2}{4} + C\\)",
+                "\\(x^2 \\ln x - x^2 + C\\)",
+                "\\(\\frac{\\ln x}{x^2} + C\\)"
+            ],
+            correct: 1,
+            explanation: "Here \\(u=\\ln x\\) and \\(dv=x \\, dx\\), resulting in \\(\\frac{x^2}{2}\\ln x - \\int \\frac{x^2}{2} \\cdot \\frac{1}{x} \\, dx\\)."
+        },
+        {
+            id: 10,
+            text: "Solve \\(\\int \\sin^{-1} x \\, dx\\).",
+            options: [
+                "\\(x \\sin^{-1} x - \\sqrt{1-x^2} + C\\)",
+                "\\(x \\sin^{-1} x + \\sqrt{1-x^2} + C\\)",
+                "\\(\\frac{1}{\\sqrt{1-x^2}} + C\\)",
+                "\\(x \\cos^{-1} x + C\\)"
+            ],
+            correct: 1,
+            explanation: "The integration results in \\(x \\sin^{-1} x + \\int \\frac{-x}{\\sqrt{1-x^2}} \\, dx\\)."
+        },
+        {
+            id: 11,
+            text: "How many times do you need to differentiate \\(x^2\\) in the tabular method for \\(\\int x^2 e^x \\, dx\\) until you reach zero?",
+            options: [
+                "1 time",
+                "2 times",
+                "3 times",
+                "4 times"
+            ],
+            correct: 2,
+            explanation: "\\(x^2 \\rightarrow 2x \\rightarrow 2 \\rightarrow 0\\)."
+        },
+        {
+            id: 12,
+            text: "What is the result of \\(\\int x^2 e^x \\, dx\\)?",
+            options: [
+                "\\((x^2 - 2x + 2) e^x + C\\)",
+                "\\((x^2 + 2x + 2) e^x + C\\)",
+                "\\(x^2 e^x - 2x e^x + C\\)",
+                "\\(x^2 e^x + 2e^x + C\\)"
+            ],
+            correct: 0,
+            explanation: "Calculated using the tabular method with alternating signs."
+        },
+        {
+            id: 13,
+            text: "Evaluate \\(\\int x^2 \\sin x \\, dx\\).",
+            options: [
+                "\\(-x^2 \\cos x + 2x \\sin x + 2 \\cos x + C\\)",
+                "\\(x^2 \\cos x - 2x \\sin x - 2 \\cos x + C\\)",
+                "\\(-x^2 \\sin x + 2x \\cos x + C\\)",
+                "\\(x^2 \\sin x + C\\)"
+            ],
+            correct: 0,
+            explanation: "Based on the tabular method example in the lecture notes."
+        },
+        {
+            id: 14,
+            text: "In the tabular method for \\(\\int x^2 \\sin x \\, dx\\), what is the second term (after multiplying 2x and sin x)?",
+            options: [
+                "\\(-2x \\sin x\\)",
+                "\\(+2x \\sin x\\)",
+                "\\(-2x \\cos x\\)",
+                "\\(+2x \\cos x\\)"
+            ],
+            correct: 1,
+            explanation: "The term is \\((-2x) \\times (-\\sin x) = 2x \\sin x\\)."
+        },
+        {
+            id: 15,
+            text: "When is the tabular method most useful?",
+            options: [
+                "When one function is a polynomial and the other is easily integrable.",
+                "For all integration problems.",
+                "Only for logarithmic functions.",
+                "Only for inverse trig functions."
+            ],
+            correct: 0,
+            explanation: "It simplifies repeated integration by parts for polynomials."
+        },
+        {
+            id: 16,
+            text: "In the substitution \\(x = h(w)\\), what is \\(dx\\) equal to?",
+            options: [
+                "\\(dw\\)",
+                "\\(h(w) \\, dw\\)",
+                "\\(h'(w) \\, dw\\)",
+                "\\(\\frac{1}{h'(w)} \\, dw\\)"
+            ],
+            correct: 2,
+            explanation: "Based on the differential rule \\(dx = \\frac{dx}{dw} \\, dw\\)."
+        },
+        {
+            id: 17,
+            text: "For the integral \\(\\int x(x+1)^8 \\, dx\\), what is the recommended substitution?",
+            options: [
+                "\\(w = x\\)",
+                "\\(w = x+1\\)",
+                "\\(w = x^8\\)",
+                "\\(w = (x+1)^8\\)"
+            ],
+            correct: 1,
+            explanation: "Substituting \\(w = x+1\\) simplifies the binomial power."
+        },
+        {
+            id: 18,
+            text: "Using the substitution \\(w = x+1\\), what does the term x become?",
+            options: [
+                "\\(w+1\\)",
+                "\\(w-1\\)",
+                "\\(w\\)",
+                "\\(1-w\\)"
+            ],
+            correct: 1,
+            explanation: "If \\(w = x+1\\), then \\(x = w-1\\)."
+        },
+        {
+            id: 19,
+            text: "Solve \\(\\int (w^9 - w^8) \\, dw\\).",
+            options: [
+                "\\(\\frac{1}{10} w^{10} - \\frac{1}{9} w^9 + C\\)",
+                "\\(9w^8 - 8w^7 + C\\)",
+                "\\(\\frac{1}{9} w^{10} - \\frac{1}{8} w^9 + C\\)",
+                "\\(w^{10} - w^9 + C\\)"
+            ],
+            correct: 0,
+            explanation: "Using the power rule for integration."
+        },
+        {
+            id: 20,
+            text: "What is the final answer for \\(\\int x(x+1)^8 \\, dx\\)?",
+            options: [
+                "\\(\\frac{1}{10}(x+1)^{10} - \\frac{1}{9}(x+1)^9 + C\\)",
+                "\\(\\frac{1}{10}x^{10} - \\frac{1}{9}x^9 + C\\)",
+                "\\((x+1)^{10} - (x+1)^9 + C\\)",
+                "\\(\\frac{(x+1)^9}{9} + C\\)"
+            ],
+            correct: 0,
+            explanation: "Substituting \\(w = x+1\\) back into the integrated form."
+        },
+        {
+            id: 21,
+            text: "In the integral \\(\\int \\frac{1}{(x+2)\\sqrt{x+1}} \\, dx\\), what substitution is used?",
+            options: [
+                "\\(x+2 = w\\)",
+                "\\(x+1 = w^2\\)",
+                "\\(x+1 = w\\)",
+                "\\(\\sqrt{x+1} = x\\)"
+            ],
+            correct: 1,
+            explanation: "Letting \\(x+1 = w^2\\) removes the square root."
+        },
+        {
+            id: 22,
+            text: "If \\(x+1 = w^2\\), what is \\(dx\\)?",
+            options: [
+                "\\(dw\\)",
+                "\\(w \\, dw\\)",
+                "\\(2w \\, dw\\)",
+                "\\(w^2 \\, dw\\)"
+            ],
+            correct: 2,
+            explanation: "Differentiating \\(x = w^2 - 1\\) with respect to w gives \\(dx/dw = 2w\\)."
+        },
+        {
+            id: 23,
+            text: "After substituting \\(x+1 = w^2\\), the term \\((x+2)\\) becomes:",
+            options: [
+                "\\(w^2 + 1\\)",
+                "\\(w^2 + 2\\)",
+                "\\(w^2 - 1\\)",
+                "\\(w^2 + 3\\)"
+            ],
+            correct: 0,
+            explanation: "\\(x+2 = (w^2 - 1) + 2 = w^2 + 1\\)."
+        },
+        {
+            id: 24,
+            text: "What does the integral \\(\\int \\frac{1}{(x+2)\\sqrt{x+1}} \\, dx\\) transform into after substitution?",
+            options: [
+                "\\(\\int \\frac{1}{w^2+1} \\, dw\\)",
+                "\\(2 \\int \\frac{1}{1+w^2} \\, dw\\)",
+                "\\(\\int \\frac{2w}{w} \\, dw\\)",
+                "\\(2 \\int \\frac{1}{w^2-1} \\, dw\\)"
+            ],
+            correct: 1,
+            explanation: "The w terms cancel out, leaving the constant 2."
+        },
+        {
+            id: 25,
+            text: "What is the final result of \\(\\int \\frac{1}{(x+2)\\sqrt{x+1}} \\, dx\\)?",
+            options: [
+                "\\(2 \\tan^{-1}(\\sqrt{x+1}) + C\\)",
+                "\\(\\tan^{-1}(x+1) + C\\)",
+                "\\(2 \\sin^{-1}(\\sqrt{x+1}) + C\\)",
+                "\\(2 \\ln|x+2| + C\\)"
+            ],
+            correct: 0,
+            explanation: "The integral of \\(1/(1+w^2)\\) is \\(\\tan^{-1} w\\), and \\(w = \\sqrt{x+1}\\)."
+        },
+        {
+            id: 26,
+            text: "Which method is preferred for \\(\\int x^2 \\ln x \\, dx\\)?",
+            options: [
+                "Algebraic substitution",
+                "Integration by parts",
+                "Power rule only",
+                "Trig substitution"
+            ],
+            correct: 1,
+            explanation: "It is a product of a polynomial and a logarithmic function."
+        },
+        {
+            id: 27,
+            text: "If you use parts for \\(\\int \\sin^{-1} x \\, dx\\), what is \\(dv\\)?",
+            options: [
+                "\\(\\sin^{-1} x \\, dx\\)",
+                "\\(dx\\)",
+                "\\(\\frac{1}{\\sqrt{1-x^2}} \\, dx\\)",
+                "\\(x \\, dx\\)"
+            ],
+            correct: 1,
+            explanation: "u must be \\(\\sin^{-1} x\\), so dv is the remaining part, \\(dx\\)."
+        },
+        {
+            id: 28,
+            text: "The integral of \\(w^9\\) is:",
+            options: [
+                "\\(9w^8\\)",
+                "\\(10w^{10}\\)",
+                "\\(\\frac{w^{10}}{10}\\)",
+                "\\(\\frac{w^9}{9}\\)"
+            ],
+            correct: 2,
+            explanation: "Basic power rule for integration."
+        },
+        {
+            id: 29,
+            text: "In the selection order for u, what does \"Polynomials\" rank?",
+            options: [
+                "First",
+                "Second",
+                "Third",
+                "Last"
+            ],
+            correct: 1,
+            explanation: "After inverse trig and log functions."
+        },
+        {
+            id: 30,
+            text: "What is the derivative of \\(x^2\\) used in the tabular method?",
+            options: [
+                "\\(x\\)",
+                "\\(2x\\)",
+                "\\(2\\)",
+                "\\(0\\)"
+            ],
+            correct: 1,
+            explanation: "First step of differentiating the polynomial part."
+        }
+    ]
+},
+4: { // Trigonometric Substitutions & Partial Fractions
+    title: "Trigonometric Substitutions & Partial Fractions - (30 Questions)",
+    questions: [
+        {
+            id: 1,
+            text: "For an integral containing \\(\\sqrt{a^2 - x^2}\\), which substitution is used?",
+            options: [
+                "\\(x = a \\tan \\theta\\)",
+                "\\(x = a \\sin \\theta\\)",
+                "\\(x = a \\sec \\theta\\)",
+                "\\(x = a \\cos \\theta + a \\sin \\theta\\)"
+            ],
+            correct: 1,
+            explanation: "The substitution \\(x = a \\sin \\theta\\) eliminates the square root using the identity \\(1 - \\sin^2 \\theta = \\cos^2 \\theta\\)."
+        },
+        {
+            id: 2,
+            text: "If you use the substitution \\(x = a \\sin \\theta\\), what is \\(dx\\) equal to?",
+            options: [
+                "\\(a \\sin \\theta \\, d\\theta\\)",
+                "\\(a \\cos \\theta \\, d\\theta\\)",
+                "\\(a \\sec^2 \\theta \\, d\\theta\\)",
+                "\\(a \\sec \\theta \\tan \\theta \\, d\\theta\\)"
+            ],
+            correct: 1,
+            explanation: "The derivative of \\(x = a \\sin \\theta\\) with respect to \\(\\theta\\) is \\(dx/d\\theta = a \\cos \\theta\\)."
+        },
+        {
+            id: 3,
+            text: "When integrating \\(\\sqrt{a^2 + x^2}\\), the best substitution is:",
+            options: [
+                "\\(x = a \\sin \\theta\\)",
+                "\\(x = a \\sec \\theta\\)",
+                "\\(x = a \\tan \\theta\\)",
+                "\\(x = a^2\\)"
+            ],
+            correct: 2,
+            explanation: "The substitution \\(x = a \\tan \\theta\\) uses the identity \\(1 + \\tan^2 \\theta = \\sec^2 \\theta\\) to simplify the square root."
+        },
+        {
+            id: 4,
+            text: "For the expression \\(\\sqrt{x^2 - a^2}\\), what is the correct substitution?",
+            options: [
+                "\\(x = a \\sec \\theta\\)",
+                "\\(x = a \\tan \\theta\\)",
+                "\\(x = a \\sin \\theta\\)",
+                "\\(x = a \\cos \\theta\\)"
+            ],
+            correct: 0,
+            explanation: "The substitution \\(x = a \\sec \\theta\\) uses the identity \\(\\sec^2 \\theta - 1 = \\tan^2 \\theta\\) to simplify the square root."
+        },
+        {
+            id: 5,
+            text: "Using \\(x = a \\tan \\theta\\), the expression \\(\\sqrt{a^2 + x^2}\\) simplifies to:",
+            options: [
+                "\\(a \\sin \\theta\\)",
+                "\\(a \\tan \\theta\\)",
+                "\\(a \\sec \\theta\\)",
+                "\\(a \\cos \\theta\\)"
+            ],
+            correct: 2,
+            explanation: "\\(\\sqrt{a^2 + a^2 \\tan^2 \\theta} = \\sqrt{a^2(1 + \\tan^2 \\theta)} = a\\sqrt{\\sec^2 \\theta} = a \\sec \\theta\\)."
+        },
+        {
+            id: 6,
+            text: "In the integral \\(\\int \\frac{1}{x^2 \\sqrt{4-x^2}} \\, dx\\), what is the value of 'a'?",
+            options: [
+                "4",
+                "1",
+                "2",
+                "16"
+            ],
+            correct: 2,
+            explanation: "Since \\(a^2 = 4\\), then \\(a = 2\\)."
+        },
+        {
+            id: 7,
+            text: "After substitution, \\(\\int \\frac{1}{\\sqrt{9+x^2}} \\, dx\\) transforms into which trigonometric integral?",
+            options: [
+                "\\(\\int \\sec \\theta \\, d\\theta\\)",
+                "\\(\\int \\tan \\theta \\, d\\theta\\)",
+                "\\(\\int \\sec^2 \\theta \\, d\\theta\\)",
+                "\\(\\int \\sin \\theta \\, d\\theta\\)"
+            ],
+            correct: 0,
+            explanation: "With \\(x = 3 \\tan \\theta\\), \\(\\sqrt{9+x^2} = 3\\sec \\theta\\) and \\(dx = 3\\sec^2 \\theta \\, d\\theta\\), leading to \\(\\int \\sec \\theta \\, d\\theta\\)."
+        },
+        {
+            id: 8,
+            text: "What is the final result of \\(\\int \\frac{1}{\\sqrt{9+x^2}} \\, dx\\)?",
+            options: [
+                "\\(\\ln | \\sec \\theta + \\tan \\theta | + C\\)",
+                "\\(\\ln \\left| \\frac{\\sqrt{9+x^2}}{3} + \\frac{x}{3} \\right| + C\\)",
+                "\\(\\tan^{-1} \\frac{x}{3} + C\\)",
+                "Both A and B are correct"
+            ],
+            correct: 3,
+            explanation: "Both expressions are equivalent after converting from \\(\\theta\\) back to \\(x\\) using \\(\\sec \\theta = \\frac{\\sqrt{9+x^2}}{3}\\) and \\(\\tan \\theta = \\frac{x}{3}\\)."
+        },
+        {
+            id: 9,
+            text: "If \\(x = 4 \\sec \\theta\\), then \\(\\sqrt{x^2 - 16}\\) simplifies to:",
+            options: [
+                "\\(4 \\sec \\theta\\)",
+                "\\(4 \\tan \\theta\\)",
+                "\\(4 \\sin \\theta\\)",
+                "\\(16 \\tan \\theta\\)"
+            ],
+            correct: 1,
+            explanation: "\\(\\sqrt{(4\\sec \\theta)^2 - 16} = \\sqrt{16\\sec^2 \\theta - 16} = 4\\sqrt{\\sec^2 \\theta - 1} = 4\\sqrt{\\tan^2 \\theta} = 4 \\tan \\theta\\)."
+        },
+        {
+            id: 10,
+            text: "In the triangle for \\(x = 2 \\sin \\theta\\), if the opposite is x and the hypotenuse is 2, what is the adjacent side?",
+            options: [
+                "\\(\\sqrt{x^2 + 4}\\)",
+                "\\(\\sqrt{4 - x^2}\\)",
+                "\\(\\sqrt{x^2 - 4}\\)",
+                "2"
+            ],
+            correct: 1,
+            explanation: "Using Pythagorean theorem: adjacent = \\(\\sqrt{\\text{hypotenuse}^2 - \\text{opposite}^2} = \\sqrt{4 - x^2}\\)."
+        },
+        {
+            id: 11,
+            text: "Integration by partial fractions is used for which type of functions?",
+            options: [
+                "Exponential functions",
+                "Logarithmic functions",
+                "Rational functions \\(\\frac{p(x)}{q(x)}\\) where p, q are polynomials",
+                "Radical functions"
+            ],
+            correct: 2,
+            explanation: "Partial fractions specifically decomposes rational functions (ratios of polynomials) into simpler fractions."
+        },
+        {
+            id: 12,
+            text: "To use partial fractions directly, the degree of the numerator must be:",
+            options: [
+                "Equal to the degree of the denominator",
+                "Greater than the degree of the denominator",
+                "Less than the degree of the denominator",
+                "Always 1"
+            ],
+            correct: 2,
+            explanation: "If degree of numerator ≥ degree of denominator, polynomial long division must be performed first."
+        },
+        {
+            id: 13,
+            text: "How do you decompose \\(\\frac{1}{(x-1)(x+2)}\\)?",
+            options: [
+                "\\(\\frac{A}{x-1} + \\frac{B}{x+2}\\)",
+                "\\(\\frac{A}{x-1} + \\frac{B}{(x-1)^2}\\)",
+                "\\(\\frac{Ax+B}{(x-1)(x+2)}\\)",
+                "\\(\\frac{A}{x^2} + \\frac{B}{x}\\)"
+            ],
+            correct: 0,
+            explanation: "For distinct linear factors, use separate fractions with constants in the numerators."
+        },
+        {
+            id: 14,
+            text: "In the example \\(\\int \\frac{1}{x^2+x-2} \\, dx\\), what were the values of constants A and B?",
+            options: [
+                "A=1, B=1",
+                "A=1/3, B=-1/3",
+                "A=3, B=-3",
+                "A=1/2, B=-1/2"
+            ],
+            correct: 1,
+            explanation: "After decomposition: \\(\\frac{1}{(x-1)(x+2)} = \\frac{1/3}{x-1} - \\frac{1/3}{x+2}\\)."
+        },
+        {
+            id: 15,
+            text: "The integral \\(\\int \\frac{1}{x-1} \\, dx\\) is:",
+            options: [
+                "\\(\\ln |x-1| + C\\)",
+                "\\(\\frac{1}{(x-1)^2} + C\\)",
+                "\\(e^{x-1} + C\\)",
+                "\\((x-1)^2 + C\\)"
+            ],
+            correct: 0,
+            explanation: "Standard integral: \\(\\int \\frac{1}{x-a} \\, dx = \\ln |x-a| + C\\)."
+        },
+        {
+            id: 16,
+            text: "For a repeated linear factor like \\((x+1)^2\\) in the denominator, the decomposition is:",
+            options: [
+                "\\(\\frac{A}{x+1} + \\frac{B}{x+1}\\)",
+                "\\(\\frac{A}{x+1} + \\frac{B}{(x+1)^2}\\)",
+                "\\(\\frac{Ax+B}{(x+1)^2}\\)",
+                "\\(\\frac{A}{(x+1)^2}\\)"
+            ],
+            correct: 1,
+            explanation: "For repeated linear factors, include terms for each power from 1 up to the highest power."
+        },
+        {
+            id: 17,
+            text: "In \\(\\frac{5x^2+20x+6}{x(x+1)^2}\\), what are the denominators for the partial fractions?",
+            options: [
+                "\\(x, (x+1), (x+1)^2\\)",
+                "\\(x, x^2, (x+1)\\)",
+                "\\(x, (x+1)\\)",
+                "\\(x^3, 2x^2, x\\)"
+            ],
+            correct: 0,
+            explanation: "For \\(x(x+1)^2\\), the decomposition is: \\(\\frac{A}{x} + \\frac{B}{x+1} + \\frac{C}{(x+1)^2}\\)."
+        },
+        {
+            id: 18,
+            text: "What is the value of constant A in the repeated factor example?",
+            options: [
+                "9",
+                "-1",
+                "6",
+                "0"
+            ],
+            correct: 2,
+            explanation: "For \\(\\frac{5x^2+20x+6}{x(x+1)^2} = \\frac{A}{x} + \\frac{B}{x+1} + \\frac{C}{(x+1)^2}\\), solving gives A=6."
+        },
+        {
+            id: 19,
+            text: "What is the integral of \\(\\frac{9}{(x+1)^2}\\)?",
+            options: [
+                "\\(9 \\ln |x+1|^2 + C\\)",
+                "\\(\\frac{-9}{x+1} + C\\)",
+                "\\(\\frac{9}{x+1} + C\\)",
+                "\\(9(x+1)^3 + C\\)"
+            ],
+            correct: 1,
+            explanation: "\\(\\int \\frac{9}{(x+1)^2} \\, dx = 9\\int (x+1)^{-2} \\, dx = 9\\cdot\\frac{(x+1)^{-1}}{-1} + C = -\\frac{9}{x+1} + C\\)."
+        },
+        {
+            id: 20,
+            text: "The final result of \\(\\int \\frac{5x^2+20x+6}{x(x+1)^2} \\, dx\\) includes:",
+            options: [
+                "\\(6 \\ln|x| - \\ln|x+1| - \\frac{9}{x+1} + C\\)",
+                "\\(6 \\ln|x| + \\ln|x+1| + \\frac{9}{x+1} + C\\)",
+                "\\(\\ln|x| + \\ln|x+1| + C\\)",
+                "\\(5x^2 + 20x + C\\)"
+            ],
+            correct: 0,
+            explanation: "After decomposition and integration: \\(6\\ln|x| - \\ln|x+1| - \\frac{9}{x+1} + C\\)."
+        },
+        {
+            id: 21,
+            text: "Which identity is used to simplify \\(\\sqrt{a^2 - a^2 \\sin^2 \\theta}\\)?",
+            options: [
+                "\\(1 + \\tan^2 \\theta = \\sec^2 \\theta\\)",
+                "\\(1 - \\sin^2 \\theta = \\cos^2 \\theta\\)",
+                "\\(\\sin^2 \\theta + \\cos^2 \\theta = 1\\)",
+                "Both B and C are correct"
+            ],
+            correct: 3,
+            explanation: "Both identities are equivalent: \\(\\sin^2 \\theta + \\cos^2 \\theta = 1\\) implies \\(1 - \\sin^2 \\theta = \\cos^2 \\theta\\)."
+        },
+        {
+            id: 22,
+            text: "In trigonometric substitution, \\(\\csc^2 \\theta\\) integrates to:",
+            options: [
+                "\\(\\tan \\theta + C\\)",
+                "\\(-\\cot \\theta + C\\)",
+                "\\(\\sec \\theta + C\\)",
+                "\\(-\\sin \\theta + C\\)"
+            ],
+            correct: 1,
+            explanation: "Standard integral: \\(\\int \\csc^2 \\theta \\, d\\theta = -\\cot \\theta + C\\)."
+        },
+        {
+            id: 23,
+            text: "If \\(\\tan \\theta = x/3\\), what is \\(\\theta\\)?",
+            options: [
+                "\\(\\tan(x/3)\\)",
+                "\\(\\tan^{-1}(x/3)\\)",
+                "\\(3/x\\)",
+                "\\(x/3\\)"
+            ],
+            correct: 1,
+            explanation: "If \\(\\tan \\theta = x/3\\), then \\(\\theta = \\tan^{-1}(x/3)\\)."
+        },
+        {
+            id: 24,
+            text: "The expression \\(4(\\tan\\theta - \\theta)\\) appeared in which integral?",
+            options: [
+                "\\(\\int \\frac{\\sqrt{x^2-16}}{x} \\, dx\\)",
+                "\\(\\int \\frac{1}{\\sqrt{9+x^2}} \\, dx\\)",
+                "\\(\\int \\frac{1}{x^2+x-2} \\, dx\\)",
+                "\\(\\int \\sin^2 x \\, dx\\)"
+            ],
+            correct: 0,
+            explanation: "Using \\(x = 4\\sec \\theta\\) in \\(\\int \\frac{\\sqrt{x^2-16}}{x} \\, dx\\) leads to \\(4\\int \\tan^2 \\theta \\, d\\theta = 4(\\tan\\theta - \\theta) + C\\)."
+        },
+        {
+            id: 25,
+            text: "In partial fractions, if x=0 was used to find A=6, what value of x was used to find C=9?",
+            options: [
+                "x=1",
+                "x=-1",
+                "x=2",
+                "x=0"
+            ],
+            correct: 1,
+            explanation: "Setting \\(x = -1\\) eliminates terms with A and B, leaving only C to solve for."
+        },
+        {
+            id: 26,
+            text: "Which method requires identifying linear or repeated factors in the denominator?",
+            options: [
+                "Substitution",
+                "Integration by Parts",
+                "Partial Fractions",
+                "Power Rule"
+            ],
+            correct: 2,
+            explanation: "Partial fraction decomposition depends on factoring the denominator completely."
+        },
+        {
+            id: 27,
+            text: "What is \\(\\sec \\theta\\) if \\(\\cos \\theta = 4/x\\)?",
+            options: [
+                "\\(x/4\\)",
+                "\\(4/x\\)",
+                "\\(\\sqrt{x^2-16}/4\\)",
+                "1"
+            ],
+            correct: 0,
+            explanation: "\\(\\sec \\theta = \\frac{1}{\\cos \\theta} = \\frac{1}{4/x} = x/4\\)."
+        },
+        {
+            id: 28,
+            text: "Which trigonometric substitution uses the identity \\(\\sec^2 \\theta - 1 = \\tan^2 \\theta\\)?",
+            options: [
+                "\\(x = a \\sin \\theta\\)",
+                "\\(x = a \\tan \\theta\\)",
+                "\\(x = a \\sec \\theta\\)",
+                "\\(x = a \\cos \\theta\\)"
+            ],
+            correct: 2,
+            explanation: "The substitution \\(x = a \\sec \\theta\\) leads to \\(x^2 - a^2 = a^2(\\sec^2 \\theta - 1) = a^2\\tan^2 \\theta\\)."
+        },
+        {
+            id: 29,
+            text: "In the integral \\(\\int \\sec \\theta \\, d\\theta\\), the result is:",
+            options: [
+                "\\(\\tan \\theta + C\\)",
+                "\\(\\ln | \\sec \\theta + \\tan \\theta | + C\\)",
+                "\\(\\sec \\theta \\tan \\theta + C\\)",
+                "\\(\\sin \\theta + C\\)"
+            ],
+            correct: 1,
+            explanation: "Standard integral: \\(\\int \\sec \\theta \\, d\\theta = \\ln |\\sec \\theta + \\tan \\theta| + C\\)."
+        },
+        {
+            id: 30,
+            text: "Partial fraction decomposition of \\(\\frac{p(x)}{q(x)}\\) is impossible if degree of p(x) ≥ degree of q(x) without first performing:",
+            options: [
+                "Factoring",
+                "Long division",
+                "Substitution",
+                "Differentiation"
+            ],
+            correct: 1,
+            explanation: "When degree of numerator ≥ degree of denominator, polynomial long division must be performed to obtain a proper rational function first."
+        }
+    ]
+},
+5: { // Advanced Integration Techniques
+    title: "Advanced Integration Techniques - (30 Questions)",
+    questions: [
+        {
+            id: 1,
+            text: "What is the correct partial fraction decomposition for \\(\\frac{2x^2-5x+2}{x(x^2+1)}\\)?",
+            options: [
+                "\\(\\frac{A}{x} + \\frac{B}{x^2+1}\\)",
+                "\\(\\frac{A}{x} + \\frac{Bx+C}{x^2+1}\\)",
+                "\\(\\frac{A}{x} + \\frac{B}{x} + \\frac{C}{x^2+1}\\)",
+                "\\(\\frac{Ax+B}{x^2+1}\\)"
+            ],
+            correct: 1,
+            explanation: "For irreducible quadratic factors like \\((x^2+1)\\), the numerator must be a linear form \\((Bx+C)\\)."
+        },
+        {
+            id: 2,
+            text: "When the degree of the numerator is greater than or equal to the degree of the denominator, what is the first step?",
+            options: [
+                "Integration by Parts",
+                "Partial Fraction Decomposition",
+                "Long Division",
+                "Substitution"
+            ],
+            correct: 2,
+            explanation: "Long division is required to reduce the rational function into a polynomial plus a proper fraction."
+        },
+        {
+            id: 3,
+            text: "In \\(\\int \\frac{2x^3-4x^2-15x+5}{x^2-2x-8} \\, dx\\), the quotient after long division is:",
+            options: [
+                "\\(x\\)",
+                "\\(2x\\)",
+                "\\(2x^2\\)",
+                "\\(x+5\\)"
+            ],
+            correct: 1,
+            explanation: "Dividing \\(2x^3-4x^2-15x+5\\) by \\(x^2-2x-8\\) gives quotient \\(2x\\) and remainder \\(x+5\\)."
+        },
+        {
+            id: 4,
+            text: "The result of \\(\\int \\frac{-5}{x^2+1} \\, dx\\) is:",
+            options: [
+                "\\(-5 \\ln|x^2+1| + C\\)",
+                "\\(-5 \\tan^{-1} x + C\\)",
+                "\\(5 \\sin^{-1} x + C\\)",
+                "\\(\\frac{-5}{x} + C\\)"
+            ],
+            correct: 1,
+            explanation: "Standard integral: \\(\\int \\frac{1}{x^2+1} \\, dx = \\tan^{-1} x + C\\), so \\(\\int \\frac{-5}{x^2+1} \\, dx = -5\\tan^{-1} x + C\\)."
+        },
+        {
+            id: 5,
+            text: "For the fraction \\(\\frac{x+5}{(x+2)(x-4)}\\), the constant B in \\(\\frac{A}{x+2} + \\frac{B}{x-4}\\) is found by setting x to:",
+            options: [
+                "-2",
+                "0",
+                "4",
+                "5"
+            ],
+            correct: 2,
+            explanation: "Setting \\(x = 4\\) eliminates the term with A, allowing us to solve for B directly."
+        },
+        {
+            id: 6,
+            text: "To integrate \\(\\int \\sin^3 x \\, dx\\) (odd power), which identity should be used?",
+            options: [
+                "\\(\\sin^2 x = 1 - \\cos^2 x\\)",
+                "\\(\\sin^2 x = \\frac{1}{2}(1 - \\cos 2x)\\)",
+                "\\(\\sin^2 x = 1 + \\cos^2 x\\)",
+                "\\(\\sin x = \\sqrt{1 - \\cos^2 x}\\)"
+            ],
+            correct: 0,
+            explanation: "We separate one \\(\\sin x\\) and convert the remaining \\(\\sin^2 x\\) to terms of \\(\\cos x\\) using \\(\\sin^2 x = 1 - \\cos^2 x\\)."
+        },
+        {
+            id: 7,
+            text: "What is the integral of \\(\\int \\sin^3 x \\, dx\\)?",
+            options: [
+                "\\(\\cos x - \\frac{1}{3} \\cos^3 x + C\\)",
+                "\\(-\\cos x + \\frac{1}{3} \\cos^3 x + C\\)",
+                "\\(\\sin x - \\frac{1}{3} \\sin^3 x + C\\)",
+                "\\(-\\cos x - \\sin x + C\\)"
+            ],
+            correct: 1,
+            explanation: "\\(\\int \\sin^3 x \\, dx = \\int \\sin^2 x \\cdot \\sin x \\, dx = \\int (1-\\cos^2 x) \\sin x \\, dx = -\\cos x + \\frac{1}{3}\\cos^3 x + C\\)."
+        },
+        {
+            id: 8,
+            text: "For an even power like \\(\\int \\cos^2 x \\, dx\\), we use the identity:",
+            options: [
+                "\\(1 - \\sin^2 x\\)",
+                "\\(\\frac{1}{2}(1 + \\cos 2x)\\)",
+                "\\(\\frac{1}{2}(1 - \\cos 2x)\\)",
+                "\\(2 \\cos^2 x - 1\\)"
+            ],
+            correct: 1,
+            explanation: "The half-angle identity \\(\\cos^2 x = \\frac{1}{2}(1 + \\cos 2x)\\) reduces the power."
+        },
+        {
+            id: 9,
+            text: "The integral \\(\\int \\cos^4 x \\, dx\\) results in which highest frequency sine term?",
+            options: [
+                "\\(\\sin 2x\\)",
+                "\\(\\sin 4x\\)",
+                "\\(\\sin 8x\\)",
+                "\\(\\sin x\\)"
+            ],
+            correct: 1,
+            explanation: "Squaring \\((1+\\cos 2x)^2\\) eventually requires integrating \\(\\cos^2 2x\\), which uses the \\(4x\\) identity."
+        },
+        {
+            id: 10,
+            text: "Evaluate \\(\\int \\cos^4 x \\sin^3 x \\, dx\\). What substitution is appropriate?",
+            options: [
+                "\\(u = \\sin x\\)",
+                "\\(u = \\cos x\\)",
+                "\\(u = \\tan x\\)",
+                "\\(u = x^2\\)"
+            ],
+            correct: 1,
+            explanation: "Since the power of \\(\\sin x\\) is odd, we save one \\(\\sin x\\) for \\(du\\) and let \\(u = \\cos x\\) (so \\(du = -\\sin x \\, dx\\))."
+        },
+        {
+            id: 11,
+            text: "If n is an even positive integer in \\(\\int \\tan^m x \\sec^n x \\, dx\\), we use:",
+            options: [
+                "\\(\\tan^2 x = \\sec^2 x - 1\\)",
+                "\\(\\sec^2 x = 1 + \\tan^2 x\\)",
+                "\\(u = \\sec x\\)",
+                "\\(\\sin^2 x + \\cos^2 x = 1\\)"
+            ],
+            correct: 1,
+            explanation: "We convert \\(\\sec^n x = \\sec^{n-2} x \\cdot \\sec^2 x\\) and use \\(\\sec^2 x = 1 + \\tan^2 x\\)."
+        },
+        {
+            id: 12,
+            text: "Find \\(\\int \\tan^2 x \\sec^4 x \\, dx\\). The first term in the result is:",
+            options: [
+                "\\(\\frac{1}{3} \\tan^3 x\\)",
+                "\\(\\frac{1}{5} \\tan^5 x\\)",
+                "\\(\\sec^2 x\\)",
+                "\\(\\ln|\\sec x|\\)"
+            ],
+            correct: 0,
+            explanation: "\\(\\int \\tan^2 x \\sec^4 x \\, dx = \\int \\tan^2 x (1+\\tan^2 x) \\sec^2 x \\, dx = \\frac{1}{3}\\tan^3 x + \\frac{1}{5}\\tan^5 x + C\\)."
+        },
+        {
+            id: 13,
+            text: "When m and n are both odd in \\(\\int \\tan^m x \\sec^n x \\, dx\\), we save which factor for du?",
+            options: [
+                "\\(\\sec^2 x\\)",
+                "\\(\\sec x \\tan x\\)",
+                "\\(\\tan^2 x\\)",
+                "\\(\\sin x\\)"
+            ],
+            correct: 1,
+            explanation: "We save \\(\\sec x \\tan x\\) for \\(du\\) and set \\(u = \\sec x\\) (since \\(du = \\sec x \\tan x \\, dx\\))."
+        },
+        {
+            id: 14,
+            text: "The integral \\(\\int \\sec^3 x \\, dx\\) is given as:",
+            options: [
+                "\\(\\tan x + \\sec x + C\\)",
+                "\\(\\frac{1}{2}(\\sec x \\tan x + \\ln|\\sec x + \\tan x|) + C\\)",
+                "\\(\\ln|\\sec x + \\tan x| + C\\)",
+                "\\(\\frac{1}{3} \\sec^3 x + C\\)"
+            ],
+            correct: 1,
+            explanation: "Standard formula for \\(\\int \\sec^3 x \\, dx = \\frac{1}{2}(\\sec x \\tan x + \\ln|\\sec x + \\tan x|) + C\\)."
+        },
+        {
+            id: 15,
+            text: "Evaluate \\(\\int \\tan^2 x \\sec x \\, dx\\). This is solved by converting \\(\\tan^2 x\\) to:",
+            options: [
+                "\\(1 - \\sec^2 x\\)",
+                "\\(\\sec^2 x - 1\\)",
+                "\\(\\frac{1}{\\cos^2 x}\\)",
+                "\\(\\frac{\\sin^2 x}{\\cos^2 x}\\)"
+            ],
+            correct: 1,
+            explanation: "\\(\\tan^2 x = \\sec^2 x - 1\\), so \\(\\int \\tan^2 x \\sec x \\, dx = \\int (\\sec^3 x - \\sec x) \\, dx\\)."
+        },
+        {
+            id: 16,
+            text: "Complete the square for \\(x^2 + 6x + 13\\):",
+            options: [
+                "\\((x+3)^2 + 4\\)",
+                "\\((x+3)^2 + 9\\)",
+                "\\((x-3)^2 + 4\\)",
+                "\\((x+6)^2 - 23\\)"
+            ],
+            correct: 0,
+            explanation: "\\(x^2 + 6x + 13 = (x^2 + 6x + 9) + 4 = (x+3)^2 + 4\\)."
+        },
+        {
+            id: 17,
+            text: "The expression \\(-5 + 6x - x^2\\) is equivalent to:",
+            options: [
+                "\\((x-3)^2 - 4\\)",
+                "\\(4 - (x-3)^2\\)",
+                "\\(9 - (x+3)^2\\)",
+                "\\((x+3)^2 - 4\\)"
+            ],
+            correct: 1,
+            explanation: "\\(-5 + 6x - x^2 = -(x^2 - 6x + 5) = -[(x-3)^2 - 4] = 4 - (x-3)^2\\)."
+        },
+        {
+            id: 18,
+            text: "To solve \\(\\int \\frac{1}{\\sqrt{-5+6x-x^2}} \\, dx\\), we use the form for:",
+            options: [
+                "\\(\\tan^{-1}\\)",
+                "\\(\\sin^{-1}\\)",
+                "\\(\\ln|f + \\sqrt{f^2-a^2}|\\)",
+                "\\(\\sec^{-1}\\)"
+            ],
+            correct: 1,
+            explanation: "After completing the square: \\(-5+6x-x^2 = 4-(x-3)^2\\), which leads to \\(\\int \\frac{1}{\\sqrt{a^2-u^2}} \\, du = \\sin^{-1}(u/a) + C\\)."
+        },
+        {
+            id: 19,
+            text: "Find the integral \\(\\int \\frac{1}{x^2+2x+5} \\, dx\\).",
+            options: [
+                "\\(\\frac{1}{2} \\tan^{-1} \\frac{x+1}{2} + C\\)",
+                "\\(\\tan^{-1}(x+1) + C\\)",
+                "\\(\\ln|x^2+2x+5| + C\\)",
+                "\\(\\frac{1}{5} \\tan^{-1} x + C\\)"
+            ],
+            correct: 0,
+            explanation: "Complete square: \\(x^2+2x+5 = (x+1)^2 + 4\\), so \\(\\int \\frac{1}{(x+1)^2+4} \\, dx = \\frac{1}{2}\\tan^{-1}\\frac{x+1}{2} + C\\)."
+        },
+        {
+            id: 20,
+            text: "What is the constant term \\(a^2\\) when completing the square for \\(x^2 + 6x + 5\\)?",
+            options: [
+                "9",
+                "4",
+                "5",
+                "13"
+            ],
+            correct: 1,
+            explanation: "\\(x^2 + 6x + 5 = (x^2+6x+9) - 9 + 5 = (x+3)^2 - 4\\). Here \\(a^2 = 4\\)."
+        },
+        {
+            id: 21,
+            text: "The formula \\(\\int \\frac{f'}{\\sqrt{a^2+f^2}} \\, dx\\) results in:",
+            options: [
+                "\\(\\sin^{-1} \\frac{f}{a} + C\\)",
+                "\\(\\ln \\left| \\frac{f}{a} + \\frac{\\sqrt{a^2+f^2}}{a} \\right| + C\\)",
+                "\\(\\frac{1}{a} \\tan^{-1} \\frac{f}{a} + C\\)",
+                "\\(\\sec^{-1} \\frac{f}{a} + C\\)"
+            ],
+            correct: 1,
+            explanation: "Standard integral: \\(\\int \\frac{f'}{\\sqrt{a^2+f^2}} \\, dx = \\ln \\left| \\frac{f}{a} + \\frac{\\sqrt{a^2+f^2}}{a} \\right| + C\\)."
+        },
+        {
+            id: 22,
+            text: "Solve \\(\\int \\frac{1}{\\sqrt{x^2-9}} \\, dx\\).",
+            options: [
+                "\\(\\ln \\left| \\frac{x}{3} + \\frac{\\sqrt{x^2-9}}{3} \\right| + C\\)",
+                "\\(\\sin^{-1} \\frac{x}{3} + C\\)",
+                "\\(\\frac{1}{3} \\tan^{-1} \\frac{x}{3} + C\\)",
+                "\\(\\ln | x + \\sqrt{x^2+9} | + C\\)"
+            ],
+            correct: 0,
+            explanation: "Using the formula: \\(\\int \\frac{1}{\\sqrt{x^2-a^2}} \\, dx = \\ln \\left| \\frac{x}{a} + \\frac{\\sqrt{x^2-a^2}}{a} \\right| + C\\), with \\(a=3\\)."
+        },
+        {
+            id: 23,
+            text: "The result of \\(\\int \\frac{1}{1-x^2} \\, dx\\) is:",
+            options: [
+                "\\(\\tan^{-1} x + C\\)",
+                "\\(\\frac{1}{2} \\ln \\left| \\frac{1+x}{1-x} \\right| + C\\)",
+                "\\(\\frac{1}{2} \\ln \\left| \\frac{1-x}{1+x} \\right| + C\\)",
+                "\\(\\sin^{-1} x + C\\)"
+            ],
+            correct: 1,
+            explanation: "Using partial fractions: \\(\\frac{1}{1-x^2} = \\frac{1}{2(1+x)} + \\frac{1}{2(1-x)}\\), which integrates to \\(\\frac{1}{2}\\ln\\left|\\frac{1+x}{1-x}\\right| + C\\)."
+        },
+        {
+            id: 24,
+            text: "Evaluate \\(\\int \\frac{1}{x^2-9} \\, dx\\).",
+            options: [
+                "\\(\\frac{1}{6} \\ln \\left| \\frac{3+x}{3-x} \\right| + C\\)",
+                "\\(\\frac{1}{6} \\ln \\left| \\frac{3-x}{3+x} \\right| + C\\)",
+                "\\(\\frac{1}{3} \\tan^{-1} \\frac{x}{3} + C\\)",
+                "\\(\\ln | x-3 | + C\\)"
+            ],
+            correct: 1,
+            explanation: "\\(\\int \\frac{1}{x^2-9} \\, dx = \\int \\frac{1}{(x-3)(x+3)} \\, dx = \\frac{1}{6}\\ln\\left|\\frac{3-x}{3+x}\\right| + C\\)."
+        },
+        {
+            id: 25,
+            text: "The integral \\(\\int \\frac{1}{9-(x+1)^2} \\, dx\\) gives which final log expression?",
+            options: [
+                "\\(\\frac{1}{6} \\ln \\left| \\frac{4+x}{2-x} \\right| + C\\)",
+                "\\(\\frac{1}{6} \\ln \\left| \\frac{x+4}{x-2} \\right| + C\\)",
+                "\\(\\frac{1}{6} \\ln \\left| \\frac{2-x}{4+x} \\right| + C\\)",
+                "\\(\\frac{1}{18} \\ln \\left| \\frac{3+x}{3-x} \\right| + C\\)"
+            ],
+            correct: 0,
+            explanation: "Using \\(a=3\\) and \\(u=x+1\\): \\(\\int \\frac{1}{9-u^2} \\, du = \\frac{1}{6}\\ln\\left|\\frac{3+u}{3-u}\\right| + C = \\frac{1}{6}\\ln\\left|\\frac{4+x}{2-x}\\right| + C\\)."
+        },
+        {
+            id: 26,
+            text: "In \\(\\int \\sin^2 2x \\, dx\\), which identity is used?",
+            options: [
+                "\\(\\frac{1}{2}(1 - \\cos 2x)\\)",
+                "\\(\\frac{1}{2}(1 - \\cos 4x)\\)",
+                "\\(\\frac{1}{2}(1 + \\cos 4x)\\)",
+                "\\(1 - \\cos^2 2x\\)"
+            ],
+            correct: 1,
+            explanation: "For \\(\\sin^2 2x\\), use \\(\\sin^2 u = \\frac{1}{2}(1-\\cos 2u)\\) with \\(u=2x\\), giving \\(\\frac{1}{2}(1-\\cos 4x)\\)."
+        },
+        {
+            id: 27,
+            text: "The integral \\(\\int \\frac{dx}{x^2-a^2}\\) is equivalent to:",
+            options: [
+                "\\(\\frac{1}{2a} \\ln \\left| \\frac{a-x}{a+x} \\right| + C\\)",
+                "\\(\\frac{1}{2a} \\ln \\left| \\frac{a+x}{a-x} \\right| + C\\)",
+                "\\(\\frac{1}{a} \\tan^{-1} \\frac{x}{a} + C\\)",
+                "\\(\\sin^{-1} \\frac{x}{a} + C\\)"
+            ],
+            correct: 0,
+            explanation: "Standard formula: \\(\\int \\frac{1}{x^2-a^2} \\, dx = \\frac{1}{2a}\\ln\\left|\\frac{x-a}{x+a}\\right| + C = \\frac{1}{2a}\\ln\\left|\\frac{a-x}{a+x}\\right| + C\\)."
+        },
+        {
+            id: 28,
+            text: "To integrate \\(\\int \\sin^2 x \\cos^2 x \\, dx\\), we use:",
+            options: [
+                "Substitution \\(u = \\sin x\\)",
+                "Half-angle identities for both",
+                "Integration by parts",
+                "Partial fractions"
+            ],
+            correct: 1,
+            explanation: "Use \\(\\sin^2 x = \\frac{1}{2}(1-\\cos 2x)\\) and \\(\\cos^2 x = \\frac{1}{2}(1+\\cos 2x)\\), then multiply and simplify."
+        },
+        {
+            id: 29,
+            text: "When integrating \\(\\int \\frac{1}{x^2+2x-3} \\, dx\\), the denominator factors into:",
+            options: [
+                "\\((x+1)^2 + 4\\)",
+                "\\((x+1)^2 - 4\\)",
+                "\\((x-1)(x+3)\\)",
+                "Both B and C are correct"
+            ],
+            correct: 3,
+            explanation: "\\((x+1)^2 - 4 = x^2+2x+1-4 = x^2+2x-3\\). Also factors to \\((x+3)(x-1)\\)."
+        },
+        {
+            id: 30,
+            text: "The integral \\(\\int \\frac{1}{\\sqrt{9-(x+1)^2}} \\, dx\\) is:",
+            options: [
+                "\\(\\sin^{-1} \\frac{x+1}{3} + C\\)",
+                "\\(\\frac{1}{3} \\sin^{-1} \\frac{x+1}{3} + C\\)",
+                "\\(\\ln \\left| \\frac{x+1}{3} + \\frac{\\sqrt{9-(x+1)^2}}{3} \\right| + C\\)",
+                "\\(\\tan^{-1} \\frac{x+1}{3} + C\\)"
+            ],
+            correct: 0,
+            explanation: "Using \\(u=x+1\\) and \\(a=3\\): \\(\\int \\frac{1}{\\sqrt{a^2-u^2}} \\, du = \\sin^{-1}\\frac{u}{a} + C = \\sin^{-1}\\frac{x+1}{3} + C\\)."
+        }
+    ]
+},
+6: { // Definite Integrals & Properties
+    title: "Definite Integrals & Properties - (30 Questions)",
+    questions: [
+        {
+            id: 1,
+            text: "Evaluate the definite integral \\(\\int_{0}^{1} x^3 \\, dx\\).",
+            options: [
+                "1",
+                "1/3",
+                "1/4",
+                "0"
+            ],
+            correct: 2,
+            explanation: "\\(\\int_{0}^{1} x^3 \\, dx = \\frac{x^4}{4} \\Big|_{0}^{1} = \\frac{1^4}{4} - \\frac{0^4}{4} = \\frac{1}{4}\\)."
+        },
+        {
+            id: 2,
+            text: "Find the value of \\(\\int_{1}^{2} (3x^2 + 2x) \\, dx\\).",
+            options: [
+                "10",
+                "12",
+                "8",
+                "14"
+            ],
+            correct: 0,
+            explanation: "The antiderivative is \\(x^3 + x^2\\). Evaluating from 1 to 2 gives \\((2^3 + 2^2) - (1^3 + 1^2) = (8 + 4) - (1 + 1) = 12 - 2 = 10\\)."
+        },
+        {
+            id: 3,
+            text: "Evaluate \\(\\int_{0}^{\\pi/4} \\cos(2x) \\, dx\\).",
+            options: [
+                "1",
+                "1/2",
+                "0",
+                "\\(\\pi/4\\)"
+            ],
+            correct: 1,
+            explanation: "\\(\\int \\cos(2x) \\, dx = \\frac{\\sin(2x)}{2}\\). Evaluating from 0 to \\(\\pi/4\\) gives \\(\\frac{\\sin(\\pi/2)}{2} - \\frac{\\sin(0)}{2} = \\frac{1}{2} - 0 = \\frac{1}{2}\\)."
+        },
+        {
+            id: 4,
+            text: "Solve the integral \\(\\int_{0}^{1} x e^x \\, dx\\).",
+            options: [
+                "\\(e\\)",
+                "\\(e - 1\\)",
+                "1",
+                "0"
+            ],
+            correct: 2,
+            explanation: "Using integration by parts, the antiderivative is \\(x e^x - e^x\\). Evaluating from 0 to 1 gives \\((1 \\cdot e^1 - e^1) - (0 \\cdot e^0 - e^0) = (e - e) - (0 - 1) = 0 + 1 = 1\\)."
+        },
+        {
+            id: 5,
+            text: "What is the result of \\(\\int_{0}^{1} \\sqrt{1-x^2} \\, dx\\)?",
+            options: [
+                "1",
+                "\\(\\pi/2\\)",
+                "\\(\\pi/4\\)",
+                "\\(\\pi\\)"
+            ],
+            correct: 2,
+            explanation: "This represents the area of a quarter circle with radius 1, which is \\(\\pi/4\\)."
+        },
+        {
+            id: 6,
+            text: "What is the value of \\(\\int_{a}^{a} f(x) \\, dx\\)?",
+            options: [
+                "\\(f(a)\\)",
+                "1",
+                "0",
+                "Depends on f(x)"
+            ],
+            correct: 2,
+            explanation: "Property 1 states that if the upper and lower limits are equal, the integral is zero."
+        },
+        {
+            id: 7,
+            text: "If \\(\\int_{\\pi}^{\\pi} \\cos^{100} x \\, dx = I\\), then I equals:",
+            options: [
+                "100",
+                "1",
+                "0",
+                "\\(\\pi\\)"
+            ],
+            correct: 2,
+            explanation: "Since the limits are the same (from \\(\\pi\\) to \\(\\pi\\)), the result is always 0."
+        },
+        {
+            id: 8,
+            text: "If \\(\\int_{2}^{h} \\frac{1+\\cos x}{1+\\sin x} \\, dx = 0\\), then h must be:",
+            options: [
+                "0",
+                "1",
+                "2",
+                "-2"
+            ],
+            correct: 2,
+            explanation: "According to property 1, the integral is 0 when the limits are identical."
+        },
+        {
+            id: 9,
+            text: "If we swap the limits of integration, \\(\\int_{a}^{b} f(x) \\, dx\\) becomes:",
+            options: [
+                "\\(\\int_{b}^{a} f(x) \\, dx\\)",
+                "\\(-\\int_{b}^{a} f(x) \\, dx\\)",
+                "0",
+                "\\(\\frac{1}{\\int_{a}^{b} f(x) \\, dx}\\)"
+            ],
+            correct: 1,
+            explanation: "Property 2 states that \\(\\int_{a}^{b} f(x) \\, dx = -\\int_{b}^{a} f(x) \\, dx\\)."
+        },
+        {
+            id: 10,
+            text: "If \\(\\int_{0}^{2} h(x) \\, dx = k \\int_{2}^{0} h(x) \\, dx\\), then the constant k is:",
+            options: [
+                "1",
+                "0",
+                "-1",
+                "2"
+            ],
+            correct: 2,
+            explanation: "Reversing the limits introduces a negative sign: \\(\\int_{0}^{2} h(x) \\, dx = -\\int_{2}^{0} h(x) \\, dx\\)."
+        },
+        {
+            id: 11,
+            text: "The property \\(\\int_{a}^{b} f(x) \\, dx = \\int_{a}^{b} f(t) \\, dt\\) implies:",
+            options: [
+                "The variable of integration (dummy variable) does not change the value.",
+                "x must equal t.",
+                "The function changes if the variable changes.",
+                "The limits must change."
+            ],
+            correct: 0,
+            explanation: "Property 3 shows the value is independent of the variable name used."
+        },
+        {
+            id: 12,
+            text: "If \\(f(x)\\) is an odd function, then \\(\\int_{-a}^{a} f(x) \\, dx\\) is:",
+            options: [
+                "\\(2 \\int_{0}^{a} f(x) \\, dx\\)",
+                "0",
+                "\\(f(a)\\)",
+                "\\(a^2\\)"
+            ],
+            correct: 1,
+            explanation: "Property 4 states the integral of an odd function over symmetric limits [-a, a] is zero."
+        },
+        {
+            id: 13,
+            text: "Evaluate \\(\\int_{-\\pi}^{\\pi} \\sin x \\, dx\\).",
+            options: [
+                "2",
+                "0",
+                "-1",
+                "\\(\\pi\\)"
+            ],
+            correct: 1,
+            explanation: "\\(\\sin x\\) is an odd function, and the limits are symmetric."
+        },
+        {
+            id: 14,
+            text: "If \\(f(x)\\) is an even function, then \\(\\int_{-a}^{a} f(x) \\, dx\\) is equal to:",
+            options: [
+                "0",
+                "\\(\\int_{0}^{a} f(x) \\, dx\\)",
+                "\\(2 \\int_{0}^{a} f(x) \\, dx\\)",
+                "\\(2f(a)\\)"
+            ],
+            correct: 2,
+            explanation: "Property 5 for even functions: \\(\\int_{-a}^{a} f(x) \\, dx = 2\\int_{0}^{a} f(x) \\, dx\\)."
+        },
+        {
+            id: 15,
+            text: "\\(\\int_{-\\pi/2}^{\\pi/2} \\cos x \\, dx\\) is equivalent to:",
+            options: [
+                "0",
+                "\\(\\int_{0}^{\\pi/2} \\cos x \\, dx\\)",
+                "\\(2 \\int_{0}^{\\pi/2} \\cos x \\, dx\\)",
+                "\\(\\pi\\)"
+            ],
+            correct: 2,
+            explanation: "\\(\\cos x\\) is an even function, so \\(\\int_{-a}^{a} \\cos x \\, dx = 2\\int_{0}^{a} \\cos x \\, dx\\)."
+        },
+        {
+            id: 16,
+            text: "Which formula represents the additive property of definite integrals?",
+            options: [
+                "\\(\\int_{a}^{b} f + \\int_{b}^{c} f = \\int_{a}^{c} f\\)",
+                "\\(\\int_{a}^{b} f = \\int_{a}^{a} f + \\int_{b}^{b} f\\)",
+                "\\(\\int_{a}^{b} f = \\int_{b}^{a} f\\)",
+                "\\(\\int_{a}^{b} f = f(b) - f(a)\\)"
+            ],
+            correct: 0,
+            explanation: "Property 6 allows splitting the interval [a, b] at any point c."
+        },
+        {
+            id: 17,
+            text: "If \\(\\int_{0}^{3} f(x) \\, dx = 6\\) and \\(\\int_{3}^{7} f(x) \\, dx = 4\\), find \\(\\int_{0}^{7} f(x) \\, dx\\).",
+            options: [
+                "2",
+                "10",
+                "24",
+                "-2"
+            ],
+            correct: 1,
+            explanation: "Using additive property: \\(\\int_{0}^{7} f(x) \\, dx = \\int_{0}^{3} f(x) \\, dx + \\int_{3}^{7} f(x) \\, dx = 6 + 4 = 10\\)."
+        },
+        {
+            id: 18,
+            text: "Given \\(\\int_{0}^{3} f(x) \\, dx = 6\\) and \\(\\int_{0}^{7} f(x) \\, dx = 4\\), find \\(\\int_{3}^{7} f(x) \\, dx\\).",
+            options: [
+                "10",
+                "2",
+                "-2",
+                "0"
+            ],
+            correct: 2,
+            explanation: "\\(\\int_{3}^{7} f(x) \\, dx = \\int_{0}^{7} f(x) \\, dx - \\int_{0}^{3} f(x) \\, dx = 4 - 6 = -2\\)."
+        },
+        {
+            id: 19,
+            text: "If \\(\\int_{2}^{7} f(x) \\, dx = 6\\) and \\(\\int_{5}^{7} f(x) \\, dx = 4\\), then \\(\\int_{2}^{5} f(x) \\, dx\\) is:",
+            options: [
+                "10",
+                "2",
+                "-2",
+                "1.5"
+            ],
+            correct: 1,
+            explanation: "\\(\\int_{2}^{5} f(x) \\, dx = \\int_{2}^{7} f(x) \\, dx - \\int_{5}^{7} f(x) \\, dx = 6 - 4 = 2\\)."
+        },
+        {
+            id: 20,
+            text: "Evaluate \\(\\int_{7}^{5} f(x) \\, dx\\) if \\(\\int_{5}^{7} f(x) \\, dx = 4\\).",
+            options: [
+                "4",
+                "0",
+                "-4",
+                "1/4"
+            ],
+            correct: 2,
+            explanation: "Reversing limits changes the sign: \\(\\int_{7}^{5} f(x) \\, dx = -\\int_{5}^{7} f(x) \\, dx = -4\\)."
+        },
+        {
+            id: 21,
+            text: "If \\(m \\le f(x) \\le M\\) on the interval [a, b], then the integral \\(\\int_{a}^{b} f(x) \\, dx\\) is bounded by:",
+            options: [
+                "\\(m \\le \\dots \\le M\\)",
+                "\\(m(b-a) \\le \\dots \\le M(b-a)\\)",
+                "\\(0 \\le \\dots \\le (M-m)\\)",
+                "\\(m/a \\le \\dots \\le M/b\\)"
+            ],
+            correct: 1,
+            explanation: "Property 7 defines the minimum and maximum possible values of the integral."
+        },
+        {
+            id: 22,
+            text: "If \\(3 \\le f(x) \\le 6\\) for \\(x \\in [2, 8]\\), what is the minimum value of \\(\\int_{2}^{8} f(x) \\, dx\\)?",
+            options: [
+                "3",
+                "6",
+                "18",
+                "36"
+            ],
+            correct: 2,
+            explanation: "Minimum = \\(m(b-a) = 3(8-2) = 3(6) = 18\\)."
+        },
+        {
+            id: 23,
+            text: "For the same function in Q22, what is the maximum value of the integral?",
+            options: [
+                "6",
+                "18",
+                "36",
+                "48"
+            ],
+            correct: 2,
+            explanation: "Maximum = \\(M(b-a) = 6(8-2) = 6(6) = 36\\)."
+        },
+        {
+            id: 24,
+            text: "If \\(f(x) \\ge 0\\) on [a, b], then \\(\\int_{a}^{b} f(x) \\, dx\\) must be:",
+            options: [
+                "Negative",
+                "Zero",
+                "Greater than or equal to zero",
+                "Exactly 1"
+            ],
+            correct: 2,
+            explanation: "Based on the property that the integral of a non-negative function is non-negative."
+        },
+        {
+            id: 25,
+            text: "If \\(f(x) \\le g(x)\\), then which of the following is true for their integrals?",
+            options: [
+                "\\(\\int f \\ge \\int g\\)",
+                "\\(\\int f \\le \\int g\\)",
+                "\\(\\int f = \\int g\\)",
+                "No relationship"
+            ],
+            correct: 1,
+            explanation: "Comparison property of definite integrals."
+        },
+        {
+            id: 26,
+            text: "The integral \\(\\int_{0}^{1} \\sqrt{1-t^2} \\, dt\\) is equal to:",
+            options: [
+                "\\(\\pi/4\\)",
+                "1/2",
+                "0",
+                "\\(\\pi/2\\)"
+            ],
+            correct: 0,
+            explanation: "Property 3 (dummy variable) means it's the same as \\(\\int_{0}^{1} \\sqrt{1-x^2} \\, dx = \\pi/4\\)."
+        },
+        {
+            id: 27,
+            text: "In \\(\\int_{0}^{1} x e^x \\, dx\\), if we use u=x, then v is:",
+            options: [
+                "1",
+                "x",
+                "\\(e^x\\)",
+                "\\(e^x - 1\\)"
+            ],
+            correct: 2,
+            explanation: "In integration by parts, if \\(dv = e^x \\, dx\\), then \\(v = \\int e^x \\, dx = e^x\\)."
+        },
+        {
+            id: 28,
+            text: "To solve \\(\\int_{0}^{1} \\sqrt{1-x^2} \\, dx\\) using substitution, we set \\(x = \\sin \\theta\\). The new limits for \\(\\theta\\) are:",
+            options: [
+                "0 to 1",
+                "0 to \\(\\pi/2\\)",
+                "0 to \\(\\pi\\)",
+                "\\(-\\pi/2\\) to \\(\\pi/2\\)"
+            ],
+            correct: 1,
+            explanation: "If \\(x=0\\), \\(\\sin \\theta = 0 \\Rightarrow \\theta = 0\\). If \\(x=1\\), \\(\\sin \\theta = 1 \\Rightarrow \\theta = \\pi/2\\)."
+        },
+        {
+            id: 29,
+            text: "If \\(f(x)\\) is even and \\(\\int_{0}^{a} f(x) \\, dx = 5\\), then \\(\\int_{-a}^{a} f(x) \\, dx\\) is:",
+            options: [
+                "0",
+                "5",
+                "10",
+                "-10"
+            ],
+            correct: 2,
+            explanation: "Using the even function property: \\(\\int_{-a}^{a} f(x) \\, dx = 2\\int_{0}^{a} f(x) \\, dx = 2 \\times 5 = 10\\)."
+        },
+        {
+            id: 30,
+            text: "The definite integral measures:",
+            options: [
+                "The slope of a curve.",
+                "The net signed area under a curve.",
+                "The value of the function at a point.",
+                "The rate of change."
+            ],
+            correct: 1,
+            explanation: "Definition of the definite integral."
+        }
+    ]
+},
+7: { // Improper Integrals
+    title: "Improper Integrals - (30 Questions)",
+    questions: [
+        {
+            id: 1,
+            text: "An integral is called 'improper' if:",
+            options: [
+                "The function is continuous everywhere in the interval.",
+                "The function is undefined at a point in the integral interval.",
+                "The integral interval contains ∞ or -∞.",
+                "Both B and C are correct."
+            ],
+            correct: 3,
+            explanation: "An improper integral occurs when either: 1) The interval is infinite (Case 2), or 2) The integrand has a discontinuity within the interval (Case 1)."
+        },
+        {
+            id: 2,
+            text: "Why is the integral \\(\\int_{0}^{1} \\frac{1}{x} \\, dx\\) improper?",
+            options: [
+                "Because the upper limit is 1.",
+                "Because the function is undefined at x=0.",
+                "Because it has an infinite limit.",
+                "It is not an improper integral."
+            ],
+            correct: 1,
+            explanation: "The integrand 1/x is undefined at x=0, which is the lower limit of integration (discontinuity at endpoint)."
+        },
+        {
+            id: 3,
+            text: "The integral \\(\\int_{0}^{3} \\frac{1}{(x-3)^2} \\, dx\\) is improper due to:",
+            options: [
+                "x = 0",
+                "x = 3",
+                "x = ∞",
+                "x = -3"
+            ],
+            correct: 1,
+            explanation: "The denominator becomes zero when x=3, making the function undefined at the upper limit."
+        },
+        {
+            id: 4,
+            text: "Which of the following is an improper integral due to its interval (Case 2)?",
+            options: [
+                "\\(\\int_{0}^{1} \\frac{1}{x} \\, dx\\)",
+                "\\(\\int_{-1}^{2} \\frac{1}{x^2} \\, dx\\)",
+                "\\(\\int_{1}^{\\infty} \\frac{1}{x^2} \\, dx\\)",
+                "\\(\\int_{0}^{3} \\frac{1}{x^2} \\, dx\\)"
+            ],
+            correct: 2,
+            explanation: "This has an infinite upper limit (∞), which makes it a Case 2 improper integral."
+        },
+        {
+            id: 5,
+            text: "The integral \\(\\int_{-1}^{2} \\frac{1}{x^2} \\, dx\\) is improper because:",
+            options: [
+                "The limits are negative.",
+                "The function is undefined at x = 0, which is inside the interval [-1, 2].",
+                "The interval is infinite.",
+                "It is a definite integral."
+            ],
+            correct: 1,
+            explanation: "The integrand 1/x² is undefined at x=0, which lies between -1 and 2 (discontinuity inside interval)."
+        },
+        {
+            id: 6,
+            text: "If the limit of an improper integral exists as a finite number, the integral is said to be:",
+            options: [
+                "Divergent.",
+                "Convergent.",
+                "Undefined.",
+                "Improper."
+            ],
+            correct: 1,
+            explanation: "Definition: An improper integral converges if its defining limit exists as a finite number."
+        },
+        {
+            id: 7,
+            text: "Evaluate \\(\\int_{0}^{1} \\frac{1}{\\sqrt{x}} \\, dx\\).",
+            options: [
+                "Convergent to 1.",
+                "Divergent.",
+                "Convergent to 2.",
+                "Convergent to ∞."
+            ],
+            correct: 2,
+            explanation: "\\(\\int_{0}^{1} x^{-1/2} \\, dx = \\lim_{R\\to0^+} 2\\sqrt{x}|_{R}^{1} = 2(1) - 2(0) = 2\\)."
+        },
+        {
+            id: 8,
+            text: "What is the result of \\(\\int_{0}^{1} \\frac{1}{x} \\, dx\\)?",
+            options: [
+                "1",
+                "0",
+                "∞ (Divergent).",
+                "ln(1)"
+            ],
+            correct: 2,
+            explanation: "\\(\\lim_{R\\to0^+} \\ln|x||_{R}^{1} = \\ln(1) - \\lim_{R\\to0^+} \\ln(R) = 0 - (-∞) = ∞\\) (diverges)."
+        },
+        {
+            id: 9,
+            text: "When calculating \\(\\int_{0}^{1} \\frac{1}{x} \\, dx\\), we use the limit:",
+            options: [
+                "\\(\\lim_{R \\to \\infty}\\)",
+                "\\(\\lim_{R \\to 0}\\)",
+                "\\(\\lim_{R \\to 1}\\)",
+                "No limit is needed."
+            ],
+            correct: 1,
+            explanation: "We approach the discontinuity at x=0 from the right: \\(\\lim_{R\\to0^+} \\int_{R}^{1} \\frac{1}{x} \\, dx\\)."
+        },
+        {
+            id: 10,
+            text: "In the calculation of \\(\\int_{0}^{1} \\frac{1}{x} \\, dx\\), the value of ln|0| is treated as:",
+            options: [
+                "0",
+                "1",
+                "-∞",
+                "e"
+            ],
+            correct: 2,
+            explanation: "As x→0⁺, ln(x)→ -∞. So ln|0| represents -∞ in the limit."
+        },
+        {
+            id: 11,
+            text: "Evaluate \\(\\int_{-\\infty}^{1} e^x \\, dx\\).",
+            options: [
+                "Divergent.",
+                "Convergent to e.",
+                "Convergent to 1.",
+                "Convergent to 0."
+            ],
+            correct: 1,
+            explanation: "\\(\\lim_{R\\to-\\infty} e^x|_{R}^{1} = e^1 - \\lim_{R\\to-\\infty} e^R = e - 0 = e\\)."
+        },
+        {
+            id: 12,
+            text: "What is the value of \\(e^{-\\infty}\\) used in integration limits?",
+            options: [
+                "∞",
+                "1",
+                "0",
+                "-e"
+            ],
+            correct: 2,
+            explanation: "\\(\\lim_{x\\to-\\infty} e^x = 0\\). This is a standard limit used in improper integrals."
+        },
+        {
+            id: 13,
+            text: "Find the value of \\(\\int_{0}^{\\infty} \\frac{1}{1+x^2} \\, dx\\).",
+            options: [
+                "π",
+                "π/2",
+                "∞",
+                "0"
+            ],
+            correct: 1,
+            explanation: "\\(\\lim_{R\\to\\infty} \\tan^{-1}(x)|_{0}^{R} = \\lim_{R\\to\\infty} \\tan^{-1}(R) - \\tan^{-1}(0) = \\frac{\\pi}{2} - 0 = \\frac{\\pi}{2}\\)."
+        },
+        {
+            id: 14,
+            text: "The value of \\(\\tan^{-1}(\\infty)\\) is:",
+            options: [
+                "0",
+                "π",
+                "π/2",
+                "1"
+            ],
+            correct: 2,
+            explanation: "As x→∞, tan⁻¹(x) approaches π/2. This is a standard limit."
+        },
+        {
+            id: 15,
+            text: "Evaluate \\(\\int_{-\\infty}^{\\infty} \\frac{1}{1+x^2} \\, dx\\).",
+            options: [
+                "π/2",
+                "2π",
+                "π",
+                "Divergent."
+            ],
+            correct: 2,
+            explanation: "For even functions: \\(2\\int_{0}^{\\infty} \\frac{1}{1+x^2} \\, dx = 2 \\times \\frac{\\pi}{2} = \\pi\\)."
+        },
+        {
+            id: 16,
+            text: "To solve \\(\\int_{-1}^{2} \\frac{1}{x^2} \\, dx\\), you must split it into:",
+            options: [
+                "\\(\\int_{-1}^{1} + \\int_{1}^{2}\\)",
+                "\\(\\int_{-1}^{0} + \\int_{0}^{2}\\)",
+                "\\(\\int_{-1}^{2}\\) (no splitting needed).",
+                "\\(\\int_{0}^{2}\\) only."
+            ],
+            correct: 1,
+            explanation: "Split at the discontinuity x=0: \\(\\int_{-1}^{0} \\frac{1}{x^2} \\, dx + \\int_{0}^{2} \\frac{1}{x^2} \\, dx\\)."
+        },
+        {
+            id: 17,
+            text: "The integral \\(\\int_{-1}^{0} \\frac{1}{x^2} \\, dx\\) is:",
+            options: [
+                "Convergent to 1.",
+                "Convergent to -1.",
+                "Divergent.",
+                "Zero."
+            ],
+            correct: 2,
+            explanation: "\\(\\lim_{R\\to0^-} (-\\frac{1}{x})|_{-1}^{R} = \\lim_{R\\to0^-} (-\\frac{1}{R}) - 1 = ∞ - 1 = ∞\\) (diverges)."
+        },
+        {
+            id: 18,
+            text: "If one part of a split improper integral is divergent, the whole integral is:",
+            options: [
+                "Convergent.",
+                "Divergent.",
+                "Zero.",
+                "Half-convergent."
+            ],
+            correct: 1,
+            explanation: "Rule: For an improper integral with discontinuity inside [a,b], if any part diverges, the whole integral diverges."
+        },
+        {
+            id: 19,
+            text: "\\(\\int_{0}^{1} \\frac{1}{\\sqrt{1-x}} \\, dx\\) is improper at:",
+            options: [
+                "x = 0",
+                "x = 0.5",
+                "x = 1",
+                "x = -1"
+            ],
+            correct: 2,
+            explanation: "The denominator becomes zero when 1-x=0 ⇒ x=1 (discontinuity at upper limit)."
+        },
+        {
+            id: 20,
+            text: "\\(\\int_{-\\infty}^{0} \\frac{1}{1+x^2} \\, dx\\) is convergent to:",
+            options: [
+                "π/2",
+                "-π/2",
+                "π",
+                "∞"
+            ],
+            correct: 0,
+            explanation: "\\(\\lim_{R\\to-\\infty} \\tan^{-1}(x)|_{R}^{0} = \\tan^{-1}(0) - \\tan^{-1}(-\\infty) = 0 - (-\\frac{\\pi}{2}) = \\frac{\\pi}{2}\\)."
+        },
+        {
+            id: 21,
+            text: "For the integral \\(\\int_{1}^{\\infty} \\frac{1}{x^p} \\, dx\\), it is divergent if:",
+            options: [
+                "p > 1",
+                "p ≤ 1",
+                "p = 2",
+                "p = 5"
+            ],
+            correct: 1,
+            explanation: "P-Test Rule: \\(\\int_{1}^{\\infty} \\frac{1}{x^p} \\, dx\\) converges if p>1, diverges if p≤1."
+        },
+        {
+            id: 22,
+            text: "For the integral \\(\\int_{1}^{\\infty} \\frac{1}{x^p} \\, dx\\), it is convergent if:",
+            options: [
+                "p > 1",
+                "p ≤ 1",
+                "p = 1",
+                "p = 0.5"
+            ],
+            correct: 0,
+            explanation: "P-Test: Converges only when p > 1."
+        },
+        {
+            id: 23,
+            text: "If \\(\\int_{1}^{\\infty} \\frac{1}{x^p} \\, dx\\) is convergent, it converges to:",
+            options: [
+                "p - 1",
+                "1/p",
+                "1/(p-1)",
+                "∞"
+            ],
+            correct: 2,
+            explanation: "For p>1: \\(\\int_{1}^{\\infty} x^{-p} \\, dx = \\frac{1}{p-1}\\)."
+        },
+        {
+            id: 24,
+            text: "The integral \\(\\int_{1}^{\\infty} \\frac{1}{\\sqrt[3]{x}} \\, dx\\) is:",
+            options: [
+                "Convergent because p=3.",
+                "Divergent because p = 1/3 ≤ 1.",
+                "Convergent to 1/4.",
+                "Convergent to 3/2."
+            ],
+            correct: 1,
+            explanation: "\\(\\frac{1}{\\sqrt[3]{x}} = x^{-1/3}\\), so p=1/3 ≤ 1 ⇒ divergent by P-test."
+        },
+        {
+            id: 25,
+            text: "The integral \\(\\int_{1}^{\\infty} \\frac{1}{x^5} \\, dx\\) is:",
+            options: [
+                "Divergent.",
+                "Convergent to 1/5.",
+                "Convergent to 1/4.",
+                "Convergent to 1/6."
+            ],
+            correct: 2,
+            explanation: "p=5 > 1, so convergent to 1/(p-1) = 1/(5-1) = 1/4."
+        },
+        {
+            id: 26,
+            text: "The integral \\(\\int_{1}^{\\infty} \\frac{1}{x} \\, dx\\) is:",
+            options: [
+                "Convergent to 1.",
+                "Divergent because p=1.",
+                "Convergent to 0.",
+                "Improper Case 1."
+            ],
+            correct: 1,
+            explanation: "P-test with p=1 ≤ 1 ⇒ divergent. Also: \\(\\lim_{R\\to\\infty} \\ln(R) = ∞\\)."
+        },
+        {
+            id: 27,
+            text: "\\(\\int_{1}^{\\infty} \\frac{1}{\\sqrt{x}} \\, dx\\) is divergent because:",
+            options: [
+                "x=0 is in the interval.",
+                "p = 1/2 and 1/2 ≤ 1.",
+                "The function is e^x.",
+                "The limit is π/2."
+            ],
+            correct: 1,
+            explanation: "\\(1/\\sqrt{x} = x^{-1/2}\\), p=1/2 ≤ 1 ⇒ divergent by P-test."
+        },
+        {
+            id: 28,
+            text: "To find \\(\\int_{-\\infty}^{\\infty} f(x) \\, dx\\) for an even function, we can use:",
+            options: [
+                "\\(2 \\int_{0}^{\\infty} f(x) \\, dx\\)",
+                "0",
+                "\\(\\int_{0}^{\\infty} f(x) \\, dx\\)",
+                "The p-test."
+            ],
+            correct: 0,
+            explanation: "Property of even functions: \\(\\int_{-\\infty}^{\\infty} f(x) \\, dx = 2\\int_{0}^{\\infty} f(x) \\, dx\\)."
+        },
+        {
+            id: 29,
+            text: "\\(\\int_{0}^{3} \\frac{1}{x^2} \\, dx\\) is improper at x=0. Is it convergent or divergent?",
+            options: [
+                "Convergent to 3.",
+                "Divergent.",
+                "Convergent to 1/3.",
+                "Not improper."
+            ],
+            correct: 1,
+            explanation: "\\(\\lim_{R\\to0^+} (-\\frac{1}{x})|_{R}^{3} = (-\\frac{1}{3}) - \\lim_{R\\to0^+} (-\\frac{1}{R}) = -\\frac{1}{3} + ∞ = ∞\\) (divergent)."
+        },
+        {
+            id: 30,
+            text: "What is the main tool used to solve all improper integrals?",
+            options: [
+                "Multiplication.",
+                "Long Division.",
+                "Limits.",
+                "Integration by parts only."
+            ],
+            correct: 2,
+            explanation: "All improper integrals are evaluated using limits: either to approach discontinuities or infinite bounds."
+        }
+    ]
+},
+8: { // Complex Numbers
+    title: "Complex Numbers - (30 Questions)",
+    questions: [
+        {
+            id: 1,
+            text: "The standard form of a complex number is z = x + yi. What does y represent?",
+            options: [
+                "The real part",
+                "The imaginary part",
+                "The magnitude",
+                "The conjugate"
+            ],
+            correct: 1,
+            explanation: "In z = x + yi, x is the real part (Re(z)) and y is the imaginary part (Im(z))."
+        },
+        {
+            id: 2,
+            text: "In the complex number z = 3i, what are the values of x and y?",
+            options: [
+                "x=3, y=0",
+                "x=3, y=3",
+                "x=0, y=3",
+                "x=0, y=0"
+            ],
+            correct: 2,
+            explanation: "z = 3i = 0 + 3i, so real part x=0, imaginary part y=3."
+        },
+        {
+            id: 3,
+            text: "What is the value of i²?",
+            options: [
+                "1",
+                "-1",
+                "i",
+                "-i"
+            ],
+            correct: 1,
+            explanation: "By definition, i² = -1, where i is the imaginary unit (√-1)."
+        },
+        {
+            id: 4,
+            text: "Evaluate i³.",
+            options: [
+                "1",
+                "-1",
+                "i",
+                "-i"
+            ],
+            correct: 3,
+            explanation: "i³ = i² × i = (-1) × i = -i."
+        },
+        {
+            id: 5,
+            text: "What is the value of i⁴?",
+            options: [
+                "1",
+                "-1",
+                "0",
+                "i"
+            ],
+            correct: 0,
+            explanation: "i⁴ = (i²)² = (-1)² = 1."
+        },
+        {
+            id: 6,
+            text: "If z = 2 + 3i, what is its conjugate \\(\\overline{z}\\)?",
+            options: [
+                "2 + 3i",
+                "-2 + 3i",
+                "2 - 3i",
+                "-2 - 3i"
+            ],
+            correct: 2,
+            explanation: "The conjugate changes the sign of the imaginary part: \\(\\overline{2+3i} = 2-3i\\)."
+        },
+        {
+            id: 7,
+            text: "Find the conjugate of z = 3i.",
+            options: [
+                "3i",
+                "-3i",
+                "3",
+                "-3"
+            ],
+            correct: 1,
+            explanation: "\\(\\overline{3i} = \\overline{0+3i} = 0-3i = -3i\\)."
+        },
+        {
+            id: 8,
+            text: "If z₁ = 2 + 3i and z₂ = 3 - 4i, find z₁ + z₂.",
+            options: [
+                "5 - 7i",
+                "5 - i",
+                "6 - i",
+                "1 + 7i"
+            ],
+            correct: 1,
+            explanation: "(2+3) + (3i-4i) = 5 - i."
+        },
+        {
+            id: 9,
+            text: "Evaluate z₁ × z₂ for z₁ = 2 + 3i and z₂ = 3 - 4i.",
+            options: [
+                "6 - 12i",
+                "18 + i",
+                "6 + i",
+                "18 - i"
+            ],
+            correct: 1,
+            explanation: "(2+3i)(3-4i) = 6 - 8i + 9i - 12i² = 6 + i - 12(-1) = 6 + i + 12 = 18 + i."
+        },
+        {
+            id: 10,
+            text: "What is the result of multiplying a complex number by its conjugate (z × \\(\\overline{z}\\))?",
+            options: [
+                "x² - y²",
+                "x² + y²",
+                "2x",
+                "0"
+            ],
+            correct: 1,
+            explanation: "(x+yi)(x-yi) = x² - (yi)² = x² - (-y²) = x² + y²."
+        },
+        {
+            id: 11,
+            text: "To divide two complex numbers, you should multiply the numerator and denominator by:",
+            options: [
+                "The numerator's conjugate",
+                "The denominator's conjugate",
+                "i",
+                "-1"
+            ],
+            correct: 1,
+            explanation: "Multiply by the conjugate of the denominator to eliminate i from the denominator."
+        },
+        {
+            id: 12,
+            text: "Find the magnitude |z| of z = 3 + 4i.",
+            options: [
+                "7",
+                "25",
+                "5",
+                "√7"
+            ],
+            correct: 2,
+            explanation: "|z| = √(x²+y²) = √(3²+4²) = √(9+16) = √25 = 5."
+        },
+        {
+            id: 13,
+            text: "In division \\(\\frac{1+2i}{2+3i}\\), what is the value of the denominator after multiplication?",
+            options: [
+                "13",
+                "5",
+                "√13",
+                "1"
+            ],
+            correct: 0,
+            explanation: "(2+3i)(2-3i) = 2²+3² = 4+9 = 13."
+        },
+        {
+            id: 14,
+            text: "If z = x + yi, the magnitude |z| is calculated as:",
+            options: [
+                "x + y",
+                "√(x² - y²)",
+                "√(x² + y²)",
+                "x² + y²"
+            ],
+            correct: 2,
+            explanation: "|z| = √(Re(z)² + Im(z)²) = √(x² + y²)."
+        },
+        {
+            id: 15,
+            text: "Evaluate |13 - 6i|.",
+            options: [
+                "19",
+                "√(169 + 36) = √205",
+                "√205 i",
+                "7"
+            ],
+            correct: 1,
+            explanation: "|13-6i| = √(13² + (-6)²) = √(169 + 36) = √205."
+        },
+        {
+            id: 16,
+            text: "If x > 0 and y > 0, the complex number is in the:",
+            options: [
+                "First quadrant",
+                "Second quadrant",
+                "Third quadrant",
+                "Fourth quadrant"
+            ],
+            correct: 0,
+            explanation: "First quadrant: x>0 (right of origin), y>0 (above origin)."
+        },
+        {
+            id: 17,
+            text: "What is the formula for θ in the Second Quadrant (x < 0, y > 0)?",
+            options: [
+                "tan⁻¹|y/x|",
+                "π - tan⁻¹|y/x|",
+                "tan⁻¹|y/x| - π",
+                "-tan⁻¹|y/x|"
+            ],
+            correct: 1,
+            explanation: "Second quadrant: θ = π - α where α = tan⁻¹|y/x|."
+        },
+        {
+            id: 18,
+            text: "Find the argument θ for z = 1 + i.",
+            options: [
+                "π/2",
+                "π/4",
+                "3π/4",
+                "-π/4"
+            ],
+            correct: 1,
+            explanation: "θ = tan⁻¹(1/1) = tan⁻¹(1) = π/4 (First quadrant)."
+        },
+        {
+            id: 19,
+            text: "If z = -1 - i, what is the argument θ (Third Quadrant)?",
+            options: [
+                "3π/4",
+                "-π/4",
+                "-3π/4",
+                "π/4"
+            ],
+            correct: 2,
+            explanation: "Third quadrant: θ = -π + α = -π + tan⁻¹(1) = -π + π/4 = -3π/4."
+        },
+        {
+            id: 20,
+            text: "For z = 1 - i, θ is calculated as:",
+            options: [
+                "π/4",
+                "-π/4",
+                "3π/4",
+                "tan⁻¹(1)"
+            ],
+            correct: 1,
+            explanation: "Fourth quadrant: θ = -α = -tan⁻¹(1) = -π/4."
+        },
+        {
+            id: 21,
+            text: "The polar form of a complex number is written as:",
+            options: [
+                "z = r(cosθ + i sinθ)",
+                "z = r e^(iθ)",
+                "z = x + yi",
+                "Both A and B are correct"
+            ],
+            correct: 3,
+            explanation: "Two equivalent forms: trigonometric (Euler's form) and exponential form."
+        },
+        {
+            id: 22,
+            text: "In the polar form, r represents the:",
+            options: [
+                "Argument",
+                "Magnitude",
+                "Real part",
+                "Conjugate"
+            ],
+            correct: 1,
+            explanation: "r = |z| = √(x²+y²) is the magnitude (modulus)."
+        },
+        {
+            id: 23,
+            text: "Find the polar form of z = 1 + √3 i.",
+            options: [
+                "2(cos(π/3) + i sin(π/3))",
+                "2(cos(π/6) + i sin(π/6))",
+                "√2(cos(π/4) + i sin(π/4))",
+                "2e^(π/6 i)"
+            ],
+            correct: 0,
+            explanation: "r = √(1²+(√3)²) = √4 = 2, θ = tan⁻¹(√3/1) = π/3, so z = 2(cos(π/3)+i sin(π/3))."
+        },
+        {
+            id: 24,
+            text: "For z = √3 + i, what is the argument θ?",
+            options: [
+                "π/3",
+                "π/6",
+                "π/4",
+                "π/2"
+            ],
+            correct: 1,
+            explanation: "θ = tan⁻¹(1/√3) = tan⁻¹(√3/3) = π/6."
+        },
+        {
+            id: 25,
+            text: "Convert z = 1 + i to polar form.",
+            options: [
+                "2e^(π/4 i)",
+                "√2 e^(π/4 i)",
+                "√2(cos(π/3) + i sin(π/3))",
+                "1(cos(π/4) + i sin(π/4))"
+            ],
+            correct: 1,
+            explanation: "r = √(1²+1²) = √2, θ = π/4, so polar form is √2 e^(π/4 i)."
+        },
+        {
+            id: 26,
+            text: "What is the magnitude of z = 2?",
+            options: [
+                "0",
+                "2",
+                "√2",
+                "4"
+            ],
+            correct: 1,
+            explanation: "|2| = √(2²+0²) = √4 = 2."
+        },
+        {
+            id: 27,
+            text: "If z = -1 + i, which quadrant does it belong to?",
+            options: [
+                "First",
+                "Second",
+                "Third",
+                "Fourth"
+            ],
+            correct: 1,
+            explanation: "x = -1 < 0, y = 1 > 0 ⇒ Second quadrant."
+        },
+        {
+            id: 28,
+            text: "The complex number i⁸ is equal to:",
+            options: [
+                "i",
+                "-i",
+                "1",
+                "-1"
+            ],
+            correct: 2,
+            explanation: "i⁸ = (i⁴)² = (1)² = 1."
+        },
+        {
+            id: 29,
+            text: "In the formula θ = tan⁻¹|y/x|, the absolute value |y/x| is used to find:",
+            options: [
+                "The final angle directly",
+                "The reference angle in the first quadrant",
+                "The magnitude",
+                "The conjugate"
+            ],
+            correct: 1,
+            explanation: "|y/x| gives the reference angle α, then we adjust based on the actual quadrant."
+        },
+        {
+            id: 30,
+            text: "What is e^(π/3 i) in trigonometric form?",
+            options: [
+                "sin(π/3) + i cos(π/3)",
+                "cos(π/3) + i sin(π/3)",
+                "cos(π/3) - i sin(π/3)",
+                "tan(π/3)"
+            ],
+            correct: 1,
+            explanation: "Euler's formula: e^(iθ) = cosθ + i sinθ."
+        }
+    ]
+},
+9: { // Applications of Definite Integral
+    title: "Applications of Definite Integral - (30 Questions)",
+    questions: [
+        {
+            id: 1,
+            text: "What is the formula for the arc length of the curve \\(y=f(x)\\) for \\(a \\le x \\le b\\)?",
+            options: [
+                "\\(L = \\int_{a}^{b} (1 + (\\frac{dy}{dx})^2) \\, dx\\)",
+                "\\(L = \\int_{a}^{b} \\sqrt{1 + (\\frac{dy}{dx})^2} \\, dx\\)",
+                "\\(L = \\int_{a}^{b} (f(x) - g(x)) \\, dx\\)",
+                "\\(L = \\int_{a}^{b} \\sqrt{1 - (\\frac{dy}{dx})^2} \\, dx\\)"
+            ],
+            correct: 1,
+            explanation: "Arc length formula: \\(L = \\int_{a}^{b} \\sqrt{1 + [f'(x)]^2} \\, dx\\)."
+        },
+        {
+            id: 2,
+            text: "To find the length of \\(y = \\sqrt{3}x + 12\\), what is the derivative \\(\\frac{dy}{dx}\\)?",
+            options: [
+                "\\(x\\)",
+                "\\(12\\)",
+                "\\(\\sqrt{3}\\)",
+                "\\(\\sqrt{3}x\\)"
+            ],
+            correct: 2,
+            explanation: "\\(\\frac{d}{dx}(\\sqrt{3}x + 12) = \\sqrt{3}\\) (constant slope)."
+        },
+        {
+            id: 3,
+            text: "For the curve \\(y = \\sqrt{3}x + 12\\) on \\([0, \\frac{1}{2}]\\), \\(\\sqrt{1 + (\\frac{dy}{dx})^2}\\) simplifies to:",
+            options: [
+                "\\(\\sqrt{3}\\)",
+                "\\(2\\)",
+                "\\(4\\)",
+                "\\(1\\)"
+            ],
+            correct: 1,
+            explanation: "\\(\\sqrt{1 + (\\sqrt{3})^2} = \\sqrt{1+3} = \\sqrt{4} = 2\\)."
+        },
+        {
+            id: 4,
+            text: "Find the length of the curve \\(y = \\sqrt{3}x + 12\\) for \\(0 \\le x \\le \\frac{1}{2}\\).",
+            options: [
+                "\\(\\frac{1}{2}\\)",
+                "\\(2\\)",
+                "\\(1\\)",
+                "\\(4\\)"
+            ],
+            correct: 2,
+            explanation: "\\(L = \\int_{0}^{1/2} 2 \\, dx = [2x]_{0}^{1/2} = 2(\\frac{1}{2}) - 0 = 1\\)."
+        },
+        {
+            id: 5,
+            text: "For the curve \\(y = \\frac{2}{3}x^{3/2} + 12\\), find \\(\\frac{dy}{dx}\\).",
+            options: [
+                "\\(x^{1/2}\\)",
+                "\\(x^{3/2}\\)",
+                "\\(\\frac{2}{3}x\\)",
+                "\\(1\\)"
+            ],
+            correct: 0,
+            explanation: "\\(\\frac{d}{dx}[\\frac{2}{3}x^{3/2}] = \\frac{2}{3} \\cdot \\frac{3}{2}x^{1/2} = x^{1/2}\\)."
+        },
+        {
+            id: 6,
+            text: "In the arc length integral for \\(y = \\frac{2}{3}x^{3/2} + 12\\), \\((\\frac{dy}{dx})^2\\) equals:",
+            options: [
+                "\\(x^{1/4}\\)",
+                "\\(x\\)",
+                "\\(x^2\\)",
+                "\\(\\sqrt{x}\\)"
+            ],
+            correct: 1,
+            explanation: "\\((\\frac{dy}{dx})^2 = (x^{1/2})^2 = x\\)."
+        },
+        {
+            id: 7,
+            text: "The integral to find the length of \\(y = \\frac{2}{3}x^{3/2} + 12\\) for \\(0 \\le x \\le 3\\) is:",
+            options: [
+                "\\(\\int_{0}^{3} \\sqrt{1+x^2} \\, dx\\)",
+                "\\(\\int_{0}^{3} (1+x) \\, dx\\)",
+                "\\(\\int_{0}^{3} \\sqrt{1+x} \\, dx\\)",
+                "\\(\\int_{0}^{3} x^{1/2} \\, dx\\)"
+            ],
+            correct: 2,
+            explanation: "\\(\\sqrt{1 + (\\frac{dy}{dx})^2} = \\sqrt{1+x}\\)."
+        },
+        {
+            id: 8,
+            text: "What is the antiderivative of \\(\\sqrt{1+x}\\)?",
+            options: [
+                "\\(\\frac{1}{2\\sqrt{1+x}}\\)",
+                "\\(\\frac{2}{3}(1+x)^{3/2}\\)",
+                "\\((1+x)^2\\)",
+                "\\(\\frac{3}{2}(1+x)^{2/3}\\)"
+            ],
+            correct: 1,
+            explanation: "\\(\\int \\sqrt{1+x} \\, dx = \\frac{2}{3}(1+x)^{3/2} + C\\)."
+        },
+        {
+            id: 9,
+            text: "Evaluate the length of the curve \\(y = \\frac{2}{3}x^{3/2} + 12\\) for \\(0 \\le x \\le 3\\).",
+            options: [
+                "\\(\\frac{16}{3}\\)",
+                "\\(\\frac{2}{3}\\)",
+                "\\(\\frac{14}{3}\\)",
+                "\\(12\\)"
+            ],
+            correct: 2,
+            explanation: "\\(L = \\int_{0}^{3} \\sqrt{1+x} \\, dx = [\\frac{2}{3}(1+x)^{3/2}]_{0}^{3} = \\frac{2}{3}(4)^{3/2} - \\frac{2}{3}(1)^{3/2} = \\frac{2}{3}(8) - \\frac{2}{3}(1) = \\frac{16}{3} - \\frac{2}{3} = \\frac{14}{3}\\)."
+        },
+        {
+            id: 10,
+            text: "The area enclosed by \\(y=f(x)\\) and \\(y=g(x)\\) where \\(f(x) \\ge g(x)\\) on \\([a,b]\\) is:",
+            options: [
+                "\\(\\int_{a}^{b} (f(x) + g(x)) \\, dx\\)",
+                "\\(\\int_{a}^{b} (f(x) - g(x)) \\, dx\\)",
+                "\\(\\int_{a}^{b} \\sqrt{f(x)^2 + g(x)^2} \\, dx\\)",
+                "\\(f(b) - g(a)\\)"
+            ],
+            correct: 1,
+            explanation: "Area between curves = \\(\\int_{a}^{b} [f(x) - g(x)] \\, dx\\) where \\(f(x)\\) is the upper curve."
+        },
+        {
+            id: 11,
+            text: "Find the area enclosed by \\(y=x\\) and \\(y=x^3\\) for \\(0 \\le x \\le 1\\).",
+            options: [
+                "\\(\\frac{1}{2}\\)",
+                "\\(\\frac{1}{4}\\)",
+                "\\(1\\)",
+                "\\(\\frac{3}{4}\\)"
+            ],
+            correct: 1,
+            explanation: "\\(\\text{Area} = \\int_{0}^{1} (x - x^3) \\, dx = [\\frac{x^2}{2} - \\frac{x^4}{4}]_{0}^{1} = (\\frac{1}{2} - \\frac{1}{4}) - 0 = \\frac{1}{4}\\)."
+        },
+        {
+            id: 12,
+            text: "In the area calculation for \\(y=x\\) and \\(y=x^3\\), which function is greater on \\((0,1)\\)?",
+            options: [
+                "\\(y=x^3\\)",
+                "\\(y=x\\)",
+                "They are equal",
+                "None"
+            ],
+            correct: 1,
+            explanation: "For \\(0<x<1\\), \\(x > x^3\\) (since \\(x^3 < x\\) when \\(0<x<1\\))."
+        },
+        {
+            id: 13,
+            text: "Find the area enclosed by \\(y=\\sqrt{x}\\) and the x-axis for \\(0 \\le x \\le 1\\).",
+            options: [
+                "\\(\\frac{1}{2}\\)",
+                "\\(\\frac{1}{3}\\)",
+                "\\(\\frac{2}{3}\\)",
+                "\\(2\\)"
+            ],
+            correct: 2,
+            explanation: "\\(\\text{Area} = \\int_{0}^{1} \\sqrt{x} \\, dx = \\int_{0}^{1} x^{1/2} \\, dx = [\\frac{2}{3}x^{3/2}]_{0}^{1} = \\frac{2}{3}\\)."
+        },
+        {
+            id: 14,
+            text: "Evaluate the area between \\(y=\\cos x\\) and \\(y=\\sin x\\) from \\(x=0\\) to \\(x=\\pi/4\\).",
+            options: [
+                "\\(\\sqrt{2}\\)",
+                "\\(1\\)",
+                "\\(\\sqrt{2} - 1\\)",
+                "\\(0\\)"
+            ],
+            correct: 2,
+            explanation: "\\(\\text{Area} = \\int_{0}^{\\pi/4} (\\cos x - \\sin x) \\, dx = [\\sin x + \\cos x]_{0}^{\\pi/4} = (\\frac{\\sqrt{2}}{2}+\\frac{\\sqrt{2}}{2}) - (0+1) = \\sqrt{2} - 1\\)."
+        },
+        {
+            id: 15,
+            text: "What is the integral set up for the area between \\(y=\\cos x\\) and \\(y=\\sin x\\) on \\([0, \\pi/4]\\)?",
+            options: [
+                "\\(\\int_{0}^{\\pi/4} (\\sin x - \\cos x) \\, dx\\)",
+                "\\(\\int_{0}^{\\pi/4} (\\cos x - \\sin x) \\, dx\\)",
+                "\\(\\int_{0}^{\\pi/4} (\\cos x + \\sin x) \\, dx\\)",
+                "\\(\\int_{0}^{\\pi/4} \\tan x \\, dx\\)"
+            ],
+            correct: 1,
+            explanation: "Since \\(\\cos x \\ge \\sin x\\) on \\([0, \\pi/4]\\), upper minus lower = \\(\\cos x - \\sin x\\)."
+        },
+        {
+            id: 16,
+            text: "If curves are given as \\(x=f(y)\\) and \\(x=g(y)\\), the area formula is:",
+            options: [
+                "\\(\\int_{a}^{b} [f(y) - g(y)] \\, dy\\)",
+                "\\(\\int_{a}^{b} [f(y) + g(y)] \\, dy\\)",
+                "\\(\\int_{a}^{b} x \\, dy\\)",
+                "\\(\\int_{a}^{b} y \\, dx\\)"
+            ],
+            correct: 0,
+            explanation: "Area between curves in terms of y: \\(\\int_{a}^{b} [\\text{right curve} - \\text{left curve}] \\, dy\\)."
+        },
+        {
+            id: 17,
+            text: "Find the area enclosed by \\(x=\\sqrt{y}\\) and the y-axis for \\(0 \\le y \\le 1\\).",
+            options: [
+                "\\(\\frac{1}{2}\\)",
+                "\\(\\frac{2}{3}\\)",
+                "\\(\\frac{1}{3}\\)",
+                "\\(\\frac{3}{2}\\)"
+            ],
+            correct: 1,
+            explanation: "\\(\\text{Area} = \\int_{0}^{1} \\sqrt{y} \\, dy = \\int_{0}^{1} y^{1/2} \\, dy = [\\frac{2}{3}y^{3/2}]_{0}^{1} = \\frac{2}{3}\\) (same as Q13 but with respect to y)."
+        },
+        {
+            id: 18,
+            text: "For the shaded region between \\(y=5x-x^2\\) and \\(y=x\\), the upper curve is:",
+            options: [
+                "\\(y=x\\)",
+                "\\(y=5x-x^2\\)",
+                "x-axis",
+                "\\(y=4\\)"
+            ],
+            correct: 1,
+            explanation: "On \\([0,4]\\), \\(5x-x^2 \\ge x\\) (since the parabola is above the line)."
+        },
+        {
+            id: 19,
+            text: "The integral to find the area between \\(y=5x-x^2\\) and \\(y=x\\) from 0 to 4 is:",
+            options: [
+                "\\(\\int_{0}^{4} (4x - x^2) \\, dx\\)",
+                "\\(\\int_{0}^{4} (6x - x^2) \\, dx\\)",
+                "\\(\\int_{0}^{4} (x^2 - 4x) \\, dx\\)",
+                "\\(\\int_{0}^{4} 5x \\, dx\\)"
+            ],
+            correct: 0,
+            explanation: "\\((5x-x^2) - x = 4x - x^2\\)."
+        },
+        {
+            id: 20,
+            text: "Evaluate the area of the region between \\(y=5x-x^2\\) and \\(y=x\\) from 0 to 4.",
+            options: [
+                "\\(9\\)",
+                "\\(\\frac{32}{3}\\)",
+                "\\(\\frac{64}{3}\\)",
+                "\\(16\\)"
+            ],
+            correct: 1,
+            explanation: "\\(\\int_{0}^{4} (4x-x^2) \\, dx = [2x^2 - \\frac{x^3}{3}]_{0}^{4} = 2(16) - \\frac{64}{3} = 32 - \\frac{64}{3} = \\frac{96}{3} - \\frac{64}{3} = \\frac{32}{3}\\)."
+        },
+        {
+            id: 21,
+            text: "For the region between \\(y=\\sqrt{x+2}\\) and \\(y=\\frac{1}{x+1}\\) from \\(x=0\\) to \\(x=2\\), the integral is:",
+            options: [
+                "\\(\\int_{0}^{2} [\\sqrt{x+2} + \\frac{1}{x+1}] \\, dx\\)",
+                "\\(\\int_{0}^{2} [\\sqrt{x+2} - \\frac{1}{x+1}] \\, dx\\)",
+                "\\(\\int_{0}^{2} \\frac{\\sqrt{x+2}}{x+1} \\, dx\\)",
+                "\\(\\int_{0}^{2} [x+2 - \\frac{1}{x+1}] \\, dx\\)"
+            ],
+            correct: 1,
+            explanation: "\\(\\sqrt{x+2} \\ge \\frac{1}{x+1}\\) on \\([0,2]\\), so area = upper - lower."
+        },
+        {
+            id: 22,
+            text: "What is the antiderivative of \\(\\frac{1}{x+1}\\)?",
+            options: [
+                "\\(e^{x+1}\\)",
+                "\\(\\ln|x+1|\\)",
+                "\\(-\\frac{1}{(x+1)^2}\\)",
+                "\\(x+1\\)"
+            ],
+            correct: 1,
+            explanation: "\\(\\int \\frac{1}{x+1} \\, dx = \\ln|x+1| + C\\)."
+        },
+        {
+            id: 23,
+            text: "The area of the region for \\(y=\\sqrt{x+2}\\) vs \\(y=\\frac{1}{x+1}\\) from 0 to 2 is:",
+            options: [
+                "\\(\\frac{16}{3} - \\ln 3\\)",
+                "\\(\\frac{16}{3} - \\ln 3 - \\frac{4\\sqrt{2}}{3}\\)",
+                "\\(\\frac{16}{3} + \\ln 3\\)",
+                "\\(0\\)"
+            ],
+            correct: 1,
+            explanation: "\\(\\int_{0}^{2} [\\sqrt{x+2} - \\frac{1}{x+1}] \\, dx = [\\frac{2}{3}(x+2)^{3/2} - \\ln|x+1|]_{0}^{2} = (\\frac{2}{3}(8) - \\ln3) - (\\frac{2}{3}(2\\sqrt{2}) - \\ln1) = \\frac{16}{3} - \\ln3 - \\frac{4\\sqrt{2}}{3}\\)."
+        },
+        {
+            id: 24,
+            text: "In the example \\(x=2y-y^2\\) and \\(x=y^2-4y\\), what is the interval of integration for y?",
+            options: [
+                "\\(0 \\le y \\le 2\\)",
+                "\\(0 \\le y \\le 3\\)",
+                "\\(-3 \\le y \\le 3\\)",
+                "\\(0 \\le y \\le 4\\)"
+            ],
+            correct: 1,
+            explanation: "The curves intersect at \\(y=0\\) and \\(y=3\\)."
+        },
+        {
+            id: 25,
+            text: "The simplified integrand for the area between \\(x=2y-y^2\\) and \\(x=y^2-4y\\) is:",
+            options: [
+                "\\(2y - 2y^2\\)",
+                "\\(6y - 2y^2\\)",
+                "\\(y^2 + 2y\\)",
+                "\\(4y - y^2\\)"
+            ],
+            correct: 1,
+            explanation: "\\((2y-y^2) - (y^2-4y) = 2y-y^2 - y^2 + 4y = 6y - 2y^2\\)."
+        },
+        {
+            id: 26,
+            text: "Find the area enclosed by \\(x=2y-y^2\\) and \\(x=y^2-4y\\) from \\(y=0\\) to \\(y=3\\).",
+            options: [
+                "\\(18\\)",
+                "\\(27\\)",
+                "\\(9\\)",
+                "\\(6\\)"
+            ],
+            correct: 2,
+            explanation: "\\(\\text{Area} = \\int_{0}^{3} (6y-2y^2) \\, dy = [3y^2 - \\frac{2}{3}y^3]_{0}^{3} = 3(9) - \\frac{2}{3}(27) = 27 - 18 = 9\\)."
+        },
+        {
+            id: 27,
+            text: "For the region between \\(x=e^y\\) and \\(x=y^2-2\\) on \\([-1, 1]\\), the integral is:",
+            options: [
+                "\\(\\int_{-1}^{1} (e^y - y^2 + 2) \\, dy\\)",
+                "\\(\\int_{-1}^{1} (e^y + y^2 - 2) \\, dy\\)",
+                "\\(\\int_{-1}^{1} (y^2 - 2 - e^y) \\, dy\\)",
+                "\\(\\int_{-1}^{1} (e^y - y^2 - 2) \\, dy\\)"
+            ],
+            correct: 0,
+            explanation: "\\(e^y \\ge y^2-2\\) on \\([-1,1]\\), so area = right - left = \\(e^y - (y^2-2) = e^y - y^2 + 2\\)."
+        },
+        {
+            id: 28,
+            text: "Evaluate the area of the region between \\(x=e^y\\) and \\(x=y^2-2\\) from \\(y=-1\\) to \\(y=1\\).",
+            options: [
+                "\\(e - \\frac{1}{e}\\)",
+                "\\(e - \\frac{1}{e} + \\frac{10}{3}\\)",
+                "\\(e + \\frac{1}{e} + 4\\)",
+                "\\(\\frac{10}{3}\\)"
+            ],
+            correct: 1,
+            explanation: "\\(\\int_{-1}^{1} (e^y - y^2 + 2) \\, dy = [e^y - \\frac{y^3}{3} + 2y]_{-1}^{1} = (e - \\frac{1}{3} + 2) - (\\frac{1}{e} + \\frac{1}{3} - 2) = e - \\frac{1}{e} + \\frac{10}{3}\\)."
+        },
+        {
+            id: 29,
+            text: "When calculating the area of \\(x=e^y - y^2 + 2\\) on \\([-1, 1]\\), the value of the integral at \\(y=1\\) is:",
+            options: [
+                "\\(e - \\frac{1}{3} + 2\\)",
+                "\\(e + \\frac{1}{3} - 2\\)",
+                "\\(e + \\frac{5}{3}\\)",
+                "Both A and C are correct"
+            ],
+            correct: 3,
+            explanation: "\\(e - \\frac{1}{3} + 2 = e + \\frac{5}{3}\\) (since \\(-\\frac{1}{3}+2 = \\frac{5}{3}\\))."
+        },
+        {
+            id: 30,
+            text: "The general rule for arc length always involves:",
+            options: [
+                "Logarithms",
+                "A square root and a squared derivative",
+                "Partial fractions",
+                "Second derivatives"
+            ],
+            correct: 1,
+            explanation: "Arc length formula: \\(L = \\int \\sqrt{1 + (\\frac{dy}{dx})^2} \\, dx\\) - always has square root of 1 plus squared derivative."
+        }
+    ]
+}
+    };
+
+    // حالة الكويز الحالية
+    let currentState = {
+        lectureId: 1,
+        currentQuestion: 0,
+        answers: {},
+        markedQuestions: new Set(),
+        startTime: null,
+        timeElapsed: 0,
+        timerInterval: null,
+        isSubmitted: false
+    };
+
+    // الحصول على معلمة المحاضرة من الـ URL
+    function getLectureIdFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const lec = parseInt(urlParams.get('lec'));
+        return lec && QUIZ_DATA[lec] ? lec : 1;
+    }
+
+    // تهيئة الكويز
+    function initializeQuiz() {
+        currentState.lectureId = getLectureIdFromURL();
+        currentState.startTime = new Date();
+        currentState.timerInterval = setInterval(updateTimer, 1000);
+        
+        // تحديث عنوان المحاضرة
+        const lecture = QUIZ_DATA[currentState.lectureId];
+        document.getElementById('lecture-number').textContent = `Lec ${currentState.lectureId < 10 ? '0' + currentState.lectureId : currentState.lectureId}`;
+        document.getElementById('lecture-title').textContent = lecture.title;
+        
+        // إنشاء الأسئلة
+        createQuestions();
+        createQuestionIndicators();
+        updateStats();
+        showQuestion(0);
+        
+        // تحميل التقدم السابق إذا كان موجود
+        loadPreviousProgress();
+        
+        // تأخير لإعطاء MathJax وقت للتهيئة
+        setTimeout(() => {
+            if (window.MathJax && window.MathJax.typeset) {
+                window.MathJax.typeset();
+            }
+        }, 500);
+    }
+
+    // إنشاء الأسئلة
+    function createQuestions() {
+        const questionsSection = document.querySelector('.questions-section');
+        const lecture = QUIZ_DATA[currentState.lectureId];
+        
+        lecture.questions.forEach((question, index) => {
+            const questionCard = document.createElement('div');
+            questionCard.className = `question-card ${index === 0 ? 'active' : ''}`;
+            questionCard.id = `question-${index}`;
+            questionCard.style.display = index === 0 ? 'block' : 'none';
+            
+            questionCard.innerHTML = `
+                <div class="question-number">سؤال ${index + 1}</div>
+                <div class="question-text">${question.text}</div>
+                <div class="options-container">
+                    ${question.options.map((option, optIndex) => `
+                        <div class="option" onclick="selectAnswer(${index}, ${optIndex})">
+                            <div class="option-letter">${String.fromCharCode(65 + optIndex)}</div>
+                            <div class="option-text">${option}</div>
+                            <div class="option-status">
+                                ${optIndex === question.correct ? '<i class="fas fa-check" style="color: var(--correct);"></i>' : 
+                                  ''}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            
+            questionsSection.appendChild(questionCard);
+        });
+        
+        // إعادة معالجة MathJax بعد إضافة المحتوى
+        if (window.MathJax && window.MathJax.typesetPromise) {
+            window.MathJax.typesetPromise();
+        }
+    }
+
+    // إنشاء مؤشرات الأسئلة
+    function createQuestionIndicators() {
+        const grid = document.getElementById('questions-grid');
+        const lecture = QUIZ_DATA[currentState.lectureId];
+        
+        lecture.questions.forEach((_, index) => {
+            const indicator = document.createElement('div');
+            indicator.className = 'question-indicator unanswered';
+            indicator.textContent = index + 1;
+            indicator.onclick = () => showQuestion(index);
+            
+            grid.appendChild(indicator);
+        });
+    }
+
+    // عرض سؤال محدد
+    function showQuestion(index) {
+        // إخفاء جميع الأسئلة
+        document.querySelectorAll('.question-card').forEach(card => {
+            card.style.display = 'none';
+            card.classList.remove('active');
+        });
+        
+        // إظهار السؤال المطلوب
+        const questionCard = document.getElementById(`question-${index}`);
+        if (questionCard) {
+            questionCard.style.display = 'block';
+            questionCard.classList.add('active');
+            currentState.currentQuestion = index;
+            
+            // تحديث المؤشرات
+            updateQuestionIndicators();
+            
+            // تحديث نص السؤال الحالي
+            const totalQuestions = QUIZ_DATA[currentState.lectureId].questions.length;
+            document.getElementById('current-question').textContent = 
+                `سؤال ${index + 1} من ${totalQuestions}`;
+            
+            // تحديث شريط التقدم
+            const progress = ((index + 1) / totalQuestions) * 100;
+            document.getElementById('quiz-progress').style.width = `${progress}%`;
+            
+            // تحديث الإجابات المحددة مسبقاً
+            const selectedAnswer = currentState.answers[index];
+            if (selectedAnswer !== undefined) {
+                highlightSelectedAnswer(index, selectedAnswer);
+            }
+            
+            // إعادة معالجة MathJax عند تغيير السؤال
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                window.MathJax.typesetPromise([questionCard]);
+            }
+        }
+    }
+
+    // تحديث مؤشرات الأسئلة
+    function updateQuestionIndicators() {
+        const indicators = document.querySelectorAll('.question-indicator');
+        
+        indicators.forEach((indicator, index) => {
+            indicator.className = 'question-indicator';
+            
+            if (index === currentState.currentQuestion) {
+                indicator.classList.add('current');
+            }
+            
+            if (currentState.answers[index] !== undefined) {
+                indicator.classList.add('answered');
+            }
+            
+            if (currentState.markedQuestions.has(index)) {
+                indicator.classList.add('marked');
+            }
+            
+            if (currentState.answers[index] === undefined) {
+                indicator.classList.add('unanswered');
+            }
+        });
+    }
+
+    // اختيار إجابة
+    function selectAnswer(questionIndex, optionIndex) {
+        if (currentState.isSubmitted) return;
+        
+        currentState.answers[questionIndex] = optionIndex;
+        
+        // إزالة التحديد من جميع خيارات هذا السؤال
+        const options = document.querySelectorAll(`#question-${questionIndex} .option`);
+        options.forEach(option => option.classList.remove('selected'));
+        
+        // إضافة التحديد للخيار المختار
+        options[optionIndex].classList.add('selected');
+        
+        // تحديث المؤشرات والإحصائيات
+        updateQuestionIndicators();
+        updateStats();
+    }
+
+    // تظليل الإجابة المحددة
+    function highlightSelectedAnswer(questionIndex, answerIndex) {
+        const options = document.querySelectorAll(`#question-${questionIndex} .option`);
+        options.forEach(option => option.classList.remove('selected'));
+        
+        if (answerIndex !== undefined && options[answerIndex]) {
+            options[answerIndex].classList.add('selected');
+        }
+    }
+
+    // السؤال التالي
+    function nextQuestion() {
+        const totalQuestions = QUIZ_DATA[currentState.lectureId].questions.length;
+        if (currentState.currentQuestion < totalQuestions - 1) {
+            showQuestion(currentState.currentQuestion + 1);
+        }
+    }
+
+    // السؤال السابق
+    function prevQuestion() {
+        if (currentState.currentQuestion > 0) {
+            showQuestion(currentState.currentQuestion - 1);
+        }
+    }
+
+    // وضع علامة على السؤال
+    function markQuestion() {
+        if (currentState.markedQuestions.has(currentState.currentQuestion)) {
+            currentState.markedQuestions.delete(currentState.currentQuestion);
+            showNotification('تم إزالة العلامة من السؤال');
+        } else {
+            currentState.markedQuestions.add(currentState.currentQuestion);
+            showNotification('تم وضع علامة على السؤال للعودة إليه لاحقاً');
+        }
+        updateQuestionIndicators();
+        updateStats();
+    }
+
+    // تحديث المؤقت
+    function updateTimer() {
+        if (!currentState.startTime) return;
+        
+        const now = new Date();
+        const elapsedSeconds = Math.floor((now - currentState.startTime) / 1000);
+        currentState.timeElapsed = elapsedSeconds;
+        
+        const minutes = Math.floor(elapsedSeconds / 60);
+        const seconds = elapsedSeconds % 60;
+        
+        document.getElementById('timer').textContent = 
+            `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    // تحديث الإحصائيات
+    function updateStats() {
+        const totalQuestions = QUIZ_DATA[currentState.lectureId].questions.length;
+        const answered = Object.keys(currentState.answers).length;
+        const remaining = totalQuestions - answered;
+        const marked = currentState.markedQuestions.size;
+        
+        // حساب النسبة الحالية
+        let correct = 0;
+        const lecture = QUIZ_DATA[currentState.lectureId];
+        
+        Object.entries(currentState.answers).forEach(([qIndex, answer]) => {
+            const question = lecture.questions[qIndex];
+            if (question && answer === question.correct) {
+                correct++;
+            }
+        });
+        
+        const currentScore = totalQuestions > 0 ? Math.round((correct / totalQuestions) * 100) : 0;
+        
+        // تحديث الواجهة
+        document.getElementById('answered-count').textContent = answered;
+        document.getElementById('remaining-count').textContent = remaining;
+        document.getElementById('marked-count').textContent = marked;
+        document.getElementById('score-preview').textContent = `${currentScore}%`;
+    }
+
+    // تقديم الكويز
+    function submitQuiz() {
+        if (!confirm('هل أنت متأكد من إنهاء الكويز؟ يمكنك مراجعة إجاباتك قبل الإنهاء.')) {
+            return;
+        }
+        
+        currentState.isSubmitted = true;
+        clearInterval(currentState.timerInterval);
+        
+        // حساب النتائج
+        const results = calculateResults();
+        showResults(results);
+        
+        // حفظ النتائج في localStorage
+        saveResults(results);
+    }
+
+    // حساب النتائج
+    function calculateResults() {
+        const lecture = QUIZ_DATA[currentState.lectureId];
+        const totalQuestions = lecture.questions.length;
+        let correct = 0;
+        let wrong = 0;
+        
+        // حساب الإجابات الصحيحة والخاطئة
+        Object.entries(currentState.answers).forEach(([qIndex, answer]) => {
+            const question = lecture.questions[qIndex];
+            if (question && answer === question.correct) {
+                correct++;
+            } else {
+                wrong++;
+            }
+        });
+        
+        const unanswered = totalQuestions - correct - wrong;
+        const score = totalQuestions > 0 ? Math.round((correct / totalQuestions) * 100) : 0;
+        
+        // تنسيق الوقت
+        const minutes = Math.floor(currentState.timeElapsed / 60);
+        const seconds = currentState.timeElapsed % 60;
+        const timeTaken = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        
+        return {
+            totalQuestions,
+            correct,
+            wrong,
+            unanswered,
+            score,
+            timeTaken,
+            grade: `${correct * 10}/${totalQuestions * 10}`
+        };
+    }
+
+    // عرض النتائج
+    function showResults(results) {
+        const modal = document.getElementById('resultsModal');
+        const lecture = QUIZ_DATA[currentState.lectureId];
+        
+        // تحديث النتائج
+        document.getElementById('total-questions-result').textContent = results.totalQuestions;
+        document.getElementById('correct-answers').textContent = results.correct;
+        document.getElementById('wrong-answers').textContent = results.wrong;
+        document.getElementById('time-taken').textContent = results.timeTaken;
+        document.getElementById('final-grade').textContent = results.grade;
+        document.getElementById('final-score').textContent = `${results.score}%`;
+        
+        // تحديث أيقونة النتيجة
+        const resultIcon = document.getElementById('result-icon');
+        const resultTitle = document.getElementById('result-title');
+        const scoreCircle = document.getElementById('score-circle');
+        
+        if (results.score >= 90) {
+            resultIcon.textContent = '🎉';
+            resultTitle.textContent = 'ممتاز! أداء رائع';
+            scoreCircle.style.background = 'linear-gradient(135deg, #4CAF50, #2E7D32)';
+        } else if (results.score >= 70) {
+            resultIcon.textContent = '👍';
+            resultTitle.textContent = 'جيد جداً! أحسنت';
+            scoreCircle.style.background = 'linear-gradient(135deg, var(--accent), var(--accent-dark))';
+        } else if (results.score >= 50) {
+            resultIcon.textContent = '😊';
+            resultTitle.textContent = 'مقبول، يمكنك التحسن';
+            scoreCircle.style.background = 'linear-gradient(135deg, #FFB74D, #FF8A65)';
+        } else {
+            resultIcon.textContent = '📚';
+            resultTitle.textContent = 'يحتاج للمزيد من المراجعة';
+            scoreCircle.style.background = 'linear-gradient(135deg, #EF5350, #D32F2F)';
+        }
+        
+        // إظهار النافذة
+        modal.style.display = 'flex';
+        
+        // عرض الإجابات الصحيحة والخاطئة
+        showCorrectAnswers();
+    }
+
+    // عرض الإجابات الصحيحة
+    function showCorrectAnswers() {
+        const lecture = QUIZ_DATA[currentState.lectureId];
+        
+        lecture.questions.forEach((question, index) => {
+            const selectedAnswer = currentState.answers[index];
+            const options = document.querySelectorAll(`#question-${index} .option`);
+            
+            options.forEach((option, optIndex) => {
+                if (optIndex === question.correct) {
+                    option.classList.add('correct');
+                } else if (selectedAnswer === optIndex && selectedAnswer !== question.correct) {
+                    option.classList.add('incorrect');
+                }
+            });
+        });
+        
+        // إعادة معالجة MathJax بعد التحديث
+        if (window.MathJax && window.MathJax.typesetPromise) {
+            window.MathJax.typesetPromise();
+        }
+    }
+
+    // حفظ النتائج
+    function saveResults(results) {
+        // الحصول على التقدم السابق
+        let mathProgress = JSON.parse(localStorage.getItem('math_exercises_progress')) || {};
+        
+        // تحديث تقدم المحاضرة الحالية
+        if (!mathProgress[currentState.lectureId]) {
+            mathProgress[currentState.lectureId] = {};
+        }
+        
+        mathProgress[currentState.lectureId].score = results.score;
+        mathProgress[currentState.lectureId].completed = true;
+        mathProgress[currentState.lectureId].timeSpent = currentState.timeElapsed;
+        mathProgress[currentState.lectureId].lastAttempt = new Date().toISOString();
+        
+        // إرسال تحديث للصفحة الرئيسية
+        try {
+            if (window.opener && !window.opener.closed && typeof window.opener.updateMathProgress === 'function') {
+                window.opener.updateMathProgress();
+                showNotification('تم تحديث تقدمك في الصفحة الرئيسية!', 'success');
+            }
+        } catch (e) {}
+        
+        // حفظ في localStorage
+        localStorage.setItem('math_exercises_progress', JSON.stringify(mathProgress));
+    }
+
+    // تحميل التقدم السابق
+    function loadPreviousProgress() {
+        const mathProgress = JSON.parse(localStorage.getItem('math_exercises_progress')) || {};
+        const lectureProgress = mathProgress[currentState.lectureId];
+        
+        if (lectureProgress && lectureProgress.lastAttempt) {
+            showNotification(`آخر محاولة كانت بتاريخ ${new Date(lectureProgress.lastAttempt).toLocaleDateString('ar-EG')}`);
+        }
+    }
+
+    // مراجعة الإجابات
+    function reviewQuiz() {
+        hideResults();
+        showQuestion(0);
+        currentState.isSubmitted = true; // يبقى في وضع المراجعة
+    }
+
+    // إعادة المحاولة
+    function retryQuiz() {
+        if (!confirm('هل تريد إعادة الكويز من البداية؟')) return;
+        
+        // إعادة تعيين الحالة
+        currentState = {
+            lectureId: currentState.lectureId,
+            currentQuestion: 0,
+            answers: {},
+            markedQuestions: new Set(),
+            startTime: new Date(),
+            timeElapsed: 0,
+            timerInterval: currentState.timerInterval,
+            isSubmitted: false
+        };
+        
+        // إعادة تعيين الواجهة
+        document.querySelectorAll('.question-card').forEach(card => card.remove());
+        document.getElementById('questions-grid').innerHTML = '';
+        
+        // إعادة التهيئة
+        clearInterval(currentState.timerInterval);
+        currentState.timerInterval = setInterval(updateTimer, 1000);
+        
+        createQuestions();
+        createQuestionIndicators();
+        updateStats();
+        showQuestion(0);
+        
+        hideResults();
+        showNotification('تم بدء محاولة جديدة!', 'success');
+    }
+
+    // إغلاق النتائج
+    function closeResults() {
+        hideResults();
+        window.location.href = 'exercises.html';
+    }
+
+    // إخفاء نافذة النتائج
+    function hideResults() {
+        document.getElementById('resultsModal').style.display = 'none';
+    }
+
+    // الخروج من الكويز
+    function exitQuiz() {
+        if (!confirm('هل تريد الخروج؟ سيتم حفظ تقدمك الحالي.')) return;
+        
+        // حفظ التقدم الجزئي
+        if (Object.keys(currentState.answers).length > 0) {
+            const results = calculateResults();
+            saveResults(results);
+        }
+        
+        window.location.href = 'exercises.html';
+    }
+
+    // إظهار الإشعارات
+    function showNotification(message, type = 'info') {
+        // إزالة أي إشعار سابق
+        const oldNotification = document.querySelector('.notification');
+        if (oldNotification) oldNotification.remove();
+        
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+        
+        const icon = type === 'success' ? 'check-circle' : 
+                     type === 'error' ? 'exclamation-circle' : 
+                     type === 'warning' ? 'exclamation-triangle' : 'info-circle';
+        
+        notification.innerHTML = `
+            <i class="fas fa-${icon}"></i>
+            ${message}
+        `;
+        
+        // إضافة أنماط
+        notification.style.cssText = `
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: ${type === 'success' ? '#26A69A' : 
+                        type === 'error' ? '#EF5350' : 
+                        type === 'warning' ? '#FFB74D' : 'var(--accent)'};
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideInRight 0.3s ease;
+            max-width: 300px;
+            border: 2px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // إزالة الإشعار بعد 3 ثوان
+        setTimeout(() => {
+            notification.style.animation = 'slideOutRight 0.3s ease';
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+    }
+
+    // اختصارات لوحة المفاتيح
+    document.addEventListener('keydown', function(e) {
+        if (currentState.isSubmitted) return;
+        
+        switch(e.key) {
+            case 'ArrowRight':
+            case 'd':
+                e.preventDefault();
+                prevQuestion();
+                break;
+                
+            case 'ArrowLeft':
+            case 'a':
+                e.preventDefault();
+                nextQuestion();
+                break;
+                
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+                e.preventDefault();
+                const optionIndex = parseInt(e.key) - 1;
+                selectAnswer(currentState.currentQuestion, optionIndex);
+                break;
+                
+            case 'm':
+                e.preventDefault();
+                markQuestion();
+                break;
+                
+            case 'Enter':
+                e.preventDefault();
+                if (currentState.currentQuestion < QUIZ_DATA[currentState.lectureId].questions.length - 1) {
+                    nextQuestion();
+                } else {
+                    submitQuiz();
+                }
+                break;
+                
+            case 'Escape':
+                e.preventDefault();
+                exitQuiz();
+                break;
+        }
+    });
+
+    // تهيئة الصفحة
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeQuiz();
+        
+        // إضافة أنماط CSS للرسوم المتحركة
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            
+            @keyframes slideOutRight {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+            
+            @keyframes slideIn {
+                from { transform: translateX(30px); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            
+            @keyframes slideUp {
+                from {
+                    transform: translateY(30px) scale(0.95);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateY(0) scale(1);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    });
+    </script>
+</body>
+</html>
