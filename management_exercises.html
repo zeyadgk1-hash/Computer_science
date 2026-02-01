@@ -1,0 +1,4741 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>بنك تدريبات مادة الإدارة | جامعة المنصورة الجديدة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #6A0DAD;
+            --primary-dark: #4B0082;
+            --primary-light: #9370DB;
+            --accent: #8A2BE2;
+            --accent-light: #D8BFD8;
+            --dark: #2C041C;
+            --light: #F8F0FF;
+            --gray: #7B68EE;
+            --gray-light: #E6E6FA;
+            --success: #228B22;
+            --error: #B22222;
+            --warning: #DAA520;
+            --info: #7B68EE;
+            --card-shadow: 0 10px 25px rgba(106, 13, 173, 0.08);
+            --card-shadow-hover: 0 20px 40px rgba(106, 13, 173, 0.15);
+            --border-radius: 16px;
+        }
+        
+        body {
+            background: var(--light);
+            font-family: 'Cairo', sans-serif;
+            min-height: 100vh;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        .navbar {
+            background: white;
+            color: var(--dark);
+            padding: 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(106, 13, 173, 0.08);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+        
+        .logo:hover {
+            transform: translateY(-2px);
+        }
+        
+        .logo-icon {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .uni-name { 
+            font-weight: 900; 
+            font-size: 1rem; 
+            color: var(--dark); 
+            line-height: 1.2;
+        }
+        
+        .app-tag { 
+            font-size: 0.75rem; 
+            color: var(--primary); 
+            font-weight: 700; 
+            margin-top: 2px;
+        }
+        
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 10px 22px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 12px rgba(106, 13, 173, 0.2);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(106, 13, 173, 0.3);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            border: 2px solid var(--gray-light);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.85rem;
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 100px auto 40px;
+            padding: 0 20px;
+        }
+        
+        .welcome-section {
+            background: linear-gradient(135deg, var(--dark), #4B0082);
+            color: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .welcome-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(106, 13, 173, 0.1), transparent);
+            border-radius: 50%;
+        }
+        
+        .welcome-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .welcome-text h1 {
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin-bottom: 5px;
+        }
+        
+        .welcome-text p {
+            color: var(--primary-light);
+            font-size: 0.95rem;
+        }
+        
+        .quick-stats {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary-light);
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: #D8BFD8;
+        }
+        
+        .overall-progress {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 40px;
+            box-shadow: var(--card-shadow);
+            border: 2px solid var(--primary-light);
+        }
+        
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .progress-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .progress-percentage {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary);
+        }
+        
+        .overall-progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--gray-light);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        
+        .overall-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 10px;
+            transition: width 1s ease;
+            width: 0%;
+        }
+        
+        .progress-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--gray);
+            font-weight: 600;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--dark);
+            font-size: 1.6rem;
+            font-weight: 900;
+            margin: 50px 0 30px 0;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--primary);
+            width: 100%;
+        }
+        
+        .section-icon {
+            background: var(--primary-light);
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+        
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+        
+        .subject-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+        
+        .subject-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--card-shadow-hover);
+            border-color: var(--primary);
+        }
+        
+        .completed-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--success);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 12px rgba(34, 139, 34, 0.3);
+            z-index: 2;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--dark), #4B0082);
+            color: white;
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-weight: 900;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            border: 2px solid var(--primary);
+            align-self: flex-start;
+        }
+        
+        .card-icon {
+            font-size: 3.5rem;
+            margin: 15px 0 20px 0;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subject-card h3 {
+            color: var(--dark);
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            line-height: 1.4;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .subject-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            flex-grow: 1;
+            text-align: center;
+        }
+        
+        .progress-container {
+            width: 100%;
+            margin: 15px 0;
+        }
+        
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.85rem;
+        }
+        
+        .progress-label {
+            color: var(--gray);
+        }
+        
+        .progress-value {
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+        .mini-progress {
+            width: 100%;
+            height: 8px;
+            background: var(--gray-light);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .mini-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 4px;
+            width: 0%;
+        }
+        
+        .card-actions {
+            width: 100%;
+            margin-top: auto;
+        }
+        
+        .btn-card {
+            background: linear-gradient(135deg, var(--dark), #4B0082);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            font-size: 0.95rem;
+            box-shadow: 0 5px 15px rgba(44, 4, 28, 0.2);
+            font-family: 'Cairo', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-card:hover {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(106, 13, 173, 0.3);
+        }
+        
+        .btn-card.completed {
+            background: linear-gradient(135deg, var(--success), #006400);
+        }
+        
+        .btn-card.started {
+            background: linear-gradient(135deg, var(--warning), #B8860B);
+        }
+        
+        .btn-disabled {
+            background: var(--gray-light) !important;
+            color: var(--gray) !important;
+            cursor: not-allowed !important;
+            opacity: 0.7;
+        }
+        
+        .special-card {
+            background: linear-gradient(135deg, #F8F0FF, #E6E6FA);
+            border: 2px solid var(--gray-light);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .review-section {
+            margin-top: 60px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--gray);
+            font-size: 0.9rem;
+            background: white;
+            margin-top: 80px;
+            border-top: 1px solid var(--gray-light);
+        }
+        
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            color: var(--dark);
+            font-weight: 700;
+        }
+        
+        /* محرك الكويز */
+        #quizEngine {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--light);
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .quiz-header {
+            background: linear-gradient(135deg, var(--dark), #4B0082);
+            color: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .quiz-content {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .question-area {
+            margin-bottom: 30px;
+        }
+        
+        .question-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--dark);
+            line-height: 1.5;
+            background: linear-gradient(135deg, #F8F0FF, #E6E6FA);
+            padding: 20px;
+            border-radius: 12px;
+            border-right: 4px solid var(--primary);
+        }
+        
+        .options-container {
+            display: grid;
+            gap: 12px;
+        }
+        
+        .option {
+            background: var(--light);
+            border: 2px solid var(--gray-light);
+            border-radius: 10px;
+            padding: 18px 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 600;
+        }
+        
+        .option:hover {
+            background: var(--primary-light);
+            border-color: var(--primary);
+        }
+        
+        .option.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(106, 13, 173, 0.2);
+        }
+        
+        .option.correct {
+            background: var(--success);
+            color: white;
+            border-color: var(--success);
+        }
+        
+        .option.incorrect {
+            background: var(--error);
+            color: white;
+            border-color: var(--error);
+        }
+        
+        .option-label {
+            background: white;
+            color: var(--dark);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            border: 2px solid var(--gray-light);
+        }
+        
+        .option.selected .option-label {
+            background: white;
+            color: var(--primary);
+            border-color: white;
+        }
+        
+        .quiz-controls {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .quiz-btn {
+            padding: 12px 25px;
+            border-radius: 8px;
+            border: none;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-prev {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--gray-light);
+        }
+        
+        .btn-next {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+        }
+        
+        .btn-finish {
+            background: linear-gradient(135deg, var(--success), #006400);
+            color: white;
+        }
+        
+        .results-screen {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(var(--primary) 0% 0%, var(--gray-light) 0% 100%);
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(106, 13, 173, 0.2);
+        }
+        
+        .score-circle::before {
+            content: '';
+            position: absolute;
+            width: 130px;
+            height: 130px;
+            background: white;
+            border-radius: 50%;
+        }
+        
+        .score-value {
+            position: relative;
+            z-index: 1;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--primary);
+        }
+        
+        .results-details {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin: 30px 0;
+            text-align: right;
+            border: 2px solid var(--primary-light);
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--gray-light);
+        }
+        
+        .result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .close-quiz {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--error);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px rgba(178, 34, 34, 0.3);
+        }
+        
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .question-counter {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--primary-light), var(--gray-light));
+            border-radius: var(--border-radius);
+            font-weight: 700;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .timer {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--dark);
+            background: white;
+            padding: 8px 15px;
+            border-radius: 50px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        /* قسم مراجعة الأسئلة - تصميم محسّن */
+        .review-section-container {
+            margin-top: 40px;
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            border: 2px solid var(--primary-light);
+            box-shadow: var(--card-shadow);
+            width: 100%;
+            overflow-x: hidden;
+        }
+        
+        .review-section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid var(--primary);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .review-section-header h3 {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .review-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .review-action-btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            background: var(--light);
+            color: var(--primary);
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 2px solid var(--primary-light);
+        }
+        
+        .review-action-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .questions-review-wrapper {
+            background: linear-gradient(135deg, #f5f0ff, #f0f0ff);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 2px solid var(--gray-light);
+            max-height: 600px;
+            overflow-y: auto;
+            width: 100%;
+        }
+        
+        .questions-review-wrapper::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        .questions-review-wrapper::-webkit-scrollbar-track {
+            background: linear-gradient(135deg, var(--light), var(--gray-light));
+            border-radius: 10px;
+        }
+        
+        .questions-review-wrapper::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 10px;
+            border: 2px solid var(--light);
+        }
+        
+        .questions-review-wrapper::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+        }
+        
+        /* تصميم بطاقة المراجعة */
+        .review-question-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 2px solid transparent;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .review-question-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(106, 13, 173, 0.15);
+        }
+        
+        .review-question-card.correct {
+            border-right: 5px solid var(--success);
+            background: linear-gradient(135deg, rgba(34, 139, 34, 0.03), white);
+        }
+        
+        .review-question-card.incorrect {
+            border-right: 5px solid var(--error);
+            background: linear-gradient(135deg, rgba(178, 34, 34, 0.03), white);
+        }
+        
+        /* رأس البطاقة */
+        .review-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px dashed var(--gray-light);
+        }
+        
+        .question-number-badge {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(106, 13, 173, 0.3);
+        }
+        
+        .question-status-badge {
+            padding: 6px 15px;
+            border-radius: 50px;
+            font-weight: 900;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .question-status-badge.correct {
+            background: linear-gradient(135deg, var(--success), #1e7a1e);
+            color: white;
+        }
+        
+        .question-status-badge.incorrect {
+            background: linear-gradient(135deg, var(--error), #9a1919);
+            color: white;
+        }
+        
+        /* نص السؤال */
+        .review-question-text {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, #f0f0ff, #f5f0ff);
+            border-radius: 10px;
+            border-right: 4px solid var(--primary);
+        }
+        
+        /* قسم الإجابات - تصميم مبسط */
+        .answers-section {
+            margin: 20px 0;
+        }
+        
+        .answer-box {
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            position: relative;
+            border: 2px solid transparent;
+        }
+        
+        .answer-box.user-answer {
+            background: linear-gradient(135deg, rgba(178, 34, 34, 0.05), white);
+            border-color: var(--error);
+        }
+        
+        .answer-box.correct-answer {
+            background: linear-gradient(135deg, rgba(34, 139, 34, 0.05), white);
+            border-color: var(--success);
+        }
+        
+        .answer-label {
+            position: absolute;
+            top: -10px;
+            right: 15px;
+            background: white;
+            padding: 3px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border: 2px solid;
+        }
+        
+        .answer-label.user-answer {
+            color: var(--error);
+            border-color: var(--error);
+        }
+        
+        .answer-label.correct-answer {
+            color: var(--success);
+            border-color: var(--success);
+        }
+        
+        .answer-content {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--dark);
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        /* قسم التصفح */
+        .review-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--light), var(--gray-light));
+            border-radius: var(--border-radius);
+            border: 2px solid var(--primary-light);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .nav-btn {
+            padding: 10px 25px;
+            border-radius: 10px;
+            border: none;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(106, 13, 173, 0.3);
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(106, 13, 173, 0.4);
+        }
+        
+        .nav-btn:disabled {
+            background: var(--gray-light);
+            color: var(--gray);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .question-jump {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            padding: 8px 15px;
+            border-radius: 50px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .question-jump input {
+            width: 50px;
+            padding: 6px;
+            border: 2px solid var(--primary-light);
+            border-radius: 8px;
+            text-align: center;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .question-jump input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(106, 13, 173, 0.1);
+        }
+        
+        /* إحصائيات المراجعة */
+        .review-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f0f0ff, #f5f0ff);
+            border-radius: var(--border-radius);
+            border: 2px solid var(--primary);
+        }
+        
+        .review-stat-item {
+            text-align: center;
+            padding: 15px;
+        }
+        
+        .review-stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-size: 1.3rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .review-stat-icon.correct {
+            background: linear-gradient(135deg, var(--success), #1e7a1e);
+            color: white;
+        }
+        
+        .review-stat-icon.incorrect {
+            background: linear-gradient(135deg, var(--error), #9a1919);
+            color: white;
+        }
+        
+        .review-stat-icon.percentage {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+        }
+        
+        .review-stat-icon.time {
+            background: linear-gradient(135deg, var(--warning), #b8860b);
+            color: white;
+        }
+        
+        .review-stat-value {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+        
+        .review-stat-label {
+            color: var(--gray);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        
+        /* مؤشرات التنقل السريع */
+        .quick-nav-indicators {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: var(--border-radius);
+            border: 2px solid var(--primary-light);
+        }
+        
+        .quick-nav-item {
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            font-size: 0.9rem;
+        }
+        
+        .quick-nav-item:hover {
+            transform: scale(1.1);
+        }
+        
+        .quick-nav-item.correct {
+            background: var(--success);
+            color: white;
+            border-color: var(--success);
+        }
+        
+        .quick-nav-item.incorrect {
+            background: var(--error);
+            color: white;
+            border-color: var(--error);
+        }
+        
+        .quick-nav-item.unanswered {
+            background: var(--gray-light);
+            color: var(--gray);
+            border-color: var(--gray);
+        }
+        
+        .quick-nav-item.active {
+            transform: scale(1.2);
+            box-shadow: 0 0 0 3px rgba(106, 13, 173, 0.3);
+        }
+        
+        /* زر الطباعة */
+        .print-review-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.3rem;
+            box-shadow: 0 5px 20px rgba(106, 13, 173, 0.4);
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .print-review-btn:hover {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: 0 8px 25px rgba(106, 13, 173, 0.6);
+        }
+        
+        /* تأثيرات بصرية */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        
+        /* ============================================= */
+        /* تحسينات للهواتف والأجهزة المحمولة */
+        /* ============================================= */
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 85px auto 25px;
+                padding: 0 12px;
+            }
+            
+            .navbar {
+                padding: 0;
+            }
+            
+            .nav-container {
+                padding: 10px 15px;
+            }
+            
+            .logo {
+                gap: 8px;
+            }
+            
+            .logo-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+            
+            .uni-name {
+                font-size: 0.9rem;
+            }
+            
+            .app-tag {
+                font-size: 0.7rem;
+            }
+            
+            .nav-actions {
+                gap: 10px;
+            }
+            
+            .btn-primary, .btn-secondary {
+                padding: 8px 15px;
+                font-size: 0.85rem;
+            }
+            
+            .btn-secondary span {
+                display: none;
+            }
+            
+            .welcome-section {
+                padding: 20px;
+                border-radius: 14px;
+                margin-bottom: 20px;
+            }
+            
+            .welcome-text h1 {
+                font-size: 1.4rem;
+                margin-bottom: 8px;
+            }
+            
+            .welcome-text p {
+                font-size: 0.9rem;
+            }
+            
+            .quick-stats {
+                gap: 10px;
+                justify-content: center;
+                width: 100%;
+            }
+            
+            .stat-item {
+                padding: 8px 15px;
+                flex: 1;
+                min-width: calc(33.33% - 10px);
+                text-align: center;
+            }
+            
+            .stat-value {
+                font-size: 1.3rem;
+            }
+            
+            .stat-label {
+                font-size: 0.75rem;
+            }
+            
+            .overall-progress {
+                padding: 20px;
+                margin-bottom: 25px;
+            }
+            
+            .progress-title {
+                font-size: 1.1rem;
+                flex-wrap: wrap;
+            }
+            
+            .progress-percentage {
+                font-size: 1.3rem;
+            }
+            
+            .progress-stats {
+                font-size: 0.8rem;
+                flex-direction: column;
+                gap: 5px;
+                text-align: center;
+            }
+            
+            .section-header {
+                font-size: 1.3rem;
+                margin: 35px 0 20px 0;
+                padding-bottom: 12px;
+            }
+            
+            .section-icon {
+                width: 42px;
+                height: 42px;
+                font-size: 1.1rem;
+            }
+            
+            .main-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 18px;
+                margin-bottom: 40px;
+            }
+            
+            .subject-card {
+                padding: 18px;
+                border-radius: 14px;
+                width: 100%;
+            }
+            
+            .card-icon {
+                font-size: 3rem;
+                margin: 12px 0 15px 0;
+            }
+            
+            .subject-card h3 {
+                font-size: 1.2rem;
+                margin-bottom: 8px;
+            }
+            
+            .subject-card p {
+                font-size: 0.9rem;
+                margin-bottom: 15px;
+            }
+            
+            .btn-card {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+            
+            /* محرك الكويز على الهواتف */
+            #quizEngine {
+                padding: 10px 5px;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .close-quiz {
+                top: 15px;
+                left: 15px;
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+            
+            .quiz-header {
+                padding: 20px 15px;
+                margin-bottom: 15px;
+                border-radius: 14px;
+            }
+            
+            .quiz-header h1 {
+                font-size: 1.3rem;
+            }
+            
+            .quiz-header p {
+                font-size: 0.9rem;
+            }
+            
+            .quiz-content {
+                padding: 15px;
+                border-radius: 14px;
+            }
+            
+            .question-counter {
+                padding: 12px;
+                margin-bottom: 15px;
+                font-size: 0.9rem;
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+            
+            .timer {
+                align-self: flex-end;
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .question-text {
+                font-size: 1.1rem;
+                padding: 15px;
+                line-height: 1.5;
+            }
+            
+            .option {
+                padding: 14px 12px;
+                min-height: 60px;
+            }
+            
+            .option-label {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+                flex-shrink: 0;
+            }
+            
+            .quiz-controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .quiz-btn {
+                padding: 14px 20px;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            /* شاشة النتائج على الهاتف */
+            .results-screen {
+                padding: 10px 0;
+            }
+            
+            .score-circle {
+                width: 120px;
+                height: 120px;
+                margin-bottom: 20px;
+            }
+            
+            .score-circle::before {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .score-value {
+                font-size: 2rem;
+            }
+            
+            .results-details {
+                padding: 20px 15px;
+                margin: 20px 0;
+            }
+            
+            .result-item {
+                padding: 10px 0;
+                font-size: 0.95rem;
+            }
+            
+            /* قسم مراجعة الأسئلة */
+            .review-section-container {
+                padding: 18px;
+                margin-top: 30px;
+            }
+            
+            .review-section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+                margin-bottom: 20px;
+            }
+            
+            .review-section-header h3 {
+                font-size: 1.3rem;
+                width: 100%;
+            }
+            
+            .review-actions {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .review-action-btn {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+                flex: 1;
+                justify-content: center;
+            }
+            
+            .questions-review-wrapper {
+                padding: 15px;
+                max-height: 500px;
+            }
+            
+            .review-question-card {
+                padding: 16px;
+                margin-bottom: 15px;
+            }
+            
+            .review-question-text {
+                font-size: 1rem;
+                padding: 12px;
+                line-height: 1.5;
+            }
+            
+            .answer-box {
+                padding: 12px;
+            }
+            
+            .review-navigation {
+                flex-direction: column;
+                gap: 12px;
+                padding: 15px;
+            }
+            
+            .nav-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 12px 20px;
+            }
+            
+            .question-jump {
+                width: 100%;
+                justify-content: center;
+                padding: 8px 12px;
+            }
+            
+            .question-jump input {
+                width: 45px;
+                padding: 6px;
+            }
+            
+            .review-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                padding: 15px;
+            }
+            
+            .review-stat-item {
+                padding: 12px 8px;
+            }
+            
+            .review-stat-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+                margin-bottom: 8px;
+            }
+            
+            .review-stat-value {
+                font-size: 1.5rem;
+            }
+            
+            .review-stat-label {
+                font-size: 0.8rem;
+            }
+            
+            .quick-nav-indicators {
+                gap: 6px;
+                padding: 12px;
+            }
+            
+            .quick-nav-item {
+                width: 32px;
+                height: 32px;
+                font-size: 0.85rem;
+            }
+            
+            .print-review-btn {
+                bottom: 15px;
+                left: 15px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                margin: 80px auto 20px;
+                padding: 0 10px;
+            }
+            
+            .nav-container {
+                padding: 8px 10px;
+            }
+            
+            .logo {
+                gap: 6px;
+            }
+            
+            .logo-icon {
+                width: 32px;
+                height: 32px;
+                border-radius: 8px;
+            }
+            
+            .uni-name {
+                font-size: 0.85rem;
+            }
+            
+            .app-tag {
+                font-size: 0.65rem;
+            }
+            
+            .nav-actions {
+                gap: 8px;
+            }
+            
+            .btn-primary {
+                padding: 7px 12px;
+                font-size: 0.8rem;
+            }
+            
+            .btn-primary span {
+                display: none;
+            }
+            
+            .welcome-section {
+                padding: 15px;
+                border-radius: 12px;
+            }
+            
+            .welcome-text h1 {
+                font-size: 1.2rem;
+                text-align: center;
+                width: 100%;
+            }
+            
+            .welcome-text p {
+                text-align: center;
+                font-size: 0.85rem;
+            }
+            
+            .welcome-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .quick-stats {
+                gap: 8px;
+            }
+            
+            .stat-item {
+                padding: 6px 10px;
+                min-width: calc(33.33% - 8px);
+            }
+            
+            .stat-value {
+                font-size: 1.1rem;
+            }
+            
+            .stat-label {
+                font-size: 0.7rem;
+            }
+            
+            .overall-progress {
+                padding: 15px;
+            }
+            
+            .progress-header {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+            
+            .section-header {
+                font-size: 1.2rem;
+                margin: 30px 0 18px 0;
+            }
+            
+            .section-icon {
+                width: 38px;
+                height: 38px;
+                font-size: 1rem;
+            }
+            
+            .subject-card {
+                padding: 15px;
+            }
+            
+            .badge {
+                padding: 5px 12px;
+                font-size: 0.8rem;
+                align-self: center;
+                width: fit-content;
+            }
+            
+            .card-icon {
+                font-size: 2.5rem;
+                margin: 10px 0;
+            }
+            
+            .subject-card h3 {
+                font-size: 1.1rem;
+                text-align: center;
+            }
+            
+            .subject-card p {
+                font-size: 0.85rem;
+                text-align: center;
+            }
+            
+            .progress-info {
+                font-size: 0.8rem;
+            }
+            
+            .btn-card {
+                padding: 10px 15px;
+                font-size: 0.85rem;
+            }
+            
+            /* محرك الكويز */
+            #quizEngine {
+                padding: 5px;
+            }
+            
+            .question-text {
+                font-size: 1rem;
+                padding: 12px;
+            }
+            
+            .option {
+                padding: 10px;
+                min-height: 55px;
+                gap: 10px;
+            }
+            
+            .option div:last-child {
+                font-size: 0.9rem;
+            }
+            
+            /* شاشة النتائج */
+            .score-circle {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .score-circle::before {
+                width: 85px;
+                height: 85px;
+            }
+            
+            .score-value {
+                font-size: 1.7rem;
+            }
+            
+            .results-details {
+                padding: 15px 12px;
+            }
+            
+            .result-item {
+                font-size: 0.9rem;
+                flex-direction: column;
+                gap: 3px;
+                text-align: center;
+            }
+            
+            /* قسم المراجعة */
+            .review-stats {
+                grid-template-columns: 1fr;
+                padding: 12px;
+            }
+            
+            .review-stat-item {
+                padding: 10px;
+            }
+            
+            .review-question-card {
+                padding: 14px;
+            }
+            
+            .question-status-badge {
+                font-size: 0.8rem;
+                padding: 5px 10px;
+            }
+            
+            .quick-nav-indicators {
+                gap: 4px;
+            }
+            
+            .quick-nav-item {
+                width: 28px;
+                height: 28px;
+                font-size: 0.75rem;
+            }
+            
+            .print-review-btn {
+                bottom: 10px;
+                left: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            
+            /* الفوتر */
+            .footer {
+                padding: 20px 15px;
+                font-size: 0.8rem;
+            }
+            
+            .footer-logo {
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 380px) {
+            .review-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-stats {
+                flex-wrap: wrap;
+            }
+            
+            .stat-item {
+                min-width: calc(50% - 8px);
+                margin-bottom: 5px;
+            }
+            
+            .review-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .review-action-btn {
+                width: 100%;
+            }
+        }
+        
+        @media (max-height: 600px) and (orientation: landscape) {
+            .navbar {
+                padding: 5px 0;
+            }
+            
+            .container {
+                margin: 70px auto 15px;
+            }
+            
+            .questions-review-wrapper {
+                max-height: 300px;
+            }
+            
+            .review-question-card {
+                padding: 12px;
+                margin-bottom: 12px;
+            }
+            
+            .quiz-header {
+                padding: 15px;
+            }
+        }
+        
+        @media (hover: none) and (pointer: coarse) {
+            .option, .btn-card, .quiz-btn, .nav-btn, .review-action-btn {
+                min-height: 44px;
+            }
+            
+            .quick-nav-item {
+                min-width: 44px;
+                min-height: 44px;
+            }
+            
+            .subject-card:hover {
+                transform: none;
+            }
+            
+            .btn-primary:hover, .btn-secondary:hover, .btn-card:hover {
+                transform: none;
+                box-shadow: none;
+            }
+        }
+        
+        /* دعم Dark Mode للهواتف */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --light: #121212; /* تغيير من #1E0F2E إلى #121212 ليكون أغمق */
+        --dark: #F5F0FF;
+        --gray-light: #2D1B3D;
+        --gray: #9370DB;
+        --primary: #9370DB; /* تغيير primary إلى لون فاتح */
+        --primary-dark: #7B68EE;
+        --accent: #D8BFD8;
+    }
+    
+    body {
+        background: var(--light);
+        color: var(--dark);
+    }
+    
+    /* إصلاح الخلفيات */
+    .navbar, .subject-card, .overall-progress,
+    .quiz-content, .review-section-container,
+    .review-question-card, .footer,
+    .welcome-section, .quiz-header,
+    .review-stats, .quick-nav-indicators,
+    .review-navigation, .questions-review-wrapper,
+    .results-details, .question-counter,
+    .question-text, .answers-section {
+        background: #1E1E1E !important;
+        border-color: #444444 !important;
+    }
+    
+    /* إصلاح النصوص الداكنة */
+    .subject-card h3,
+    .progress-title,
+    .stat-value,
+    .welcome-text h1,
+    .welcome-text p,
+    .progress-percentage,
+    .section-header h2,
+    .result-item span,
+    .review-question-text,
+    .answer-content,
+    .review-stat-value,
+    .review-stat-label,
+    .footer p,
+    .question-text,
+    .option div:last-child,
+    .nav-btn,
+    .review-action-btn,
+    .quiz-btn {
+        color: #F5F0FF !important;
+    }
+    
+    /* إصلاح النصوص الثانوية */
+    .stat-label,
+    .progress-stats span,
+    .subject-card p,
+    .progress-label,
+    .result-item span:first-child {
+        color: #cbd5e1 !important;
+    }
+    
+    /* إصلاح البطاقات الخاصة */
+    .special-card {
+        background: linear-gradient(135deg, #2D1B3D, #1E1E1E) !important;
+        border-color: #444444 !important;
+    }
+    
+    /* إصلاح الأزرار */
+    .btn-primary {
+        background: linear-gradient(135deg, #9370DB, #7B68EE);
+    }
+    
+    .btn-secondary {
+        background: #2D1B3D;
+        border-color: #444444;
+        color: #9370DB;
+    }
+    
+    .btn-card {
+        background: linear-gradient(135deg, #2D1B3D, #1E1E1E);
+        color: #F5F0FF !important;
+    }
+    
+    .btn-card.completed {
+        background: linear-gradient(135deg, #228B22, #006400);
+    }
+    
+    .btn-card.started {
+        background: linear-gradient(135deg, #DAA520, #B8860B);
+    }
+    
+    /* إصلاح المؤشرات */
+    .quick-nav-item {
+        color: #F5F0FF !important;
+    }
+    
+    .quick-nav-item.unanswered {
+        background: #444444 !important;
+        color: #888888 !important;
+    }
+    
+    /* إصلاح شريط التقدم */
+    .overall-progress-fill {
+        background: linear-gradient(90deg, #9370DB, #7B68EE) !important;
+    }
+    
+    .mini-progress-fill {
+        background: linear-gradient(90deg, #9370DB, #7B68EE) !important;
+    }
+    
+    /* إصلاح شريط الأسئلة */
+    .question-counter {
+        background: linear-gradient(135deg, #2D1B3D, #1E1E1E) !important;
+        color: #9370DB !important;
+        border-color: #444444 !important;
+    }
+    
+    /* إصلاح الخيارات */
+    .option {
+        background: #2D1B3D !important;
+        border-color: #444444 !important;
+        color: #F5F0FF !important;
+    }
+    
+    .option:hover {
+        background: #3D2B4D !important;
+    }
+    
+    .option.selected {
+        background: #9370DB !important;
+        color: #121212 !important;
+    }
+    
+    .option.correct {
+        background: #228B22 !important;
+        color: white !important;
+    }
+    
+    .option.incorrect {
+        background: #B22222 !important;
+        color: white !important;
+    }
+    
+    .option-label {
+        background: #1E1E1E !important;
+        color: #F5F0FF !important;
+        border-color: #444444 !important;
+    }
+    
+    .option.selected .option-label {
+        background: white !important;
+        color: #9370DB !important;
+    }
+    
+    /* إصلاح علامات الإكمال */
+    .completed-badge {
+        background: #22C55E !important;
+        color: white !important;
+    }
+    
+    /* إصلاح البادجات */
+    .badge {
+        background: linear-gradient(135deg, #2D1B3D, #1E1E1E) !important;
+        color: #9370DB !important;
+        border-color: #444444 !important;
+    }
+    
+    /* إصلاح الأيقونات */
+    .card-icon {
+        background: linear-gradient(135deg, #3D2B4D, #2D1B3D) !important;
+    }
+    
+    /* إصلاح زر الطباعة العائم */
+    .print-review-btn {
+        background: linear-gradient(135deg, #9370DB, #7B68EE) !important;
+    }
+    
+    /* إصلاح شريط التنقل السريع */
+    .quick-nav-indicators {
+        background: #1E1E1E !important;
+    }
+    
+    /* إصلاح قسم الإحصائيات */
+    .review-stats {
+        background: linear-gradient(135deg, #2D1B3D, #1E1E1E) !important;
+        border-color: #444444 !important;
+    }
+    
+    /* إصلاح النصوص داخل قسم المراجعة */
+    .review-section-header h3 {
+        color: #9370DB !important;
+    }
+    
+    .question-number-badge {
+        background: linear-gradient(135deg, #9370DB, #7B68EE) !important;
+    }
+    
+    /* إصلاح شريط التمرير */
+    .questions-review-wrapper::-webkit-scrollbar-track {
+        background: linear-gradient(135deg, #1E1E1E, #2D1B3D) !important;
+    }
+    
+    .questions-review-wrapper::-webkit-scrollbar-thumb {
+        background: linear-gradient(135deg, #9370DB, #7B68EE) !important;
+    }
+    
+    /* إصلاح خلفية النصوص في الأسئلة */
+    .question-text {
+        background: linear-gradient(135deg, #2D1B3D, #1E1E1E) !important;
+        border-color: #9370DB !important;
+    }
+    
+    /* إصلاح خلفية قسم الإجابات */
+    .answer-box.user-answer {
+        background: linear-gradient(135deg, rgba(178, 34, 34, 0.1), #2D1B3D) !important;
+        border-color: #B22222 !important;
+    }
+    
+    .answer-box.correct-answer {
+        background: linear-gradient(135deg, rgba(34, 139, 34, 0.1), #2D1B3D) !important;
+        border-color: #228B22 !important;
+    }
+    
+    /* إصلاح حقول الإدخال */
+    .question-jump input {
+        background: #2D1B3D !important;
+        color: #F5F0FF !important;
+        border-color: #444444 !important;
+    }
+    
+    .question-jump input:focus {
+        border-color: #9370DB !important;
+        box-shadow: 0 0 0 3px rgba(147, 112, 219, 0.1) !important;
+    }
+    
+    /* إصلاح الأيقونات الملونة */
+    .review-stat-icon.correct {
+        background: linear-gradient(135deg, #22C55E, #1e7a1e) !important;
+    }
+    
+    .review-stat-icon.incorrect {
+        background: linear-gradient(135deg, #ef4444, #9a1919) !important;
+    }
+    
+    .review-stat-icon.percentage {
+        background: linear-gradient(135deg, #9370DB, #7B68EE) !important;
+    }
+    
+    .review-stat-icon.time {
+        background: linear-gradient(135deg, #f59e0b, #b8860b) !important;
+    }
+    
+    /* إصلاح دائرة النتيجة */
+    .score-circle::before {
+        background: #1E1E1E !important;
+    }
+    
+    .score-value {
+        color: #9370DB !important;
+    }
+    
+    /* إصلاح علامات الحالة */
+    .question-status-badge.correct {
+        background: linear-gradient(135deg, #22C55E, #1e7a1e) !important;
+    }
+    
+    .question-status-badge.incorrect {
+        background: linear-gradient(135deg, #ef4444, #9a1919) !important;
+    }
+    
+    /* إصلاح الأزرار المعطلة */
+    .btn-disabled {
+        background: #444444 !important;
+        color: #888888 !important;
+    }
+    
+    /* إصلاح رأس القسم */
+    .section-header {
+        border-bottom-color: #9370DB !important;
+    }
+    
+    .section-icon {
+        background: #2D1B3D !important;
+        color: #9370DB !important;
+    }
+    
+    /* إصلاح الإشعارات */
+    .notification {
+        background: #22C55E !important;
+    }
+    
+    /* إصلاح التايمر */
+    .timer {
+        background: #2D1B3D !important;
+        color: #F5F0FF !important;
+    }
+    
+    /* إصلاح زر الإغلاق */
+    .close-quiz {
+        background: #B22222 !important;
+    }
+    
+    /* إصلاح النصوص في قائمة الأسئلة */
+    .question-jump span {
+        color: #F5F0FF !important;
+    }
+    
+    /* إصلاح شريط البحث في الأسئلة */
+    .quick-nav-item.correct {
+        background: #22C55E !important;
+        border-color: #22C55E !important;
+    }
+    
+    .quick-nav-item.incorrect {
+        background: #ef4444 !important;
+        border-color: #ef4444 !important;
+    }
+    
+    /* إصلاح التبويبات */
+    .review-action-btn {
+        background: #2D1B3D !important;
+        border-color: #444444 !important;
+    }
+    
+    .review-action-btn:hover {
+        background: #9370DB !important;
+    }
+    
+    /* إصلاح ظلال العناصر */
+    .subject-card,
+    .quiz-content,
+    .review-section-container {
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3) !important;
+    }
+    
+    /* إصلاح تأثيرات Hover */
+    .subject-card:hover {
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
+        border-color: #9370DB !important;
+    }
+    
+    /* إصلاح خطوط الفواصل */
+    .review-card-header {
+        border-bottom-color: #444444 !important;
+    }
+    
+    .result-item {
+        border-bottom-color: #444444 !important;
+    }
+    
+    /* إصلاح نص البادجات */
+    .badge {
+        text-shadow: none !important;
+    }
+    
+    /* إصلاح نص الأيقونات */
+    .card-icon {
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+    }
+}
+        
+        input, select, textarea {
+            font-size: 16px !important;
+        }
+        
+        @media (hover: hover) and (pointer: fine) {
+            .option:hover {
+                transform: translateY(-2px);
+            }
+            
+            .quick-nav-item:hover {
+                transform: scale(1.1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- نافبار -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="uni-name">جامعة المنصورة الجديدة</span>
+                    <span class="app-tag">بنك تدريبات مادة الإدارة</span>
+                </div>
+            </div>
+            
+            <div class="nav-actions">
+                <button class="btn-secondary" onclick="resetProgress()" title="إعادة التعيين">
+                    <i class="fas fa-redo"></i>
+                    <span>إعادة</span>
+                </button>
+                <button class="btn-primary" onclick="goToHome()">
+                    <i class="fas fa-home"></i>
+                    <span>الرئيسية</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- قسم الترحيب والإحصائيات -->
+        <section class="welcome-section">
+            <div class="welcome-header">
+                <div class="welcome-text">
+                    <h1>📊 بنك تدريبات مادة الإدارة</h1>
+                    <p>تدرب، اختبر نفسك، وأتقن مفاهيم الإدارة خطوة بخطوة</p>
+                </div>
+                <div class="quick-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="total-quizzes">7</div>
+                        <div class="stat-label">إجمالي المحاضرات</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="completed-quizzes">0</div>
+                        <div class="stat-label">تم إكمالها</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="average-score">0%</div>
+                        <div class="stat-label">متوسط النتائج</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- شريط التقدم العام -->
+        <section class="overall-progress">
+            <div class="progress-header">
+                <div class="progress-title">
+                    <i class="fas fa-chart-line"></i>
+                    تقدمك العام في المادة
+                </div>
+                <div class="progress-percentage" id="overall-percentage">0%</div>
+            </div>
+            <div class="overall-progress-bar">
+                <div class="overall-progress-fill" id="overall-progress-fill" style="width: 0%"></div>
+            </div>
+            <div class="progress-stats">
+                <span id="completed-count">0/7 تم إكمالها</span>
+                <span id="total-time">الوقت الإجمالي: 0 دقيقة</span>
+                <span id="last-activity">آخر نشاط: لم يبدأ بعد</span>
+            </div>
+        </section>
+        
+        <!-- محاضرات الإدارة -->
+        <section class="lectures-section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <h2>محاضرات مادة الإدارة</h2>
+            </div>
+            
+            <div class="main-grid" id="lecturesGrid">
+                <!-- سيتم إضافة البطاقات ديناميكياً -->
+            </div>
+        </section>
+        
+        <!-- المراجعات والامتحانات الشاملة -->
+        <section class="review-section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h2>المراجعات والامتحانات الشاملة</h2>
+            </div>
+            
+            <div class="main-grid">
+                <div class="subject-card special-card">
+                    <span class="badge" style="background: var(--info);">مراجعة شاملة</span>
+                    <div class="card-icon">🏁</div>
+                    <h3 style="color: var(--primary);">Midterm Exam Review</h3>
+                    <p style="color: var(--accent);">شامل لجميع دروس النصف الأول مع حلول مفصلة وتوقيت مماثل للامتحان</p>
+                    <div class="progress-container">
+                        <div class="progress-info">
+                            <span class="progress-label">الحالة</span>
+                            <span class="progress-value">قريباً ⏳</span>
+                        </div>
+                        <div class="mini-progress">
+                            <div class="mini-progress-fill" style="width: 30%"></div>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn-card btn-disabled" disabled>
+                            <i class="fas fa-lock"></i> جاري الإعداد
+                        </button>
+                    </div>
+                </div>
+
+                <div class="subject-card special-card">
+                    <span class="badge" style="background: var(--primary-dark);">امتحان نهائي</span>
+                    <div class="card-icon">🏆</div>
+                    <h3 style="color: var(--primary-dark);">Final Comprehensive Exam</h3>
+                    <p style="color: var(--accent);">اختبار شامل لمقرر الإدارة مع تقرير أداء مفصل</p>
+                    <div class="progress-container">
+                        <div class="progress-info">
+                            <span class="progress-label">الحالة</span>
+                            <span class="progress-value">قريباً ⏳</span>
+                        </div>
+                        <div class="mini-progress">
+                            <div class="mini-progress-fill" style="width: 15%"></div>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn-card btn-disabled" disabled>
+                            <i class="fas fa-lock"></i> تحت التطوير
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-chart-line" style="color: var(--primary);"></i>
+                <span>بنك تدريبات مادة الإدارة</span>
+            </div>
+            <p>© 2026 جامعة المنصورة الجديدة - كلية إدارة الأعمال. جميع الحقوق محفوظة.</p>
+            <p>التدريب المنتظم هو مفتاح التفوق. استمر في المحاولة ولا تستسلم.</p>
+        </div>
+    </footer>
+    
+    <!-- محرك الكويز المخفي -->
+    <div id="quizEngine">
+        <div class="close-quiz" onclick="closeQuiz()">
+            <i class="fas fa-times"></i>
+        </div>
+        
+        <header class="quiz-header">
+            <h1 id="quizTitle">كويز الإدارة</h1>
+            <p id="quizSubtitle">المحاضرة الأولى</p>
+        </header>
+        
+        <div class="quiz-content" id="quizContent">
+            <div id="questionScreen">
+                <div class="question-counter">
+                    <div class="current-question">
+                        السؤال <span id="currentQuestionNum">1</span> من <span id="totalQuestionsNum">20</span>
+                    </div>
+                    <div class="timer">
+                        <i class="fas fa-clock"></i>
+                        <span id="questionTimer">20:00</span>
+                    </div>
+                </div>
+                
+                <div class="question-area">
+                    <div class="question-text" id="questionText">
+                        جاري تحميل السؤال...
+                    </div>
+                    
+                    <div class="optionsContainer" id="optionsContainer">
+                        <!-- سيتم إضافة الخيارات هنا -->
+                    </div>
+                </div>
+                
+                <div class="quiz-controls">
+                    <button class="quiz-btn btn-prev" onclick="prevQuestion()" id="prevBtn">
+                        <i class="fas fa-arrow-right"></i> السابق
+                    </button>
+                    
+                    <button class="quiz-btn btn-next" onclick="nextQuestion()" id="nextBtn">
+                        التالي <i class="fas fa-arrow-left"></i>
+                    </button>
+                    
+                    <button class="quiz-btn btn-finish" onclick="finishQuiz()" id="finishBtn" style="display: none;">
+                        <i class="fas fa-check"></i> إنهاء الاختبار
+                    </button>
+                </div>
+            </div>
+            
+            <div id="resultsScreen" style="display: none;">
+                <div class="results-screen">
+                    <div class="score-circle" id="scoreCircle">
+                        <div class="score-value" id="scoreValue">0%</div>
+                    </div>
+                    
+                    <h2 id="resultTitle">نتيجة الاختبار</h2>
+                    <p id="resultMessage" style="margin-bottom: 20px;"></p>
+                    
+                    <!-- قسم الإحصائيات -->
+                    <div class="review-stats" id="reviewStats">
+                        <!-- سيتم ملؤها ديناميكياً -->
+                    </div>
+                    
+                    <div class="results-details">
+                        <div class="result-item">
+                            <span>المحاضرة:</span>
+                            <span id="resultLecture">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span>عدد الأسئلة:</span>
+                            <span id="resultTotal">0</span>
+                        </div>
+                        <div class="result-item">
+                            <span>الإجابات الصحيحة:</span>
+                            <span id="resultCorrect" style="color: var(--success);">0</span>
+                        </div>
+                        <div class="result-item">
+                            <span>الإجابات الخاطئة:</span>
+                            <span id="resultWrong" style="color: var(--error);">0</span>
+                        </div>
+                        <div class="result-item">
+                            <span>النسبة المئوية:</span>
+                            <span id="resultPercentage">0%</span>
+                        </div>
+                        <div class="result-item">
+                            <span>الوقت المستغرق:</span>
+                            <span id="resultTime">0 دقيقة</span>
+                        </div>
+                    </div>
+                    
+                    <!-- مؤشرات التنقل السريع -->
+                    <div class="quick-nav-indicators" id="quickNavIndicators">
+                        <!-- سيتم ملؤها ديناميكياً -->
+                    </div>
+                    
+                    <!-- قسم مراجعة الأسئلة -->
+                    <div class="review-section-container">
+                        <div class="review-section-header">
+                            <h3>
+                                <i class="fas fa-clipboard-check"></i>
+                                مراجعة الأسئلة والإجابات
+                            </h3>
+                            <div class="review-actions">
+                                <button class="review-action-btn" onclick="printReview()">
+                                    <i class="fas fa-print"></i>
+                                    طباعة المراجعة
+                                </button>
+                                <button class="review-action-btn" onclick="scrollToTop()">
+                                    <i class="fas fa-arrow-up"></i>
+                                    أعلى الصفحة
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- الأسئلة والمراجعة -->
+                        <div class="questions-review-wrapper" id="questionsReviewWrapper">
+                            <!-- سيتم ملؤها ديناميكياً -->
+                        </div>
+                        
+                        <!-- أزرار التنقل -->
+                        <div class="review-navigation">
+                            <button class="nav-btn" onclick="scrollToPreviousQuestion()" id="prevQuestionBtn">
+                                <i class="fas fa-arrow-right"></i>
+                                السؤال السابق
+                            </button>
+                            
+                            <div class="question-jump">
+                                <span>انتقل إلى السؤال:</span>
+                                <input type="number" min="1" max="20" 
+                                       value="1" id="jumpToQuestionInput"
+                                       onchange="jumpToQuestion()">
+                                <span>من <span id="totalQuestionsDisplay">20</span></span>
+                            </div>
+                            
+                            <button class="nav-btn" onclick="scrollToNextQuestion()" id="nextQuestionBtn">
+                                السؤال التالي
+                                <i class="fas fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- زر الطباعة العائم -->
+                    <button class="print-review-btn" onclick="printReview()" title="طباعة المراجعة">
+                        <i class="fas fa-print"></i>
+                    </button>
+                    
+                    <div class="quiz-controls" style="justify-content: center; margin-top: 30px;">
+                        <button class="quiz-btn btn-prev" onclick="restartQuiz()">
+                            <i class="fas fa-redo"></i> إعادة الاختبار
+                        </button>
+                        <button class="quiz-btn btn-finish" onclick="closeQuiz()">
+                            <i class="fas fa-check"></i> العودة للقائمة
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+    // جميع محاضرات الإدارة والأسئلة الكاملة
+    const MANAGEMENT_DATA = [
+        {
+            id: 1,
+            title: "المحاضرة الأولى: الإدارة والأداء",
+            description: "Managing and Performing - الوظائف الإدارية والأدوار والمهارات",
+            icon: "📊",
+            color: "#6A0DAD",
+            questions: [
+                {
+                    question: "According to most textbooks, which of the following is a core function of management?",
+                    options: [
+                        "Manufacturing",
+                        "Organizing",
+                        "Advertising",
+                        "Investing"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Which term describes the real-world environment in which most managers work?",
+                    options: [
+                        "Simple and predictable",
+                        "Messy and hectic",
+                        "Linear and calm",
+                        "Automated and silent"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "When a manager passes information to others inside the organization through e-mails or memos, they are playing the role of:",
+                    options: [
+                        "Monitor",
+                        "Spokesperson",
+                        "Disseminator",
+                        "Figurehead"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "Performing formal duties like greeting visitors and signing legal contracts falls under which role?",
+                    options: [
+                        "Leader",
+                        "Liaison",
+                        "Figurehead",
+                        "Entrepreneur"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "Which decisional role involves taking corrective action during conflicts or crises?",
+                    options: [
+                        "Resource Allocator",
+                        "Negotiator",
+                        "Entrepreneur",
+                        "Disturbance Handler"
+                    ],
+                    correctAnswer: 3
+                },
+                {
+                    question: "Deciding who receives resources and setting priorities is the responsibility of the:",
+                    options: [
+                        "Resource Allocator",
+                        "Monitor",
+                        "Liaison",
+                        "Leader"
+                    ],
+                    correctAnswer: 0
+                },
+                {
+                    question: "Strategic long-range planning is a responsibility most frequently associated with:",
+                    options: [
+                        "First-line managers",
+                        "Rank-and-file employees",
+                        "Executive positions",
+                        "Customer relations"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "Continually watching for changes in the business environment and monitoring indicators like 'return on equity' is called:",
+                    options: [
+                        "Supervision",
+                        "Environmental scanning",
+                        "Staffing",
+                        "Internal consulting"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Managers who use their technical expertise to solve problems and act as agents for organizational change are performing:",
+                    options: [
+                        "External marketing",
+                        "Community relations",
+                        "Internal consulting",
+                        "Directing"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "Which level of management is responsible for the strategic direction of the entire organization?",
+                    options: [
+                        "Middle management",
+                        "First-line management",
+                        "Executive management",
+                        "Supervisory management"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "Middle management is primarily responsible for:",
+                    options: [
+                        "Day-to-day activities",
+                        "Major departments",
+                        "Rank-and-file tasks",
+                        "Signing all legal contracts"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "First-line managers are characterized by their supervision of:",
+                    options: [
+                        "Executive directors",
+                        "Rank-and-file employees",
+                        "Entire international branches",
+                        "Only other managers"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "In the management hierarchy, who sits at the very bottom of the pyramid?",
+                    options: [
+                        "Middle Management",
+                        "First-Line Management",
+                        "Rank-and-File Employees",
+                        "Executive Management"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "The ability to use specific tools, procedures, and techniques is known as:",
+                    options: [
+                        "Conceptual skills",
+                        "Human relations skills",
+                        "Technical skills",
+                        "Strategic skills"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "Understanding employee motivation and group processes is a core part of:",
+                    options: [
+                        "Technical skills",
+                        "Human relations skills",
+                        "Financial skills",
+                        "Reporting skills"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Which skills involve the ability to see the organization as a whole and understand how parts fit together?",
+                    options: [
+                        "Technical skills",
+                        "Conceptual skills",
+                        "Mechanical skills",
+                        "Operational skills"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "According to the skills requirement table, which skill is most dominant/required for Executive Managers?",
+                    options: [
+                        "Technical",
+                        "Conceptual",
+                        "Manual",
+                        "Secretarial"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "First-line managers rely most heavily on which type of skill compared to executives?",
+                    options: [
+                        "Strategic",
+                        "Technical",
+                        "Long-range planning",
+                        "Global scanning"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "What is the primary focus of 'Controlling' as a managerial responsibility?",
+                    options: [
+                        "Greeting visitors",
+                        "Evaluating and taking corrective action on resource use",
+                        "Motivating employees",
+                        "Developing new products"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "A manager representing a team or department during union contract negotiations is acting as a:",
+                    options: [
+                        "Entrepreneur",
+                        "Negotiator",
+                        "Monitor",
+                        "Disseminator"
+                    ],
+                    correctAnswer: 1
+                }
+            ]
+        },
+        {
+            id: 2,
+            title: "المحاضرة الثانية: اتخاذ القرارات الإدارية",
+            description: "Managerial Decision-Making - صنع القرار والذكاء العاطفي",
+            icon: "🤔",
+            color: "#8A2BE2",
+            questions: [
+                {
+                    question: "What is defined as the action or process of thinking through possible options and selecting one?",
+                    options: [
+                        "Problem-solving",
+                        "Strategic planning",
+                        "Decision-making",
+                        "Logical reasoning"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "Individuals or groups that are affected by an organization, such as customers, employees, and shareholders, are called:",
+                    options: [
+                        "Competitors",
+                        "Stakeholders",
+                        "Executives",
+                        "Managers"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Which of the following is a potential effect of poor decision-making?",
+                    options: [
+                        "Increased market share",
+                        "Regret and emotional distress",
+                        "Higher employee morale",
+                        "Optimized resource allocation"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "The brain's 'Reflective System' for decision-making is characterized by:",
+                    options: [
+                        "Impulsive and intuitive thinking",
+                        "Relying on habits",
+                        "Logical, analytical, and methodical thinking",
+                        "Quick and emotional reactions"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "Which system of the brain involves quick, intuitive thinking and relies on emotions or habits?",
+                    options: [
+                        "Reflective system",
+                        "Reactive system",
+                        "Programmed system",
+                        "Rational system"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Effective decision-making requires a balance between:",
+                    options: [
+                        "Profit and loss",
+                        "Reflective and reactive systems",
+                        "Customers and employees",
+                        "Logic and math"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Emotional Intelligence (EI) is defined as the ability to:",
+                    options: [
+                        "Memorize data and trends",
+                        "Manage your own emotions and understand the emotions of others",
+                        "Use mental shortcuts to save time",
+                        "Think only using the reactive system"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Which component of Emotional Intelligence involves recognizing one's own strengths and weaknesses?",
+                    options: [
+                        "Self-regulation",
+                        "Empathy",
+                        "Social skills",
+                        "Self-awareness"
+                    ],
+                    correctAnswer: 3
+                },
+                {
+                    question: "'The ability to understand other people's emotions' describes which component of Emotional Intelligence?",
+                    options: [
+                        "Self-regulation",
+                        "Empathy",
+                        "Social skills",
+                        "Self-awareness"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Programmed decisions are also known as:",
+                    options: [
+                        "High-involvement decisions",
+                        "Non-routine decisions",
+                        "Routine decisions",
+                        "Novel decisions"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "Decisions that are novel, unstructured, and based on poorly defined criteria are called:",
+                    options: [
+                        "Programmed decisions",
+                        "Low-involvement decisions",
+                        "Non-programmed decisions",
+                        "Routine decisions"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "Buying a house or hiring someone for an important position are examples of:",
+                    options: [
+                        "Programmed decisions",
+                        "Low-involvement decisions",
+                        "High-involvement decisions",
+                        "Routine decisions"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "What is the very first step in the decision-making process?",
+                    options: [
+                        "Select an alternative",
+                        "Generate multiple alternatives",
+                        "Recognize that a decision needs to be made",
+                        "Evaluate effectiveness"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "Why should managers talk to other people when generating alternatives?",
+                    options: [
+                        "To avoid making the decision themselves",
+                        "Because others view problems differently based on different life experiences",
+                        "To slow down the reactive system",
+                        "To find the easiest possible solution"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Which approach states that managers should systematically collect the best available data for every decision?",
+                    options: [
+                        "Heuristic-based decision-making",
+                        "Evidence-based decision-making",
+                        "Creative decision-making",
+                        "Emotional decision-making"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "The idea that rationality is limited and individuals select a 'satisfactory' rather than 'optimal' decision is known as:",
+                    options: [
+                        "Personal bias",
+                        "Uncertainty",
+                        "Bounded rationality",
+                        "Critical thinking"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "What is the benefit of using 'Heuristics' (mental shortcuts) for programmed decisions?",
+                    options: [
+                        "Improves quality",
+                        "Reduces conflict",
+                        "Saves time",
+                        "Increases creativity"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "Choosing the first acceptable solution rather than the best possible one is called:",
+                    options: [
+                        "Optimizing",
+                        "Satisficing",
+                        "Brainstorming",
+                        "Scanning"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "A person in a group who pretends to be against an idea to make the group discuss it in more detail is a:",
+                    options: [
+                        "Leader",
+                        "Stakeholder",
+                        "Devil's advocate",
+                        "Liaison"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "What is a 'Common Ground' in group decision-making?",
+                    options: [
+                        "A type of technical skill",
+                        "A topic or opinion that two or more people can agree about",
+                        "A method used to fire employees",
+                        "A type of financial loss"
+                    ],
+                    correctAnswer: 1
+                }
+            ]
+        },
+        {
+            id: 3,
+            title: "المحاضرة الثالثة: البيئات التنظيمية والثقافة",
+            description: "External and Internal Organizational Environments and Corporate Culture",
+            icon: "🏢",
+            color: "#9370DB",
+            questions: [
+                {
+                    question: "What is the definition of an 'Organization' according to the lecture?",
+                    options: [
+                        "A building where people work",
+                        "Groups of people deliberately grouped to serve a purpose through structured goals and plans",
+                        "A legal entity that only exists to make a profit",
+                        "Any gathering of people in a public place"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Which of the following is NOT listed as a type of organization in the lecture?",
+                    options: [
+                        "Not-for-profit organizations",
+                        "Family-owned organizations",
+                        "Voluntary organizations",
+                        "Purely digital solo entities"
+                    ],
+                    correctAnswer: 3
+                },
+                {
+                    question: "The 'General Environment' is another term for:",
+                    options: [
+                        "Internal environment",
+                        "Corporate culture",
+                        "External environment",
+                        "Management hierarchy"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "Demographic trends and lifestyle changes are considered part of which macro environment?",
+                    options: [
+                        "Economic Forces",
+                        "Technological Forces",
+                        "Sociocultural Forces",
+                        "Political Forces"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "Soft drink bottlers and food processors typically operate in which type of environment?",
+                    options: [
+                        "Simple-stable environment",
+                        "Complex-stable environment",
+                        "Simple-unstable environment",
+                        "Complex-unstable environment"
+                    ],
+                    correctAnswer: 0
+                },
+                {
+                    question: "Which environment is characterized by a large number of dissimilar external elements that remain the same or change slowly?",
+                    options: [
+                        "Simple-stable",
+                        "Complex-stable",
+                        "Simple-unstable",
+                        "Complex-unstable"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Fashion clothing and the music industry are examples of which environment?",
+                    options: [
+                        "Simple-stable",
+                        "Complex-stable",
+                        "Simple-unstable",
+                        "Complex-unstable"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "Aerospace and telecommunications firms typically face which type of environment?",
+                    options: [
+                        "Simple-stable",
+                        "Complex-stable",
+                        "Simple-unstable",
+                        "Complex-unstable"
+                    ],
+                    correctAnswer: 3
+                },
+                {
+                    question: "Complexity that comes from products, technologies, and human resources within the firm is called:",
+                    options: [
+                        "External complexity",
+                        "Macro complexity",
+                        "Internal complexity",
+                        "Environmental uncertainty"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "What are 'Modularized Units' in the context of managing environmental complexity?",
+                    options: [
+                        "Fixed departments with no flexibility",
+                        "Self-managing teams with entrepreneurial responsibility",
+                        "Outsourced marketing firms",
+                        "Legal teams that handle taxation"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Which organizational design is best suited for stable, low-uncertainty environments?",
+                    options: [
+                        "Organic",
+                        "Mechanistic",
+                        "Virtual",
+                        "Boundaryless"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "A 'Wide Span of Control' (more people reporting to a manager) is a characteristic of:",
+                    options: [
+                        "Mechanistic design",
+                        "Organic design",
+                        "Functional structure",
+                        "Pyramid structure"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Functional organizations are often referred to as 'Pyramid Structures' because they are:",
+                    options: [
+                        "Highly flexible",
+                        "Hierarchical, top-down control systems",
+                        "Based on team-based networks",
+                        "Decentered and horizontal"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "What is a major disadvantage of the Functional Structure?",
+                    options: [
+                        "Lack of specialization",
+                        "Complicated reporting system",
+                        "Formation of 'Silos' (isolated departments)",
+                        "Too much communication between departments"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "Which structure divides the organization into departments based on the specific products or services they produce?",
+                    options: [
+                        "Functional structure",
+                        "Matrix structure",
+                        "Divisional structure",
+                        "Geographic structure"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "A structure organized by the locations of customers a company serves is called:",
+                    options: [
+                        "Matrix structure",
+                        "Virtual structure",
+                        "Geographic structure",
+                        "Product structure"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "The Matrix structure is a combination of which two structures?",
+                    options: [
+                        "Functional and Divisional",
+                        "Vertical (functional) and Horizontal (team-based)",
+                        "Geographic and Virtual",
+                        "Organic and Mechanistic"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Which organization type is described as 'Boundaryless' and relies heavily on ICTs?",
+                    options: [
+                        "Functional",
+                        "Matrix",
+                        "Virtual",
+                        "Geographic"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "Culture, norms, and politics are part of which internal subsystem?",
+                    options: [
+                        "Formal subsystem",
+                        "Macro subsystem",
+                        "Informal subsystem",
+                        "Structural subsystem"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "According to the Competing Values Framework (CVF), which culture emphasizes risk-taking, innovating, and entrepreneurship?",
+                    options: [
+                        "Clan Culture",
+                        "Hierarchy Culture",
+                        "Market Culture",
+                        "Adhocracy Culture"
+                    ],
+                    correctAnswer: 3
+                }
+            ]
+        },
+        {
+            id: 4,
+            title: "المحاضرة الرابعة: أخلاقيات الأعمال والقيادة",
+            description: "Business Ethics & Leadership and Global Ethics",
+            icon: "⚖️",
+            color: "#7B68EE",
+            questions: [
+                {
+                    question: "What does 'Ethics' essentially involve according to the lecture?",
+                    options: [
+                        "Maximizing profit at all costs",
+                        "How we act, live, and treat others",
+                        "Following only written laws",
+                        "Ignoring personal values in business"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "'Business Ethics' is best described as:",
+                    options: [
+                        "Theoretical philosophy",
+                        "How we apply our values when we conduct business",
+                        "A way to avoid paying taxes",
+                        "Purely end-state goals"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Which of the following is considered a shape of a modern ethical issue?",
+                    options: [
+                        "Increasing shareholder dividends",
+                        "Climate change and lack of sustainable practices",
+                        "Hiring highly skilled managers",
+                        "Expanding into new markets"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "'Terminal Values' are defined as:",
+                    options: [
+                        "Preferred means of behavior",
+                        "Desired goals or end states individuals wish to pursue",
+                        "Temporary values that change daily",
+                        "Rules imposed by the government"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Which of the following is an example of an 'Instrumental Value'?",
+                    options: [
+                        "Freedom",
+                        "Happiness",
+                        "Being honest and courageous",
+                        "Social recognition"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "What is a major difference between ethical principles and values?",
+                    options: [
+                        "Principles are subjective; values are universal",
+                        "Principles are permanent and universal; values are subjective and can change",
+                        "Values are rules; principles are end states",
+                        "There is no difference between them"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Which ethical principle holds that an action is right if it produces the greatest good for the greatest number of people?",
+                    options: [
+                        "Universalism",
+                        "Virtue Ethics",
+                        "Utilitarianism",
+                        "Ethical Relativism"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "The 'Universalism' approach to ethics focuses on:",
+                    options: [
+                        "The 'Ends justifies the means' logic",
+                        "Considering the welfare and risks of all parties",
+                        "Personal self-interest",
+                        "Character-based traits only"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "A major limitation of the 'Rights' approach to ethics is that:",
+                    options: [
+                        "It ignores human needs",
+                        "It can be used to manipulate selfish political interests",
+                        "It only focuses on the majority",
+                        "It is too permanent"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Which component of the 'Justice' principle involves giving compensation to those for past harm or injustice?",
+                    options: [
+                        "Procedural justice",
+                        "Retributive justice",
+                        "Distributive justice",
+                        "Virtual justice"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "'Virtue Ethics' is primarily based on:",
+                    options: [
+                        "The consequences of an action",
+                        "Legal entitlements",
+                        "The character traits of the person making the decision",
+                        "Cultural relativism"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "The 'Ethical Relativism' approach suggests that:",
+                    options: [
+                        "There are universal moral standards",
+                        "People set their own moral standards for judging their actions",
+                        "Character is the only thing that matters",
+                        "Rights are the most important factor"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Which of the following is a factor that provokes good people to make unethical choices?",
+                    options: [
+                        "Feeling psychologically safe",
+                        "Realistic performance targets",
+                        "Excessive pressure to reach unrealistic targets",
+                        "Having many positive examples"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "'Altruism' in ethical leadership refers to:",
+                    options: [
+                        "A focus on individual profit",
+                        "A steadfast devotion to improving the welfare of others",
+                        "Using power to dominate followers",
+                        "Following only strictly legal guidelines"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "'Stewardship' as a leadership style concerns:",
+                    options: [
+                        "Dominating followers to ensure efficiency",
+                        "Empowering followers to make decisions and gain control over their work",
+                        "Placing self-interest before service",
+                        "Ignoring the needs of stakeholders"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Which leadership style is central to 'placing service before self-interest'?",
+                    options: [
+                        "Transactional leadership",
+                        "Servant leadership",
+                        "Autocratic leadership",
+                        "Relativistic leadership"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "What is the main difference between compliance and ethics?",
+                    options: [
+                        "Compliance is motivational; ethics is a 'stick' approach",
+                        "Ethics is about 'doing the right thing'; compliance is about acting in accordance with the law",
+                        "They are exactly the same",
+                        "Compliance only applies to international business"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Corporate Social Responsibility (CSR) is described as a belief that:",
+                    options: [
+                        "Corporations only have a responsibility to generate profit",
+                        "Corporations have a social responsibility beyond pure profit",
+                        "Laws are the only thing that should guide a company",
+                        "Shareholders are the only stakeholders who matter"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Which of the following is an ethical deed that Multinational Enterprises (MNEs) should do for local countries?",
+                    options: [
+                        "Using only foreign labor",
+                        "Creating new jobs and hiring local labor",
+                        "Increasing the country's debt",
+                        "Keeping technology secret"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "According to ethical principles for international firms in Least Developed Countries (LDCs), they should:",
+                    options: [
+                        "Encourage child labor",
+                        "Support and respect the protection of international human rights",
+                        "Promote corruption and bribery",
+                        "Ignore environmental challenges"
+                    ],
+                    correctAnswer: 1
+                }
+            ]
+        },
+        {
+            id: 5,
+            title: "المحاضرة الخامسة: التحليل الاستراتيجي",
+            description: "Strategic Analysis - تحليل البيئة الداخلية والخارجية",
+            icon: "🔍",
+            color: "#6A5ACD",
+            questions: [
+                {
+                    question: "What is the process used by firms to understand the different layers of their competitive environment?",
+                    options: [
+                        "Financial auditing",
+                        "Strategic analysis",
+                        "Human resource management",
+                        "Market segmentation"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "External factors in the competitive environment are:",
+                    options: [
+                        "Characteristics of the firm itself",
+                        "Factors that can be fully controlled by the manager",
+                        "Factors in the global environment beyond the firm's direct control",
+                        "Only related to the firm's employees"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "SWOT analysis is an acronym that stands for:",
+                    options: [
+                        "Sales, Wages, Operations, Taxes",
+                        "Strengths, Weaknesses, Opportunities, Threats",
+                        "Strategy, Work, Organization, Training",
+                        "Systems, Wealth, Objectives, Teams"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "In SWOT analysis, 'Strengths' and 'Weaknesses' are factors:",
+                    options: [
+                        "Outside the firm",
+                        "Inside the firm",
+                        "Only related to competitors",
+                        "Related to government regulations"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Which of the following is an example of an 'Opportunity' in SWOT analysis?",
+                    options: [
+                        "Highly skilled employees",
+                        "New social trends or technological advances",
+                        "Outdated technology",
+                        "Competitor actions"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "The 'Macro Environment' includes elements that are:",
+                    options: [
+                        "Directly connected to the firm's industry",
+                        "Generally beyond the firm's direct control",
+                        "Part of the internal organizational structure",
+                        "Only related to the firm's investors"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "PESTEL is a strategic tool used to examine the:",
+                    options: [
+                        "Internal environment",
+                        "Micro environment",
+                        "Macro environment",
+                        "Employee performance"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "In PESTEL, 'Legal Factors' include:",
+                    options: [
+                        "Employment levels and interest rates",
+                        "Demographic trends",
+                        "Contracts, laws, and intellectual property rights",
+                        "Automation and connectivity"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "'Porter's Five Forces' is a tool used to examine the:",
+                    options: [
+                        "Macro environment",
+                        "Internal environment",
+                        "Micro environment",
+                        "Global economic cycles"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "Which of Porter's forces is located at the center of the diagram?",
+                    options: [
+                        "Threat of New Entrants",
+                        "Buyer Power",
+                        "Industry Rivalry",
+                        "Supplier Power"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "'Supplier Power' is high when:",
+                    options: [
+                        "There are many suppliers for the same product",
+                        "Suppliers offer specialized products or control rare resources",
+                        "The product is a common commodity",
+                        "Buyers have many potential sources"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "What refers to the penalty consumers face when choosing to switch to a different company's product?",
+                    options: [
+                        "Supplier power",
+                        "Switching costs",
+                        "Industry rivalry",
+                        "Entry barriers"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "The 'Internal Environment' of a firm consists of:",
+                    options: [
+                        "Competitors and government",
+                        "Members, investors, and assets",
+                        "Globalization and demographics",
+                        "Natural disasters"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "The goal of 'The Value Chain' concept is to:",
+                    options: [
+                        "Reduce the number of employees",
+                        "Add enough value so customers buy the product for a price higher than its cost",
+                        "Only focus on marketing",
+                        "Ignore support activities"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "'Capabilities' are defined as:",
+                    options: [
+                        "Physical things a firm has (equipment, cash)",
+                        "Things a firm can do (delivering excellent service, innovation)",
+                        "Government regulations",
+                        "External market trends"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "The VRIO strategy helps managers evaluate if a resource can be a source of:",
+                    options: [
+                        "Financial debt",
+                        "Competitive advantage",
+                        "Employee turnover",
+                        "External threats"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "What does the 'O' in VRIO stand for?",
+                    options: [
+                        "Operations",
+                        "Organization (Is the firm effectively organized to capture value?)",
+                        "Opportunities",
+                        "Objectives"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "A firm has a 'Competitive Advantage' when it:",
+                    options: [
+                        "Has the same profit as rivals",
+                        "Successfully attracts more customers or earns more profit than rivals",
+                        "Only follows government regulations",
+                        "Has no internal resources"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "A 'Differentiation Strategy' involves:",
+                    options: [
+                        "Offering products at the lowest possible price",
+                        "Adding value/features to attract customers willing to pay a higher price",
+                        "Ignoring research and development",
+                        "Focusing only on cost control"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "A 'Focus Strategy' concentrates marketing and selling efforts on:",
+                    options: [
+                        "The entire global market",
+                        "A smaller, specific market or luxury segment",
+                        "Only reducing inbound logistics costs",
+                        "Imitating the competitor's broad strategy"
+                    ],
+                    correctAnswer: 1
+                }
+            ]
+        },
+        {
+            id: 6,
+            title: "المحاضرة السادسة: الإدارة الاستراتيجية",
+            description: "The Strategic Management Process - العملية والتنفيذ",
+            icon: "🎯",
+            color: "#483D8B",
+            questions: [
+                {
+                    question: "What is the set of activities that managers undertake to position their firms to compete successfully?",
+                    options: [
+                        "Operational auditing",
+                        "Strategic management process",
+                        "Financial reporting",
+                        "Recruitment process"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Which stage of the Strategy Cycle involves evaluating the firm's external and internal environments?",
+                    options: [
+                        "Strategic Objectives",
+                        "Implement Strategies",
+                        "Strategic Analysis",
+                        "Vision and Mission"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "A vision statement expresses:",
+                    options: [
+                        "How a firm will produce its products",
+                        "What a business's founders want the business to accomplish",
+                        "Detailed financial targets",
+                        "Specific employee tasks"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "What is a key characteristic of a Vision Statement?",
+                    options: [
+                        "It must mention a specific product",
+                        "It is usually very broad",
+                        "It describes the exact strategy used",
+                        "It is limited to one month of activity"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "'To make people happy' is an example of which firm's Vision?",
+                    options: [
+                        "Ikea",
+                        "Starbucks",
+                        "Disney",
+                        "Nike"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "The Mission Statement differs from the Vision by:",
+                    options: [
+                        "Explaining 'Why' the business exists",
+                        "Briefly describing 'How' the firm will try to make its vision a reality",
+                        "Focusing only on founders",
+                        "Being broader than the vision"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "'Big-picture goals' that describe what the company will do to fulfill its mission are called:",
+                    options: [
+                        "Tactical plans",
+                        "Strategic objectives",
+                        "Operational tasks",
+                        "Market trends"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Which strategy involves plans to increase the firm's size in terms of revenue or market share?",
+                    options: [
+                        "Stability strategy",
+                        "Defensive strategy",
+                        "Growth strategy",
+                        "Retrenchment strategy"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "When a company aims to maintain its current income and market share, it is pursuing a:",
+                    options: [
+                        "Growth strategy",
+                        "Stability strategy",
+                        "Defensive strategy",
+                        "Diversification strategy"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "A struggling company that shrinks its operations to reduce costs and survive is using a:",
+                    options: [
+                        "Growth strategy",
+                        "Stability strategy",
+                        "Defensive strategy",
+                        "Market penetration strategy"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "A 'Plan' is defined as:",
+                    options: [
+                        "A random set of activities",
+                        "Defining a particular action in order to achieve a specific goal",
+                        "Only the budget of the company",
+                        "The same as a vision statement"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "What is the first step in the Planning Process?",
+                    options: [
+                        "Design Plan",
+                        "Implement Plan",
+                        "Set goals",
+                        "Review Results"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "In the SMART framework, the letter 'M' stands for:",
+                    options: [
+                        "Motivational",
+                        "Measurable",
+                        "Meaningful",
+                        "Marketable"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "A goal that has a time limit to create a sense of urgency is described as:",
+                    options: [
+                        "Relevant",
+                        "Achievable",
+                        "Time-Bound",
+                        "Specific"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "Implementation of planned strategies refers to:",
+                    options: [
+                        "Setting the vision",
+                        "Executing a strategy by assigning tasks to people",
+                        "Collecting market data",
+                        "Writing the annual report"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Which level of planning is performed by company executives to set the overall direction?",
+                    options: [
+                        "Tactical planning",
+                        "Operational planning",
+                        "Strategic planning",
+                        "Technical planning"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "Mid-level planning consisting of broad ideas about how a company should pursue its mission is:",
+                    options: [
+                        "Strategic planning",
+                        "Tactical planning",
+                        "Operational planning",
+                        "Executive planning"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Division managers are typically responsible for which level of planning?",
+                    options: [
+                        "Strategic",
+                        "Tactical",
+                        "Operational",
+                        "Global"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Frontline managers perform 'Operational Planning' which answers the question:",
+                    options: [
+                        "Why?",
+                        "What?",
+                        "How?",
+                        "Where?"
+                    ],
+                    correctAnswer: 2
+                },
+                {
+                    question: "Evaluating performance in the view of customers, stakeholders, or employees is known as:",
+                    options: [
+                        "Numeric rating scales",
+                        "Peer reviews",
+                        "Functions checklist",
+                        "SWOT analysis"
+                    ],
+                    correctAnswer: 1
+                }
+            ]
+        },
+        {
+            id: 7,
+            title: "المحاضرة السابعة: إدارة الموارد البشرية",
+            description: "Human Resource Management - التوظيف والتدريب والتعويض",
+            icon: "👥",
+            color: "#4B0082",
+            questions: [
+                {
+                    question: "Human Resource Management (HRM) is defined as the process of:",
+                    options: [
+                        "Selling products and services",
+                        "Employing, training, compensating, and retaining people",
+                        "Only calculating the company's annual profit",
+                        "Managing the external macro environment"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Which role of HRM involves the entire hiring process from posting a job to negotiating salary?",
+                    options: [
+                        "Retention",
+                        "Staffing",
+                        "Worker Protection",
+                        "Internal Consulting"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "What is the purpose of a 'Staffing Plan'?",
+                    options: [
+                        "To design the company logo",
+                        "To see how many people should be hired based on revenue expectations",
+                        "To determine the internet usage policy",
+                        "To manage chemical hazards"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "'Compensation' in HRM includes:",
+                    options: [
+                        "Only the monthly salary",
+                        "Anything the employee receives for his or her work, including benefits and bonuses",
+                        "Only the vacation time policy",
+                        "The cost of raw materials"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "According to the lecture, 90% of employees leave a company due to:",
+                    options: [
+                        "High salaries",
+                        "Challenges with their manager or poor fit with organizational culture",
+                        "Too much training",
+                        "Efficient information technology"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Training and development result in:",
+                    options: [
+                        "Lower employee retention",
+                        "Higher productivity for the organization",
+                        "Increased employee dissatisfaction",
+                        "Decreased job skills"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Worker protection requirements ensure the workplace meets:",
+                    options: [
+                        "Only the CEO's standards",
+                        "Federal and union standards",
+                        "Only marketing standards",
+                        "Customer service standards"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Which HRM skill is crucial because it involves managing people's pay, benefits, and careers?",
+                    options: [
+                        "Multitasking",
+                        "Organization",
+                        "Technical engineering",
+                        "Global scanning"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Social skills in HRM are necessary for:",
+                    options: [
+                        "Managing personalities, dealing with conflict, and coaching others",
+                        "Designing new production machinery",
+                        "Calculating currency exchange rates",
+                        "Managing the supply chain"
+                    ],
+                    correctAnswer: 0
+                },
+                {
+                    question: "A strategic HR professional is able to:",
+                    options: [
+                        "Only focus on day-to-day tasks",
+                        "Understand how HR fits into the bigger picture of the business",
+                        "Ignore long-term trends",
+                        "Work without a plan"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Why is a sense of ethics essential for HR managers?",
+                    options: [
+                        "They only handle public information",
+                        "They work with highly confidential information like salary data",
+                        "They are responsible for product design",
+                        "They manage local regulations"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "An 'HRM Strategic Plan' usually includes:",
+                    options: [
+                        "Only short-term daily tasks",
+                        "Long-term goals of the human resource department",
+                        "The company's marketing budget",
+                        "The list of all customers"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "When an HRM strategic plan is aligned with the organization's mission, HRM is acting as a:",
+                    options: [
+                        "Figurehead",
+                        "Strategic partner",
+                        "Disseminator",
+                        "Negotiator"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "In the 'Introduction' stage of the organizational life cycle, the staffing focus is to:",
+                    options: [
+                        "Plan workforce reductions",
+                        "Attract the best technical and professional talent",
+                        "Control labor costs",
+                        "Encourage mobility"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "During the 'Growth' stage, the HRM focus for training is to:",
+                    options: [
+                        "Implement retraining",
+                        "Mold an effective management team through development",
+                        "Maintain flexibility of an aging workforce",
+                        "Define future skill requirements"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Tight cost control and workforce reductions are characteristic of which life cycle stage?",
+                    options: [
+                        "Introduction",
+                        "Growth",
+                        "Maturity",
+                        "Decline"
+                    ],
+                    correctAnswer: 3
+                },
+                {
+                    question: "What tool is used to identify HR's strengths, weaknesses, opportunities, and threats?",
+                    options: [
+                        "PESTEL",
+                        "SWOT analysis",
+                        "Porter's Five Forces",
+                        "VRIO"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Once HR issues are identified, the HRM manager should:",
+                    options: [
+                        "Ignore them",
+                        "Prioritize the goals and put action plans together",
+                        "Wait for the CEO to act",
+                        "Hide the data from management"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "The selection process consists of:",
+                    options: [
+                        "Posting a job on social media",
+                        "Interviewing and hiring processes",
+                        "Writing the company mission",
+                        "Managing chemical hazards"
+                    ],
+                    correctAnswer: 1
+                },
+                {
+                    question: "What is the purpose of 'Appraising Performance' in the HRM plan?",
+                    options: [
+                        "To determine the company's stock price",
+                        "To rate employee performance and continue their development",
+                        "To hire local labor",
+                        "To manage local taxes"
+                    ],
+                    correctAnswer: 1
+                }
+            ]
+        }
+    ];
+
+    // متغيرات النظام
+    let managementProgress = JSON.parse(localStorage.getItem('management_exercises_progress')) || {};
+    let currentQuiz = null;
+    let currentQuestions = [];
+    let currentQuestionIndex = 0;
+    let userAnswers = [];
+    let quizStarted = false;
+    let startTime = null;
+    let quizTimer = null;
+    let timeRemaining = 1200; // 20 دقيقة لكل كويز
+    let currentActiveQuestion = 1;
+
+    // تهيئة الصفحة
+    document.addEventListener('DOMContentLoaded', function() {
+        createQuizCards();
+        updateStatistics();
+    });
+
+    // إنشاء بطاقات المحاضرات
+    function createQuizCards() {
+        const grid = document.getElementById('lecturesGrid');
+        grid.innerHTML = '';
+        
+        MANAGEMENT_DATA.forEach(lecture => {
+            const progress = managementProgress[lecture.id] || {};
+            const score = progress.score || 0;
+            const completed = progress.completed || false;
+            const attempts = progress.attempts || 0;
+            
+            const card = document.createElement('div');
+            card.className = 'subject-card';
+            card.innerHTML = `
+                ${completed ? '<div class="completed-badge">✓</div>' : ''}
+                <span class="badge" style="background: ${lecture.color};">المحاضرة ${lecture.id}</span>
+                <div class="card-icon">${lecture.icon}</div>
+                <h3>${lecture.title}</h3>
+                <p>${lecture.description}</p>
+                
+                <div class="progress-container">
+                    <div class="progress-info">
+                        <span class="progress-label">${attempts > 0 ? 'آخر نتيجة' : 'التقدم'}</span>
+                        <span class="progress-value">${attempts > 0 ? `${score}%` : 'لم يبدأ'}</span>
+                    </div>
+                    <div class="mini-progress">
+                        <div class="mini-progress-fill" style="width: ${score}%; background: ${lecture.color};"></div>
+                    </div>
+                </div>
+                
+                <div class="card-actions">
+                    <button class="btn-card ${completed ? 'completed' : attempts > 0 ? 'started' : ''}" 
+                            onclick="startLectureQuiz(${lecture.id})">
+                        <i class="fas ${completed ? 'fa-redo' : attempts > 0 ? 'fa-play-circle' : 'fa-play'}"></i>
+                        ${completed ? 'إعادة المحاولة' : attempts > 0 ? 'مواصلة التدريب' : 'ابدأ التدريب'}
+                    </button>
+                </div>
+            `;
+            
+            grid.appendChild(card);
+        });
+    }
+
+    // تحديث الإحصائيات
+    function updateStatistics() {
+        let completedCount = 0;
+        let totalScore = 0;
+        let quizzesWithScore = 0;
+        let totalTime = 0;
+        let lastActivity = null;
+        
+        MANAGEMENT_DATA.forEach(lecture => {
+            const progress = managementProgress[lecture.id] || {};
+            const score = progress.score || 0;
+            const completed = progress.completed || false;
+            const timeSpent = progress.timeSpent || 0;
+            
+            if (completed) completedCount++;
+            if (score > 0) {
+                totalScore += score;
+                quizzesWithScore++;
+            }
+            if (timeSpent) totalTime += timeSpent;
+            
+            if (progress.lastAttempt && (!lastActivity || new Date(progress.lastAttempt) > new Date(lastActivity))) {
+                lastActivity = progress.lastAttempt;
+            }
+        });
+        
+        const overallPercentage = Math.round((completedCount / MANAGEMENT_DATA.length) * 100);
+        const averageScore = quizzesWithScore > 0 ? Math.round(totalScore / quizzesWithScore) : 0;
+        
+        document.getElementById('completed-quizzes').textContent = completedCount;
+        document.getElementById('average-score').textContent = `${averageScore}%`;
+        document.getElementById('overall-percentage').textContent = `${overallPercentage}%`;
+        document.getElementById('overall-progress-fill').style.width = `${overallPercentage}%`;
+        document.getElementById('completed-count').textContent = `${completedCount}/${MANAGEMENT_DATA.length} تم إكمالها`;
+        document.getElementById('total-time').textContent = `الوقت الإجمالي: ${Math.round(totalTime)} دقيقة`;
+        
+        if (lastActivity) {
+            const date = new Date(lastActivity);
+            document.getElementById('last-activity').textContent = 
+                `آخر نشاط: ${date.toLocaleDateString('ar-EG')}`;
+        }
+    }
+
+    // بدء كويز المحاضرة
+    function startLectureQuiz(lectureId) {
+        const lecture = MANAGEMENT_DATA.find(l => l.id === lectureId);
+        if (!lecture) return;
+        
+        currentQuiz = lectureId;
+        currentQuestions = lecture.questions;
+        currentQuestionIndex = 0;
+        userAnswers = new Array(currentQuestions.length).fill(null);
+        quizStarted = true;
+        timeRemaining = 1200; // 20 دقيقة
+        startTime = new Date();
+        
+        // تسجيل محاولة الدخول
+        if (!managementProgress[lectureId]) {
+            managementProgress[lectureId] = {};
+        }
+        managementProgress[lectureId].lastAttempt = new Date().toISOString();
+        managementProgress[lectureId].attempts = (managementProgress[lectureId].attempts || 0) + 1;
+        localStorage.setItem('management_exercises_progress', JSON.stringify(managementProgress));
+        
+        // عرض محرك الكويز
+        document.getElementById('quizEngine').style.display = 'block';
+        document.getElementById('quizTitle').textContent = lecture.title;
+        document.getElementById('quizSubtitle').textContent = lecture.description;
+        
+        // تحديث عدد الأسئلة
+        document.getElementById('totalQuestionsNum').textContent = currentQuestions.length;
+        document.getElementById('totalQuestionsDisplay').textContent = currentQuestions.length;
+        
+        // بدء المؤقت
+        startTimer();
+        
+        // عرض السؤال الأول
+        displayQuestion();
+        
+        showNotification(`بدأت المحاضرة ${lectureId}: ${lecture.title}`);
+    }
+
+    // بدء المؤقت
+    function startTimer() {
+        clearInterval(quizTimer);
+        
+        quizTimer = setInterval(() => {
+            timeRemaining--;
+            
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            
+            document.getElementById('questionTimer').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeRemaining <= 0) {
+                clearInterval(quizTimer);
+                finishQuiz();
+            }
+        }, 1000);
+    }
+
+    // عرض السؤال الحالي
+    function displayQuestion() {
+        if (currentQuestionIndex >= currentQuestions.length) {
+            finishQuiz();
+            return;
+        }
+        
+        const question = currentQuestions[currentQuestionIndex];
+        document.getElementById('questionText').textContent = question.question;
+        document.getElementById('currentQuestionNum').textContent = currentQuestionIndex + 1;
+        document.getElementById('totalQuestionsNum').textContent = currentQuestions.length;
+        
+        const optionsContainer = document.getElementById('optionsContainer');
+        optionsContainer.innerHTML = '';
+        
+        question.options.forEach((option, index) => {
+            const optionDiv = document.createElement('div');
+            optionDiv.className = 'option';
+            if (userAnswers[currentQuestionIndex] === index) {
+                optionDiv.classList.add('selected');
+            }
+            
+            optionDiv.innerHTML = `
+                <div class="option-label">${String.fromCharCode(1633 + index)}</div>
+                <div>${option}</div>
+            `;
+            
+            optionDiv.onclick = () => selectOption(index);
+            optionsContainer.appendChild(optionDiv);
+        });
+        
+        // تحديث أزرار التحكم
+        document.getElementById('prevBtn').disabled = currentQuestionIndex === 0;
+        document.getElementById('nextBtn').style.display = 
+            currentQuestionIndex < currentQuestions.length - 1 ? 'flex' : 'none';
+        document.getElementById('finishBtn').style.display = 
+            currentQuestionIndex === currentQuestions.length - 1 ? 'flex' : 'none';
+        
+        // إظهار شاشة السؤال وإخفاء النتائج
+        document.getElementById('questionScreen').style.display = 'block';
+        document.getElementById('resultsScreen').style.display = 'none';
+    }
+
+    // اختيار إجابة
+    function selectOption(optionIndex) {
+        if (quizStarted) {
+            userAnswers[currentQuestionIndex] = optionIndex;
+            
+            // تحديث مظهر الخيارات
+            const options = document.querySelectorAll('.option');
+            options.forEach((option, index) => {
+                option.classList.remove('selected');
+                if (index === optionIndex) {
+                    option.classList.add('selected');
+                }
+            });
+        }
+    }
+
+    // السؤال السابق
+    function prevQuestion() {
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            displayQuestion();
+        }
+    }
+
+    // السؤال التالي
+    function nextQuestion() {
+        if (currentQuestionIndex < currentQuestions.length - 1) {
+            currentQuestionIndex++;
+            displayQuestion();
+        }
+    }
+
+    // إنهاء الكويز وعرض النتائج
+    function finishQuiz() {
+        clearInterval(quizTimer);
+        quizStarted = false;
+        
+        // حساب الوقت المستغرق
+        const endTime = new Date();
+        const timeSpent = Math.floor((endTime - startTime) / 1000);
+        
+        // حساب النتيجة
+        let correctAnswers = 0;
+        currentQuestions.forEach((question, index) => {
+            if (userAnswers[index] === question.correctAnswer) {
+                correctAnswers++;
+            }
+        });
+        
+        const score = Math.round((correctAnswers / currentQuestions.length) * 100);
+        const wrongAnswers = currentQuestions.length - correctAnswers;
+        
+        // حفظ النتائج
+        if (!managementProgress[currentQuiz]) {
+            managementProgress[currentQuiz] = {};
+        }
+        managementProgress[currentQuiz].score = score;
+        managementProgress[currentQuiz].completed = true;
+        managementProgress[currentQuiz].timeSpent = (managementProgress[currentQuiz].timeSpent || 0) + Math.floor(timeSpent / 60);
+        localStorage.setItem('management_exercises_progress', JSON.stringify(managementProgress));
+        
+        // عرض شاشة النتائج مع مراجعة الأسئلة
+        showResultsScreen(score, correctAnswers, wrongAnswers, timeSpent);
+        
+        // تحديث الصفحة الرئيسية
+        createQuizCards();
+        updateStatistics();
+        
+        showNotification(`تم إنهاء الكويز بنتيجة ${score}%`);
+    }
+
+    // عرض شاشة النتائج
+    function showResultsScreen(score, correctAnswers, wrongAnswers, timeSpent) {
+        document.getElementById('questionScreen').style.display = 'none';
+        document.getElementById('resultsScreen').style.display = 'block';
+        
+        const lecture = MANAGEMENT_DATA.find(l => l.id === currentQuiz);
+        
+        // ملء بيانات النتيجة
+        document.getElementById('resultLecture').textContent = lecture.title;
+        document.getElementById('resultTotal').textContent = currentQuestions.length;
+        document.getElementById('resultCorrect').textContent = correctAnswers;
+        document.getElementById('resultWrong').textContent = wrongAnswers;
+        document.getElementById('resultPercentage').textContent = `${score}%`;
+        document.getElementById('scoreValue').textContent = `${score}%`;
+        document.getElementById('resultTime').textContent = `${Math.floor(timeSpent / 60)} دقيقة و ${timeSpent % 60} ثانية`;
+        
+        // تحديث دائرة النتيجة
+        const scoreCircle = document.getElementById('scoreCircle');
+        scoreCircle.style.background = `conic-gradient(${lecture.color} 0% ${score}%, var(--gray-light) ${score}% 100%)`;
+        
+        // رسالة النتيجة
+        let message = '';
+        if (score >= 90) {
+            message = 'ممتاز! 🎉 أداء رائع، أنت متقن للمحاضرة.';
+        } else if (score >= 70) {
+            message = 'جيد جداً! 👍 فهمت معظم المحتوى.';
+        } else if (score >= 50) {
+            message = 'جيد! 💪 تحتاج لمراجعة بعض النقاط.';
+        } else {
+            message = 'حاول مرة أخرى! 📚 تحتاج لدراسة أكثر.';
+        }
+        document.getElementById('resultMessage').textContent = message;
+        document.getElementById('resultTitle').textContent = `نتيجة ${lecture.title}`;
+        
+        // إنشاء قسم الإحصائيات
+        fillReviewStats(score, correctAnswers, wrongAnswers, timeSpent);
+        
+        // ملء مؤشرات التنقل السريع
+        fillQuickNavIndicators();
+        
+        // ملء الأسئلة
+        fillReviewQuestions();
+        
+        // تحديث حقل القفز
+        document.getElementById('jumpToQuestionInput').max = currentQuestions.length;
+        document.getElementById('jumpToQuestionInput').value = 1;
+        
+        // تعيين السؤال الأول كفعال
+        setActiveQuestion(1);
+    }
+
+    // ملء إحصائيات المراجعة
+    function fillReviewStats(score, correctAnswers, wrongAnswers, timeSpent) {
+        const reviewStats = document.getElementById('reviewStats');
+        reviewStats.innerHTML = `
+            <div class="review-stat-item">
+                <div class="review-stat-icon correct">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="review-stat-value">${correctAnswers}</div>
+                <div class="review-stat-label">إجابات صحيحة</div>
+            </div>
+            
+            <div class="review-stat-item">
+                <div class="review-stat-icon incorrect">
+                    <i class="fas fa-times-circle"></i>
+                </div>
+                <div class="review-stat-value">${wrongAnswers}</div>
+                <div class="review-stat-label">إجابات خاطئة</div>
+            </div>
+            
+            <div class="review-stat-item">
+                <div class="review-stat-icon percentage">
+                    <i class="fas fa-percentage"></i>
+                </div>
+                <div class="review-stat-value">${score}%</div>
+                <div class="review-stat-label">نسبة النجاح</div>
+            </div>
+            
+            <div class="review-stat-item">
+                <div class="review-stat-icon time">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="review-stat-value">${Math.floor(timeSpent / 60)}:${(timeSpent % 60).toString().padStart(2, '0')}</div>
+                <div class="review-stat-label">الوقت المستغرق</div>
+            </div>
+        `;
+    }
+
+    // ملء مؤشرات التنقل السريع
+    function fillQuickNavIndicators() {
+        const quickNav = document.getElementById('quickNavIndicators');
+        let indicatorsHTML = '';
+        
+        currentQuestions.forEach((question, index) => {
+            const userAnswer = userAnswers[index];
+            const isCorrect = userAnswer === question.correctAnswer;
+            const questionNum = index + 1;
+            
+            indicatorsHTML += `
+                <div class="quick-nav-item ${isCorrect ? 'correct' : 'incorrect'}" 
+                     onclick="jumpToQuestion(${questionNum})" 
+                     data-question="${questionNum}">
+                    ${questionNum}
+                </div>
+            `;
+        });
+        
+        quickNav.innerHTML = indicatorsHTML;
+        
+        // تعيين المؤشر الأول كفعال
+        setActiveQuestion(1);
+    }
+
+    // ملء الأسئلة في المراجعة
+    function fillReviewQuestions() {
+        const questionsWrapper = document.getElementById('questionsReviewWrapper');
+        let questionsHTML = '';
+        
+        currentQuestions.forEach((question, index) => {
+            const userAnswer = userAnswers[index];
+            const isCorrect = userAnswer === question.correctAnswer;
+            const questionNum = index + 1;
+            const correctAnswerText = question.options[question.correctAnswer];
+            const userAnswerText = userAnswer !== null ? question.options[userAnswer] : 'لم تجب';
+            
+            questionsHTML += `
+                <div class="review-question-card ${isCorrect ? 'correct' : 'incorrect'}" 
+                     id="questionReview-${questionNum}">
+                    
+                    <div class="review-card-header">
+                        <div class="question-number-badge">
+                            ${questionNum}
+                        </div>
+                        <div class="question-status-badge ${isCorrect ? 'correct' : 'incorrect'}">
+                            ${isCorrect ? '<i class="fas fa-check"></i> إجابة صحيحة' : '<i class="fas fa-times"></i> إجابة خاطئة'}
+                        </div>
+                    </div>
+                    
+                    <div class="review-question-text">
+                        ${question.question}
+                    </div>
+                    
+                    <div class="answers-section">
+                        <div class="answer-box user-answer">
+                            <div class="answer-label user-answer">👤 إجابتك</div>
+                            <div class="answer-content">
+                                ${userAnswerText}
+                            </div>
+                        </div>
+                        
+                        ${!isCorrect ? `
+                        <div class="answer-box correct-answer">
+                            <div class="answer-label correct-answer">✅ الإجابة الصحيحة</div>
+                            <div class="answer-content">
+                                ${correctAnswerText}
+                            </div>
+                        </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+        });
+        
+        questionsWrapper.innerHTML = questionsHTML;
+    }
+
+    // تعيين السؤال الفعال في التنقل
+    function setActiveQuestion(questionNum) {
+        // إزالة الفعالية من كل المؤشرات
+        document.querySelectorAll('.quick-nav-item').forEach(item => {
+            item.classList.remove('active');
+        });
+        
+        // تعيين الفعالية للمؤشر الحالي
+        const activeIndicator = document.querySelector(`.quick-nav-item[data-question="${questionNum}"]`);
+        if (activeIndicator) {
+            activeIndicator.classList.add('active');
+        }
+        
+        // تحديث حقل القفز
+        document.getElementById('jumpToQuestionInput').value = questionNum;
+        
+        currentActiveQuestion = questionNum;
+    }
+
+    // القفز إلى سؤال معين
+    function jumpToQuestion(questionNum = null) {
+        const input = document.getElementById('jumpToQuestionInput');
+        let targetQuestion = questionNum || parseInt(input.value);
+        
+        // التحقق من صحة الرقم
+        if (targetQuestion < 1) targetQuestion = 1;
+        if (targetQuestion > currentQuestions.length) targetQuestion = currentQuestions.length;
+        
+        const questionElement = document.getElementById(`questionReview-${targetQuestion}`);
+        if (questionElement) {
+            questionElement.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'center'
+            });
+            
+            // إضافة تأثير مميز
+            questionElement.style.animation = 'none';
+            setTimeout(() => {
+                questionElement.style.animation = 'pulse 0.5s ease-in-out';
+            }, 50);
+            
+            setActiveQuestion(targetQuestion);
+        }
+    }
+
+    // الانتقال للسؤال السابق
+    function scrollToPreviousQuestion() {
+        if (currentActiveQuestion > 1) {
+            jumpToQuestion(currentActiveQuestion - 1);
+        }
+    }
+
+    // الانتقال للسؤال التالي
+    function scrollToNextQuestion() {
+        if (currentActiveQuestion < currentQuestions.length) {
+            jumpToQuestion(currentActiveQuestion + 1);
+        }
+    }
+
+    // طباعة المراجعة
+    function printReview() {
+        const printWindow = window.open('', '_blank');
+        const lecture = MANAGEMENT_DATA.find(l => l.id === currentQuiz);
+        
+        let printContent = `
+            <!DOCTYPE html>
+            <html lang="ar" dir="rtl">
+            <head>
+                <meta charset="UTF-8">
+                <title>مراجعة ${lecture.title}</title>
+                <style>
+                    body {
+                        font-family: 'Cairo', sans-serif;
+                        line-height: 1.8;
+                        color: #333;
+                        padding: 20px;
+                        direction: rtl;
+                    }
+                    .header {
+                        text-align: center;
+                        border-bottom: 3px solid #6A0DAD;
+                        padding-bottom: 20px;
+                        margin-bottom: 30px;
+                    }
+                    .question {
+                        margin-bottom: 30px;
+                        padding: 20px;
+                        border: 2px solid #ddd;
+                        border-radius: 10px;
+                        page-break-inside: avoid;
+                    }
+                    .question-number {
+                        background: #6A0DAD;
+                        color: white;
+                        padding: 10px 20px;
+                        border-radius: 5px;
+                        font-weight: bold;
+                        display: inline-block;
+                        margin-bottom: 15px;
+                    }
+                    .answer {
+                        margin: 10px 0;
+                        padding: 15px;
+                        border-radius: 5px;
+                    }
+                    .user-answer {
+                        background: #ffe6e6;
+                        border-right: 3px solid #B22222;
+                    }
+                    .correct-answer {
+                        background: #e6ffe6;
+                        border-right: 3px solid #228B22;
+                    }
+                    @media print {
+                        .no-print {
+                            display: none;
+                        }
+                        .page-break {
+                            page-break-before: always;
+                        }
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="header">
+                    <h1>${lecture.title}</h1>
+                    <h2>مراجعة الأسئلة والإجابات</h2>
+                    <p>تاريخ المراجعة: ${new Date().toLocaleDateString('ar-EG')}</p>
+                </div>
+        `;
+        
+        currentQuestions.forEach((question, index) => {
+            const userAnswer = userAnswers[index];
+            const isCorrect = userAnswer === question.correctAnswer;
+            const correctAnswerText = question.options[question.correctAnswer];
+            const userAnswerText = userAnswer !== null ? question.options[userAnswer] : 'لم تجب';
+            
+            printContent += `
+                <div class="question ${index > 0 && index % 5 === 0 ? 'page-break' : ''}">
+                    <div class="question-number">السؤال ${index + 1}</div>
+                    <h3>${question.question}</h3>
+                    
+                    <div class="answer user-answer">
+                        <strong>إجابتك:</strong> ${userAnswerText}
+                        ${!isCorrect ? ' ❌' : ' ✅'}
+                    </div>
+                    
+                    ${!isCorrect ? `
+                    <div class="answer correct-answer">
+                        <strong>الإجابة الصحيحة:</strong> ${correctAnswerText} ✅
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+        });
+        
+        printContent += `
+            <div class="no-print" style="text-align: center; margin-top: 50px; padding: 20px;">
+                <button onclick="window.print()" style="
+                    background: #6A0DAD;
+                    color: white;
+                    border: none;
+                    padding: 15px 30px;
+                    border-radius: 5px;
+                    font-size: 16px;
+                    cursor: pointer;
+                    font-family: 'Cairo', sans-serif;
+                ">
+                    طباعة المراجعة
+                </button>
+            </div>
+            </body>
+            </html>
+        `;
+        
+        printWindow.document.write(printContent);
+        printWindow.document.close();
+    }
+
+    // التمرير لأعلى الصفحة
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    // إعادة الاختبار
+    function restartQuiz() {
+        currentQuestionIndex = 0;
+        userAnswers = new Array(currentQuestions.length).fill(null);
+        quizStarted = true;
+        timeRemaining = 1200;
+        startTime = new Date();
+        
+        // إخفاء شاشة النتائج
+        document.getElementById('resultsScreen').style.display = 'none';
+        
+        startTimer();
+        displayQuestion();
+    }
+
+    // إغلاق محرك الكويز
+    function closeQuiz() {
+        document.getElementById('quizEngine').style.display = 'none';
+        createQuizCards();
+        updateStatistics();
+    }
+
+    // العودة للصفحة الرئيسية
+    function goToHome() {
+        // يمكنك تعديل هذا لينتقل لصفحة رئيسية أخرى
+        window.location.href = 'index.html';
+    }
+
+    // إعادة تعيين التقدم
+    function resetProgress() {
+        if (confirm('هل تريد مسح كل تقدمك؟ هذا الإجراء لا يمكن التراجع عنه.')) {
+            managementProgress = {};
+            localStorage.removeItem('management_exercises_progress');
+            createQuizCards();
+            updateStatistics();
+            showNotification('تم مسح التقدم بنجاح!');
+        }
+    }
+
+    // إظهار إشعار
+    function showNotification(message) {
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+        notification.innerHTML = `<i class="fas fa-info-circle"></i> ${message}`;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
+    }
+    </script>
+</body>
+</html>
