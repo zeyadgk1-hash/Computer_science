@@ -756,7 +756,7 @@
             
             <div class="stats-item">
                 <div class="stats-icon">🎬</div>
-                <span class="stats-number">3</span>
+                <span class="stats-number">6</span>
                 <span class="stats-label">فيديوهات</span>
             </div>
         </div>
@@ -790,16 +790,17 @@
                 <h3>مقومات التذوق الأدبي للنص</h3>
                 <div class="content-actions">
                     <a href="ar3.pdf" target="_blank" class="btn-content btn-pdf"><span>📄</span> الشرح</a>
-                    <a href="https://youtu.be/vghlWMSv6J4?si=gJTUZY-98dVN_dxf" target="_blank" class="btn-content btn-video"><span>🎬</span> الفيديو</a>
+                    <a href="https://vimeo.com/1160752601?fl=pl&fe=sh" target="_blank" class="btn-content btn-video"><span>🎬</span> الفيديو</a>
                 </div>
             </div>
 
             <!-- المحاضرة 4 -->
             <div class="lecture-card">
                 <span class="lecture-badge">Lec 04</span>
-                <h3>ذئب على قائمة الفرزدق</h3>
+                <h3>ذئب على مائدة الفرزدق</h3>
                 <div class="content-actions">
                     <a href="ar4.pdf" target="_blank" class="btn-content btn-pdf"><span>📄</span> الشرح</a>
+                    <a href="https://vimeo.com/1160754452?fl=pl&fe=sh" target="_blank" class="btn-content btn-video"><span>🎬</span> الفيديو</a>
                 </div>
             </div>
 
@@ -809,6 +810,7 @@
                 <h3>مقدمات في تذوق النص الأدبي</h3>
                 <div class="content-actions">
                     <a href="ar5.pdf" target="_blank" class="btn-content btn-pdf"><span>📄</span> الشرح</a>
+                    <a href="https://vimeo.com/1160759528?fl=pl&fe=sh" target="_blank" class="btn-content btn-video"><span>🎬</span> الفيديو</a>
                 </div>
             </div>
 
@@ -818,6 +820,7 @@
                 <h3>التذوق النقدي للنص الأدبي</h3>
                 <div class="content-actions">
                     <a href="ar6.pdf" target="_blank" class="btn-content btn-pdf"><span>📄</span> الشرح</a>
+                    <a href="https://vimeo.com/1160763964?fl=pl&fe=sh" target="_blank" class="btn-content btn-video"><span>🎬</span> الفيديو</a>
                 </div>
             </div>
 
@@ -876,7 +879,7 @@
         const actualStats = {
             lectures: 8,      // إجمالي المحاضرات
             pdfs: 8,          // إجمالي ملفات PDF
-            videos: 3         // إجمالي الفيديوهات
+            videos: 6         // إجمالي الفيديوهات (تم تحديثها من 3 إلى 6)
         };
         
         // تعيين الأرقام الفعلية في شريط الإحصائيات
@@ -1233,13 +1236,13 @@
     // === دالة للحصول على تقرير تقدم التذوق الأدبي ===
     window.getLitReport = function() {
         const completed = JSON.parse(localStorage.getItem('literature_progress')) || [];
-        const percentage = Math.round((completed.length / 11) * 100); // 8 ملفات PDF + 3 فيديوهات
+        const percentage = Math.round((completed.length / (8 + 6)) * 100); // 8 ملفات PDF + 6 فيديوهات
         
         const report = {
             subject: 'التذوق الأدبي',
             percentage: percentage,
             completed: completed.length,
-            total: 11,
+            total: 14, // 8 PDF + 6 فيديو
             items: completed,
             status: percentage === 100 ? 'مكتملة 🎉' : 
                    percentage >= 70 ? 'متقدمة جيداً ✅' :
