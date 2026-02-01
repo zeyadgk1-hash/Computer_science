@@ -97,6 +97,15 @@
             font-size: 0.85rem;
         }
         
+        .nav-btn.danger {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+        
+        .nav-btn.danger:hover {
+            background: rgba(239, 68, 68, 0.3);
+        }
+        
         .nav-btn:hover {
             background: rgba(255, 255, 255, 0.25);
         }
@@ -2048,15 +2057,18 @@
         if (quiz) quiz.reviewMode();
     }
     
+    // التصحيح هنا: تغيير اسم الدالة من exitQuiz إلى goToExercises
     function exitQuiz() {
-        if (confirm('هل تريد الخروج؟')) {
+        if (confirm('هل تريد الخروج؟ سيتم حفظ تقدمك تلقائياً.')) {
             if (quiz) quiz.saveProgress();
-            window.location.href = 'exercises.html';
+            // التصحيح: تغيير exercises.html إلى oop_exercises.html
+            window.location.href = 'oop_exercises.html';
         }
     }
     
     function goToExercises() {
-        window.location.href = 'exercises.html';
+        // التصحيح: تغيير exercises.html إلى oop_exercises.html
+        window.location.href = 'oop_exercises.html';
     }
     
     function restartQuiz() {
