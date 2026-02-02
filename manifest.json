@@ -1,0 +1,15 @@
+{
+  "short_name": "NMU-CS",
+  "name": "NMU Computer Science",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "512×512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
