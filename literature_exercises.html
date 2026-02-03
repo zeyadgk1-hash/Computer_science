@@ -1904,6 +1904,9 @@ body {
     }
 }
 /* دعم Dark Mode للهواتف */
+/* دعم Dark Mode للهواتف */
+/* دعم Dark Mode للهواتف */
+/* دعم Dark Mode للهواتف */
 @media (prefers-color-scheme: dark) {
     :root {
         --light: #121212; /* تغيير من #1E1E1E إلى #121212 ليكون أغمق */
@@ -1913,6 +1916,10 @@ body {
         --primary: #D2B48C; /* تغيير primary إلى لون فاتح */
         --primary-dark: #B8860B;
         --accent: #DEB887;
+        --success: #22C55E;
+        --error: #ef4444;
+        --warning: #f59e0b;
+        --info: #888888;
     }
     
     body {
@@ -1926,7 +1933,11 @@ body {
     .review-question-card, .footer,
     .welcome-section, .quiz-header,
     .review-stats, .quick-nav-indicators,
-    .review-navigation, .questions-review-wrapper {
+    .review-navigation, .questions-review-wrapper,
+    .score-circle::before, .results-details,
+    .question-counter, .option,
+    .special-card, .answer-box,
+    .answer-label, .question-jump {
         background: #1E1E1E !important;
         border-color: #444444 !important;
     }
@@ -1946,7 +1957,20 @@ body {
     .answer-content,
     .review-stat-value,
     .review-stat-label,
-    .footer p {
+    .footer p,
+    .quiz-header h1,
+    .quiz-header p,
+    .question-text,
+    .option div:last-child,
+    .result-title,
+    .result-message,
+    .review-section-header h3,
+    .review-action-btn,
+    .nav-btn,
+    .question-jump span,
+    .timer,
+    .current-question,
+    #questionTimer {
         color: #F5F5F5 !important;
     }
     
@@ -1967,6 +1991,7 @@ body {
     /* إصلاح الأزرار */
     .btn-primary {
         background: linear-gradient(135deg, #D2B48C, #B8860B);
+        color: #121212 !important;
     }
     
     .btn-secondary {
@@ -1980,6 +2005,19 @@ body {
         color: #F5F5F5 !important;
     }
     
+    .btn-card.completed {
+        background: linear-gradient(135deg, #22C55E, #1e7a1e) !important;
+    }
+    
+    .btn-card.started {
+        background: linear-gradient(135deg, #f59e0b, #b8860b) !important;
+    }
+    
+    .btn-disabled {
+        background: #444444 !important;
+        color: #888888 !important;
+    }
+    
     /* إصلاح المؤشرات */
     .quick-nav-item {
         color: #F5F5F5 !important;
@@ -1988,6 +2026,16 @@ body {
     .quick-nav-item.unanswered {
         background: #444444 !important;
         color: #888888 !important;
+    }
+    
+    .quick-nav-item.correct {
+        background: #22C55E !important;
+        color: white !important;
+    }
+    
+    .quick-nav-item.incorrect {
+        background: #ef4444 !important;
+        color: white !important;
     }
     
     /* إصلاح شريط التقدم */
@@ -2022,6 +2070,16 @@ body {
         color: #121212 !important;
     }
     
+    .option.correct {
+        background: #22C55E !important;
+        color: white !important;
+    }
+    
+    .option.incorrect {
+        background: #ef4444 !important;
+        color: white !important;
+    }
+    
     .option-label {
         background: #1E1E1E !important;
         color: #F5F5F5 !important;
@@ -2031,6 +2089,16 @@ body {
     .option.selected .option-label {
         background: white !important;
         color: #D2B48C !important;
+    }
+    
+    .option.correct .option-label {
+        background: white !important;
+        color: #22C55E !important;
+    }
+    
+    .option.incorrect .option-label {
+        background: white !important;
+        color: #ef4444 !important;
     }
     
     /* إصلاح علامات الإكمال */
@@ -2049,16 +2117,19 @@ body {
     /* إصلاح الأيقونات */
     .card-icon {
         background: linear-gradient(135deg, #3D3D3D, #2D2D2D) !important;
+        -webkit-text-fill-color: #D2B48C !important;
     }
     
     /* إصلاح زر الطباعة العائم */
     .print-review-btn {
         background: linear-gradient(135deg, #D2B48C, #B8860B) !important;
+        color: #121212 !important;
     }
     
     /* إصلاح شريط التنقل السريع */
     .quick-nav-indicators {
         background: #1E1E1E !important;
+        border-color: #444444 !important;
     }
     
     /* إصلاح قسم الإحصائيات */
@@ -2074,6 +2145,17 @@ body {
     
     .question-number-badge {
         background: linear-gradient(135deg, #D2B48C, #B8860B) !important;
+        color: #121212 !important;
+    }
+    
+    .question-status-badge.correct {
+        background: linear-gradient(135deg, #22C55E, #1e7a1e) !important;
+        color: white !important;
+    }
+    
+    .question-status-badge.incorrect {
+        background: linear-gradient(135deg, #ef4444, #9a1919) !important;
+        color: white !important;
     }
     
     /* إصلاح شريط التمرير */
@@ -2088,15 +2170,35 @@ body {
     /* إصلاح خلفية النصوص في الأسئلة */
     .question-text {
         background: linear-gradient(135deg, #2D2D2D, #1E1E1E) !important;
+        border-color: #444444 !important;
+    }
+    
+    .review-question-text {
+        background: linear-gradient(135deg, #2D2D2D, #1E1E1E) !important;
+        border-color: #444444 !important;
     }
     
     /* إصلاح خلفية قسم الإجابات */
     .answer-box.user-answer {
-        background: linear-gradient(135deg, rgba(178, 34, 34, 0.1), #2D2D2D) !important;
+        background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), #2D2D2D) !important;
+        border-color: #ef4444 !important;
     }
     
     .answer-box.correct-answer {
-        background: linear-gradient(135deg, rgba(34, 139, 34, 0.1), #2D2D2D) !important;
+        background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), #2D2D2D) !important;
+        border-color: #22C55E !important;
+    }
+    
+    .answer-label.user-answer {
+        background: #2D2D2D !important;
+        color: #ef4444 !important;
+        border-color: #ef4444 !important;
+    }
+    
+    .answer-label.correct-answer {
+        background: #2D2D2D !important;
+        color: #22C55E !important;
+        border-color: #22C55E !important;
     }
     
     /* إصلاح حقول الإدخال */
@@ -2114,18 +2216,186 @@ body {
     /* إصلاح الأيقونات الملونة */
     .review-stat-icon.correct {
         background: linear-gradient(135deg, #22C55E, #1e7a1e) !important;
+        color: white !important;
     }
     
     .review-stat-icon.incorrect {
         background: linear-gradient(135deg, #ef4444, #9a1919) !important;
+        color: white !important;
     }
     
     .review-stat-icon.percentage {
         background: linear-gradient(135deg, #D2B48C, #B8860B) !important;
+        color: white !important;
     }
     
     .review-stat-icon.time {
         background: linear-gradient(135deg, #f59e0b, #b8860b) !important;
+        color: white !important;
+    }
+    
+    /* إصلاح أزرار التحكم */
+    .quiz-btn {
+        color: #121212 !important;
+    }
+    
+    .btn-prev {
+        background: #2D2D2D !important;
+        border-color: #444444 !important;
+        color: #D2B48C !important;
+    }
+    
+    .btn-next, .btn-finish {
+        background: linear-gradient(135deg, #D2B48C, #B8860B) !important;
+        color: #121212 !important;
+    }
+    
+    /* إصلاح البطاقات في الشبكة الرئيسية */
+    .main-grid .subject-card {
+        background: #1E1E1E !important;
+        border-color: #444444 !important;
+    }
+    
+    .main-grid .subject-card:hover {
+        border-color: #D2B48C !important;
+    }
+    
+    /* إصلاح التدرجات في أقسام الترحيب */
+    .welcome-section {
+        background: linear-gradient(135deg, #2D2D2D, #1E1E1E) !important;
+    }
+    
+    .quiz-header {
+        background: linear-gradient(135deg, #2D2D2D, #1E1E1E) !important;
+    }
+    
+    /* إصلاح شريط التقدم المصغر */
+    .mini-progress {
+        background: #444444 !important;
+    }
+    
+    /* إصلاح شريط التقدم العام */
+    .overall-progress-bar {
+        background: #444444 !important;
+    }
+    
+    /* إصلاح حدود البطاقات */
+    .review-question-card.correct {
+        border-color: #22C55E !important;
+        background: linear-gradient(135deg, rgba(34, 197, 94, 0.05), #1E1E1E) !important;
+    }
+    
+    .review-question-card.incorrect {
+        border-color: #ef4444 !important;
+        background: linear-gradient(135deg, rgba(239, 68, 68, 0.05), #1E1E1E) !important;
+    }
+    
+    /* إصلاح أزرار المراجعة */
+    .review-action-btn {
+        background: #2D2D2D !important;
+        border-color: #444444 !important;
+        color: #D2B48C !important;
+    }
+    
+    .review-action-btn:hover {
+        background: #D2B48C !important;
+        color: #121212 !important;
+    }
+    
+    /* إصلاح أزرار التنقل */
+    .nav-btn {
+        background: linear-gradient(135deg, #D2B48C, #B8860B) !important;
+        color: #121212 !important;
+    }
+    
+    .nav-btn:disabled {
+        background: #444444 !important;
+        color: #888888 !important;
+    }
+    
+    /* إصلاح خلفية شاشة النتائج */
+    .results-details {
+        background: #1E1E1E !important;
+        border-color: #444444 !important;
+    }
+    
+    /* إصلاح خطوط الفواصل */
+    .result-item {
+        border-color: #444444 !important;
+    }
+    
+    /* إصلاح دائرة النتيجة */
+    .score-circle {
+        background: conic-gradient(#D2B48C 0% 0%, #444444 0% 100%) !important;
+    }
+    
+    .score-circle::before {
+        background: #1E1E1E !important;
+    }
+    
+    .score-value {
+        color: #D2B48C !important;
+    }
+    
+    /* إصلاح عداد التوقيت - الإضافة الجديدة */
+    .timer {
+        background: #2D2D2D !important;
+        color: #D2B48C !important;
+        border: 1px solid #444444 !important;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.3) !important;
+    }
+    
+    .timer i {
+        color: #D2B48C !important;
+    }
+    
+    #questionTimer {
+        color: #D2B48C !important;
+        font-weight: bold;
+    }
+    
+    .current-question {
+        color: #D2B48C !important;
+    }
+    
+    /* إصلاح ألوان الشريط */
+    .overall-progress-bar {
+        background: #444444 !important;
+    }
+    
+    .mini-progress {
+        background: #444444 !important;
+    }
+    
+    /* إصلاح القسم العام */
+    .overall-progress {
+        background: #1E1E1E !important;
+        border-color: #444444 !important;
+    }
+    
+    /* إصلاح قسم الترحيب */
+    .welcome-section::before {
+        background: linear-gradient(135deg, rgba(210, 180, 140, 0.1), transparent) !important;
+    }
+    
+    /* إصلاح البادجات في الترحيب */
+    .stat-item {
+        background: rgba(255, 255, 255, 0.05) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+    
+    .stat-value {
+        color: #D2B48C !important;
+    }
+    
+    .stat-label {
+        color: #D7CCC8 !important;
+    }
+    
+    /* إصلاح خلفية العناصر العائمة */
+    .notification {
+        background: #22C55E !important;
+        color: white !important;
     }
 }
 
