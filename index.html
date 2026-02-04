@@ -375,6 +375,11 @@
             box-shadow: 0 0 10px rgba(251, 116, 25, 0.4);
         }
         
+        #structure-progress-bar {
+            background: linear-gradient(90deg, #8b5cf6, #7c3aed);
+            box-shadow: 0 0 10px rgba(139, 92, 246, 0.4);
+        }
+        
         .progress-text {
             font-size: 0.85rem;
             font-weight: 900;
@@ -464,6 +469,16 @@
         .btn-enter.literature-btn:hover {
             background: white;
             color: #ff5e62;
+        }
+        
+        .btn-enter.structure-btn {
+            background: #8b5cf6;
+            border-color: #8b5cf6;
+        }
+        
+        .btn-enter.structure-btn:hover {
+            background: white;
+            color: #8b5cf6;
         }
         
         /* المودال */
@@ -877,6 +892,24 @@
                 </div>
             </div>
 
+            <!-- مادة Structure Programming (تم نقلها للآخر) -->
+            <div class="subject-card">
+                <span class="badge">متاح الآن 🔥</span>
+                <div class="card-icon">🏗️</div>
+                <h3>برمجة الهياكل</h3>
+                <p>Structure Programming</p>
+                
+                <!-- شريط التقدم -->
+                <div class="progress-container">
+                    <div class="progress-bar" id="structure-progress-bar"></div>
+                </div>
+                <div class="progress-text" id="structure-progress-text">0% مكتمل</div>
+
+                <div class="card-actions">
+                    <a href="javascript:void(0)" onclick="toggleModal('structure')" class="btn-enter structure-btn">دخول المادة</a>
+                </div>
+            </div>
+
         </div>
     </main>
 
@@ -961,6 +994,14 @@
             text: 'literature-progress-text',
             name: 'الأدب',
             color: '#ff5e62'
+        },
+        structure: {
+            total: 22,
+            key: 'structure_progress',
+            bar: 'structure-progress-bar',
+            text: 'structure-progress-text',
+            name: 'برمجة الهياكل',
+            color: '#8b5cf6'
         }
     };
     
@@ -1031,6 +1072,9 @@
         if (subject === 'stats') {
             bar.style.background = 'linear-gradient(90deg, #0ea5e9, #0284c7)';
             bar.style.boxShadow = '0 0 10px rgba(14, 165, 233, 0.4)';
+        } else if (subject === 'structure') {
+            bar.style.background = 'linear-gradient(90deg, #8b5cf6, #7c3aed)';
+            bar.style.boxShadow = '0 0 10px rgba(139, 92, 246, 0.4)';
         }
         
         text.textContent = percentage + '% مكتمل';
@@ -1089,7 +1133,8 @@
             circuits: 'مادة الدوائر الكهربية والإلكترونية ⚡',
             math: 'مادة الرياضيات II 📐',
             management: 'مادة مقدمة في الإدارة 👔',
-            literature: 'مادة التذوق الأدبي 📜'
+            literature: 'مادة التذوق الأدبي 📜',
+            structure: 'مادة برمجة الهياكل 🏗️'
         };
         
         if (titles[subject]) {
@@ -1106,7 +1151,8 @@
             circuits: 'circuits_content.html',
             math: 'math_content.html',
             management: 'management_content.html',
-            literature: 'literature_content.html'
+            literature: 'literature_content.html',
+            structure: 'structure_content.html'
         };
         
         const exercisePages = {
@@ -1115,7 +1161,8 @@
             circuits: 'circuits_exercises.html',
             math: 'math_exercises.html',
             management: 'management_exercises.html',
-            literature: 'literature_exercises.html'
+            literature: 'literature_exercises.html',
+            structure: 'structure_exercises.html'
         };
         
         if (contentLink) contentLink.href = contentPages[subject] || '#';
@@ -1146,7 +1193,8 @@
             circuits: 'circuits_content.html',
             math: 'math_content.html',
             management: 'management_content.html',
-            literature: 'literature_content.html'
+            literature: 'literature_content.html',
+            structure: 'structure_content.html'
         };
         
         const page = pages[currentSubject] || 'index.html';
@@ -1161,7 +1209,8 @@
             circuits: 'circuits_exercises.html',
             math: 'math_exercises.html',
             management: 'management_exercises.html',
-            literature: 'literature_exercises.html'
+            literature: 'literature_exercises.html',
+            structure: 'structure_exercises.html'
         };
         
         const page = pages[currentSubject] || 'index.html';
@@ -1300,6 +1349,11 @@
         #stats-progress-bar {
             background: linear-gradient(90deg, #0ea5e9, #0284c7) !important;
             box-shadow: 0 0 10px rgba(14, 165, 233, 0.4) !important;
+        }
+        
+        #structure-progress-bar {
+            background: linear-gradient(90deg, #8b5cf6, #7c3aed) !important;
+            box-shadow: 0 0 10px rgba(139, 92, 246, 0.4) !important;
         }
     `;
     document.head.appendChild(style);
