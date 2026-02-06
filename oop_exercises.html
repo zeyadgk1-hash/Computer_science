@@ -661,6 +661,33 @@
             margin-top: 60px;
         }
         
+        /* قسم الأسئلة المقالية */
+        .essay-section {
+            margin-top: 60px;
+        }
+        
+        .essay-card {
+            background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+            border: 2px solid var(--info);
+        }
+        
+        .essay-card .card-icon {
+            background: linear-gradient(135deg, #0284c7, #0ea5e9);
+            -webkit-background-clip: text;
+        }
+        
+        .essay-card .badge {
+            background: linear-gradient(135deg, #0284c7, #0ea5e9);
+        }
+        
+        .btn-essay {
+            background: linear-gradient(135deg, #0284c7, #0ea5e9);
+        }
+        
+        .btn-essay:hover {
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
+        }
+        
         /* نافذة الإجراءات السريعة */
         .quick-actions {
             position: fixed;
@@ -1131,106 +1158,195 @@
             </div>
         </section>
         
+        <!-- قسم الأسئلة المقالية -->
+        <section class="essay-section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-pen-fancy"></i>
+                </div>
+                <h2>✍️ الأسئلة المقالية والنظرية</h2>
+            </div>
+            
+            <div class="main-grid">
+                <!-- بطاقة الأسئلة المقالية -->
+                <div class="quiz-card essay-card">
+                    <span class="badge">OOP Essay</span>
+                    <div class="card-icon">📝</div>
+                    <h3>أسئلة مقالية في OOP</h3>
+                    <p>40+ سؤال مقالي ونظري في البرمجة كائنية التوجه مع إجابات نموذجية وتقييم آلي</p>
+                    <div class="progress-container">
+                        <div class="progress-info">
+                            <span class="progress-label">المستوى</span>
+                            <span class="progress-value">متوسط - متقدم</span>
+                        </div>
+                        <div class="mini-progress">
+                            <div class="mini-progress-fill" style="width: 100%; background: linear-gradient(90deg, #0284c7, #0ea5e9);"></div>
+                        </div>
+                        <div class="progress-info" style="margin-top: 5px; font-size: 0.8rem;">
+                            <span class="progress-label">40 سؤال</span>
+                            <span class="progress-label">120 دقيقة</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn-card btn-essay" onclick="openEssayPage()">
+                            <i class="fas fa-external-link-alt"></i> ابدأ الأسئلة المقالية
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- بطاقة الأسئلة النظرية -->
+                <div class="quiz-card essay-card">
+                    <span class="badge">Theoretical</span>
+                    <div class="card-icon">🧠</div>
+                    <h3>أسئلة نظرية شاملة</h3>
+                    <p>أسئلة المقارنة والتحليل المفاهيمي - شرح النظريات الأساسية في OOP</p>
+                    <div class="progress-container">
+                        <div class="progress-info">
+                            <span class="progress-label">المستوى</span>
+                            <span class="progress-value">متقدم</span>
+                        </div>
+                        <div class="mini-progress">
+                            <div class="mini-progress-fill" style="width: 100%; background: linear-gradient(90deg, #0284c7, #0ea5e9);"></div>
+                        </div>
+                        <div class="progress-info" style="margin-top: 5px; font-size: 0.8rem;">
+                            <span class="progress-label">25 سؤال</span>
+                            <span class="progress-label">90 دقيقة</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn-card btn-essay" onclick="showComingSoon('الأسئلة النظرية')">
+                            <i class="fas fa-clock"></i> قريباً
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- بطاقة التحليل والمناقشة -->
+                <div class="quiz-card essay-card">
+                    <span class="badge">Analysis</span>
+                    <div class="card-icon">🔍</div>
+                    <h3>تحليل الكود والمناقشة</h3>
+                    <p>تحليل أمثلة كود وتصحيح الأخطاء ومناقشة الحلول البديلة</p>
+                    <div class="progress-container">
+                        <div class="progress-info">
+                            <span class="progress-label">المستوى</span>
+                            <span class="progress-value">متقدم جداً</span>
+                        </div>
+                        <div class="mini-progress">
+                            <div class="mini-progress-fill" style="width: 100%; background: linear-gradient(90deg, #0284c7, #0ea5e9);"></div>
+                        </div>
+                        <div class="progress-info" style="margin-top: 5px; font-size: 0.8rem;">
+                            <span class="progress-label">20 سؤال</span>
+                            <span class="progress-label">60 دقيقة</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn-card btn-essay" onclick="showComingSoon('تحليل الكود')">
+                            <i class="fas fa-clock"></i> قريباً
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
         <!-- المراجعات والامتحانات الشاملة -->
-        <!-- المراجعات والامتحانات الشاملة -->
-<section class="review-section">
-    <div class="section-header">
-        <div class="section-icon">
-            <i class="fas fa-trophy"></i>
-        </div>
-        <h2>🏆 المراجعات والامتحانات الشاملة (قيد التطوير)</h2>
-    </div>
-    
-    <div class="main-grid">
-        <!-- مراجعة المبادئ الأساسية -->
-        <div class="quiz-card special-card disabled-card">
-            <span class="badge coming-soon-badge">قريباً</span>
-            <div class="card-icon" style="background: linear-gradient(135deg, #64748b, #475569); -webkit-background-clip: text;">⏳</div>
-            <h3 style="color: #475569;">مراجعة المبادئ الأساسية</h3>
-            <p style="color: #64748b;">Classes, Objects, Encapsulation, Inheritance, Polymorphism</p>
-            <div class="progress-container">
-                <div class="progress-info">
-                    <span class="progress-label">الحالة</span>
-                    <span class="progress-value" style="color: #64748b;">قيد التطوير</span>
+        <section class="review-section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-trophy"></i>
                 </div>
-                <div class="mini-progress">
-                    <div class="mini-progress-fill" style="width: 30%; background: linear-gradient(90deg, #64748b, #475569);"></div>
+                <h2>🏆 المراجعات والامتحانات الشاملة (قيد التطوير)</h2>
+            </div>
+            
+            <div class="main-grid">
+                <!-- مراجعة المبادئ الأساسية -->
+                <div class="quiz-card special-card disabled-card">
+                    <span class="badge coming-soon-badge">قريباً</span>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #64748b, #475569); -webkit-background-clip: text;">⏳</div>
+                    <h3 style="color: #475569;">مراجعة المبادئ الأساسية</h3>
+                    <p style="color: #64748b;">Classes, Objects, Encapsulation, Inheritance, Polymorphism</p>
+                    <div class="progress-container">
+                        <div class="progress-info">
+                            <span class="progress-label">الحالة</span>
+                            <span class="progress-value" style="color: #64748b;">قيد التطوير</span>
+                        </div>
+                        <div class="mini-progress">
+                            <div class="mini-progress-fill" style="width: 30%; background: linear-gradient(90deg, #64748b, #475569);"></div>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn-card btn-disabled coming-soon" onclick="showComingSoon('مراجعة المبادئ الأساسية')">
+                            <i class="fas fa-clock"></i> قريباً
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- اختبار الميدترم -->
+                <div class="quiz-card special-card disabled-card">
+                    <span class="badge coming-soon-badge">قريباً</span>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #64748b, #475569); -webkit-background-clip: text;">⏳</div>
+                    <h3 style="color: #475569;">Midterm Exam Simulation</h3>
+                    <p style="color: #64748b;">50 سؤال - 90 دقيقة - محاكاة امتحان الميدترم</p>
+                    <div class="progress-container">
+                        <div class="progress-info">
+                            <span class="progress-label">الحالة</span>
+                            <span class="progress-value" style="color: #64748b;">قيد التطوير</span>
+                        </div>
+                        <div class="mini-progress">
+                            <div class="mini-progress-fill" style="width: 25%; background: linear-gradient(90deg, #64748b, #475569);"></div>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn-card btn-disabled coming-soon" onclick="showComingSoon('اختبار الميدترم')">
+                            <i class="fas fa-clock"></i> قريباً
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- الاختبار النهائي الشامل -->
+                <div class="quiz-card special-card disabled-card">
+                    <span class="badge coming-soon-badge">قريباً</span>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #64748b, #475569); -webkit-background-clip: text;">⏳</div>
+                    <h3 style="color: #475569;">Final Comprehensive Exam</h3>
+                    <p style="color: #64748b;">150 سؤال - 120 دقيقة - جميع مواضيع الـ OOP</p>
+                    <div class="progress-container">
+                        <div class="progress-info">
+                            <span class="progress-label">الحالة</span>
+                            <span class="progress-value" style="color: #64748b;">قيد التطوير</span>
+                        </div>
+                        <div class="mini-progress">
+                            <div class="mini-progress-fill" style="width: 20%; background: linear-gradient(90deg, #64748b, #475569);"></div>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn-card btn-disabled coming-soon" onclick="showComingSoon('الاختبار النهائي')">
+                            <i class="fas fa-clock"></i> قريباً
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- ماراثون OOP الكامل -->
+                <div class="quiz-card special-card disabled-card">
+                    <span class="badge coming-soon-badge">قريباً</span>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #64748b, #475569); -webkit-background-clip: text;">⏳</div>
+                    <h3 style="color: #475569;">OOP Complete Marathon</h3>
+                    <p style="color: #64748b;">360 سؤال - 180 دقيقة - جميع فصول OOP</p>
+                    <div class="progress-container">
+                        <div class="progress-info">
+                            <span class="progress-label">الحالة</span>
+                            <span class="progress-value" style="color: #64748b;">قيد التطوير</span>
+                        </div>
+                        <div class="mini-progress">
+                            <div class="mini-progress-fill" style="width: 15%; background: linear-gradient(90deg, #64748b, #475569);"></div>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn-card btn-disabled coming-soon" onclick="showComingSoon('ماراثون OOP')">
+                            <i class="fas fa-clock"></i> قريباً
+                        </button>
+                    </div>
                 </div>
             </div>
-            <div class="card-actions">
-                <button class="btn-card btn-disabled coming-soon" onclick="showComingSoon('مراجعة المبادئ الأساسية')">
-                    <i class="fas fa-clock"></i> قريباً
-                </button>
-            </div>
-        </div>
-        
-        <!-- اختبار الميدترم -->
-        <div class="quiz-card special-card disabled-card">
-            <span class="badge coming-soon-badge">قريباً</span>
-            <div class="card-icon" style="background: linear-gradient(135deg, #64748b, #475569); -webkit-background-clip: text;">⏳</div>
-            <h3 style="color: #475569;">Midterm Exam Simulation</h3>
-            <p style="color: #64748b;">50 سؤال - 90 دقيقة - محاكاة امتحان الميدترم</p>
-            <div class="progress-container">
-                <div class="progress-info">
-                    <span class="progress-label">الحالة</span>
-                    <span class="progress-value" style="color: #64748b;">قيد التطوير</span>
-                </div>
-                <div class="mini-progress">
-                    <div class="mini-progress-fill" style="width: 25%; background: linear-gradient(90deg, #64748b, #475569);"></div>
-                </div>
-            </div>
-            <div class="card-actions">
-                <button class="btn-card btn-disabled coming-soon" onclick="showComingSoon('اختبار الميدترم')">
-                    <i class="fas fa-clock"></i> قريباً
-                </button>
-            </div>
-        </div>
-        
-        <!-- الاختبار النهائي الشامل -->
-        <div class="quiz-card special-card disabled-card">
-            <span class="badge coming-soon-badge">قريباً</span>
-            <div class="card-icon" style="background: linear-gradient(135deg, #64748b, #475569); -webkit-background-clip: text;">⏳</div>
-            <h3 style="color: #475569;">Final Comprehensive Exam</h3>
-            <p style="color: #64748b;">150 سؤال - 120 دقيقة - جميع مواضيع الـ OOP</p>
-            <div class="progress-container">
-                <div class="progress-info">
-                    <span class="progress-label">الحالة</span>
-                    <span class="progress-value" style="color: #64748b;">قيد التطوير</span>
-                </div>
-                <div class="mini-progress">
-                    <div class="mini-progress-fill" style="width: 20%; background: linear-gradient(90deg, #64748b, #475569);"></div>
-                </div>
-            </div>
-            <div class="card-actions">
-                <button class="btn-card btn-disabled coming-soon" onclick="showComingSoon('الاختبار النهائي')">
-                    <i class="fas fa-clock"></i> قريباً
-                </button>
-            </div>
-        </div>
-        
-        <!-- ماراثون OOP الكامل -->
-        <div class="quiz-card special-card disabled-card">
-            <span class="badge coming-soon-badge">قريباً</span>
-            <div class="card-icon" style="background: linear-gradient(135deg, #64748b, #475569); -webkit-background-clip: text;">⏳</div>
-            <h3 style="color: #475569;">OOP Complete Marathon</h3>
-            <p style="color: #64748b;">360 سؤال - 180 دقيقة - جميع فصول OOP</p>
-            <div class="progress-container">
-                <div class="progress-info">
-                    <span class="progress-label">الحالة</span>
-                    <span class="progress-value" style="color: #64748b;">قيد التطوير</span>
-                </div>
-                <div class="mini-progress">
-                    <div class="mini-progress-fill" style="width: 15%; background: linear-gradient(90deg, #64748b, #475569);"></div>
-                </div>
-            </div>
-            <div class="card-actions">
-                <button class="btn-card btn-disabled coming-soon" onclick="showComingSoon('ماراثون OOP')">
-                    <i class="fas fa-clock"></i> قريباً
-                </button>
-            </div>
-        </div>
-    </div>
-</section>
+        </section>
 
     </main>
 
@@ -1475,6 +1591,22 @@
         });
     }
     
+    // دالة فتح صفحة الأسئلة المقالية
+    function openEssayPage() {
+        // تسجيل محاولة الدخول للأسئلة المقالية
+        let essayProgress = JSON.parse(localStorage.getItem('essay_progress')) || {};
+        essayProgress.lastAccess = new Date().toISOString();
+        localStorage.setItem('essay_progress', JSON.stringify(essayProgress));
+        
+        // تأثير تحميل
+        showNotification('جاري تحميل الأسئلة المقالية...', 'info');
+        
+        // الانتقال لصفحة الأسئلة المقالية
+        setTimeout(() => {
+            window.location.href = 'oop_essay.html';
+        }, 800);
+    }
+    
     // دالة تحديث الإحصائيات
     function updateStatistics() {
         let completedCount = 0;
@@ -1500,6 +1632,14 @@
                 lastActivity = progress.lastAttempt;
             }
         });
+        
+        // التحقق من الأسئلة المقالية أيضًا
+        const essayProgress = JSON.parse(localStorage.getItem('essay_progress')) || {};
+        if (essayProgress.lastAccess) {
+            if (!lastActivity || new Date(essayProgress.lastAccess) > new Date(lastActivity)) {
+                lastActivity = essayProgress.lastAccess;
+            }
+        }
         
         const totalChapters = OOP_CHAPTERS.length;
         const overallPercentage = Math.round((completedCount / totalChapters) * 100);
@@ -1633,6 +1773,11 @@
                 }
             } catch (e) {}
         }
+    }
+    
+    // دالة إظهار رسالة "قريباً"
+    function showComingSoon(featureName) {
+        showNotification(`ميزة ${featureName} قيد التطوير وتتوفر قريباً! 🚀`, 'warning');
     }
     
     // دالة إظهار الإشعارات
@@ -1784,6 +1929,21 @@
                         <div style="font-size: 0.7rem;">مكتمل</div>
                     </div>
                 </div>
+            </div>
+            
+            <div style="margin-top: 15px; padding: 15px; background: linear-gradient(135deg, #0284c7, #0ea5e9); 
+                       border-radius: 10px; color: white; text-align: center;">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 10px;">
+                    <i class="fas fa-pen-fancy"></i>
+                    <div style="font-weight: 700; font-size: 1.1rem;">الأسئلة المقالية</div>
+                </div>
+                <div style="font-size: 0.9rem;">
+                    متاحة الآن! ابدأ في تدريب مهاراتك الكتابية في OOP
+                </div>
+                <button onclick="openEssayPage()" style="margin-top: 10px; background: white; color: #0284c7; 
+                           border: none; padding: 8px 15px; border-radius: 8px; font-weight: 700; cursor: pointer;">
+                    <i class="fas fa-external-link-alt"></i> ابدأ الآن
+                </button>
             </div>
         `;
         
@@ -1946,6 +2106,12 @@
         // F لبدء الاختبار النهائي
         if (e.key === 'f' || e.key === 'F') {
             startQuiz('final');
+        }
+        
+        // E لفتح الأسئلة المقالية
+        if (e.key === 'e' || e.key === 'E') {
+            e.preventDefault();
+            openEssayPage();
         }
         
         // Space لتمرير للأعلى
