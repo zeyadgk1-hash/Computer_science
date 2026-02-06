@@ -131,6 +131,160 @@
             border-radius: 10px;
             object-fit: contain;
             border: 2px solid var(--gray-light);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .navbar-logo:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-color: var(--accent);
+        }
+        
+        .navbar-logo:active {
+            transform: scale(1.05);
+        }
+        
+        /* القائمة الجانبية */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -320px;
+            width: 300px;
+            height: 100vh;
+            background: white;
+            z-index: 2000;
+            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.15);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+        
+        .sidebar.show {
+            right: 0;
+        }
+        
+        .sidebar-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 25px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .sidebar-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), transparent);
+            border-radius: 50%;
+        }
+        
+        .sidebar-header h3 {
+            font-size: 1.4rem;
+            font-weight: 900;
+            margin: 0;
+        }
+        
+        .close-sidebar {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        
+        .close-sidebar:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+        
+        .sidebar-content {
+            padding: 30px 0;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            padding: 20px 25px;
+            text-decoration: none;
+            color: var(--primary);
+            transition: var(--transition);
+            border-right: 4px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .sidebar-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.1), transparent);
+            transition: width 0.3s ease;
+        }
+        
+        .sidebar-item:hover {
+            background: var(--light);
+            border-right-color: var(--accent);
+            color: var(--accent);
+        }
+        
+        .sidebar-item:hover::before {
+            width: 100%;
+        }
+        
+        .sidebar-item i {
+            font-size: 1.6rem;
+            width: 50px;
+            text-align: center;
+            margin-left: 15px;
+        }
+        
+        .sidebar-item span {
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+        
+        /* طبقة التعتيم */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 1999;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .sidebar-overlay.show {
+            display: block;
+            opacity: 1;
         }
         
         /* الهيدر الرئيسي */
@@ -675,6 +829,16 @@
                 font-size: 0.7rem;
             }
             
+            .navbar-logo {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .sidebar {
+                width: 280px;
+                right: -280px;
+            }
+            
             .main-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
@@ -709,6 +873,19 @@
                 font-size: 1.2rem;
             }
             
+            .sidebar {
+                width: 260px;
+                right: -260px;
+            }
+            
+            .sidebar-item {
+                padding: 16px 20px;
+            }
+            
+            .sidebar-item span {
+                font-size: 1rem;
+            }
+            
             .card-icon {
                 font-size: 3rem;
             }
@@ -736,12 +913,12 @@
                 background: #0f172a;
             }
             
-            .subject-card, .modal-content, .footer {
+            .subject-card, .modal-content, .footer, .sidebar {
                 background: #1e293b;
                 color: #f1f5f9;
             }
             
-            .subject-card h3, .modal-content h2, .opt-info h4 {
+            .subject-card h3, .modal-content h2, .opt-info h4, .sidebar-header h3, .sidebar-item {
                 color: #f1f5f9;
             }
             
@@ -749,7 +926,7 @@
                 color: #cbd5e1;
             }
             
-            .navbar {
+            .navbar, .sidebar-header {
                 background: #1e293b;
                 border-bottom: 1px solid #334155;
             }
@@ -758,16 +935,32 @@
                 color: #f1f5f9;
             }
             
+            .navbar-logo {
+                border-color: #475569;
+            }
+            
+            .navbar-logo:hover {
+                border-color: var(--accent);
+            }
+            
             .progress-container {
                 background: #334155;
             }
             
-            .option-item {
+            .option-item, .sidebar-item:hover {
                 background: #334155;
             }
             
-            .option-item:hover {
+            .option-item:hover, .sidebar-item:hover {
                 background: #475569;
+            }
+            
+            .sidebar-item {
+                border-right: 4px solid transparent;
+            }
+            
+            .sidebar-item:hover {
+                border-right-color: var(--accent);
             }
         }
     </style>
@@ -781,10 +974,28 @@
                 <span class="app-tag">بوابة الطالب الذكية</span>
             </div>
             <div class="user-profile">
-                <img src="uni-logo.png" alt="شعار الجامعة" class="navbar-logo">
+                <!-- اللوجو (الصورة) هو زر القائمة الجانبية -->
+                <img src="uni-logo.png" alt="شعار الجامعة" class="navbar-logo" onclick="toggleSidebar()">
             </div>
         </div>
     </nav>
+
+    <!-- القائمة الجانبية -->
+    <div id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h3>القائمة الجانبية</h3>
+            <button class="close-sidebar" onclick="toggleSidebar()">&times;</button>
+        </div>
+        <div class="sidebar-content">
+            <a href="calendar.html" class="sidebar-item">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Calendar</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- طبقة التعتيم عند فتح القائمة -->
+    <div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
 
     <header class="hero-section">
         <h1>أهلاً بك</h1>
@@ -945,6 +1156,51 @@
     </footer>
 
     <script>
+    // دالة فتح/إغلاق القائمة الجانبية
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        
+        sidebar.classList.toggle('show');
+        overlay.classList.toggle('show');
+        
+        // منع التمرير عند فتح القائمة الجانبية
+        document.body.style.overflow = sidebar.classList.contains('show') ? 'hidden' : '';
+    }
+    
+    // إغلاق القائمة الجانبية عند النقر على طبقة التعتيم
+    document.getElementById('sidebar-overlay').addEventListener('click', toggleSidebar);
+    
+    // إغلاق القائمة عند الضغط على زر ESC
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar.classList.contains('show')) {
+                toggleSidebar();
+            }
+        }
+    });
+    
+    // إغلاق القائمة عند النقر خارجها (على أي مكان في الصفحة خارج القائمة)
+    document.addEventListener('click', function(event) {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        const logo = document.querySelector('.navbar-logo');
+        
+        // إذا كانت القائمة مفتوحة، والمستخدم نقر خارج القائمة (وليس على اللوجو)
+        if (sidebar.classList.contains('show') && 
+            !sidebar.contains(event.target) && 
+            event.target !== logo &&
+            overlay.classList.contains('show')) {
+            toggleSidebar();
+        }
+    });
+    
+    // منع إغلاق القائمة عند النقر داخل القائمة نفسها
+    document.getElementById('sidebar').addEventListener('click', function(event) {
+        event.stopPropagation();
+    });
+    
     // متغيرات التخزين المحدثة - الإحصاء
     const progressData = {
         stats: {
@@ -1122,6 +1378,12 @@
     
     // إدارة المودال
     function toggleModal(subject = 'stats') {
+        // إغلاق القائمة الجانبية إذا كانت مفتوحة
+        const sidebar = document.getElementById('sidebar');
+        if (sidebar.classList.contains('show')) {
+            toggleSidebar();
+        }
+        
         currentSubject = subject;
         const modal = document.getElementById('subjectModal');
         const modalSubTitle = document.getElementById('modalSubTitle');
@@ -1230,9 +1492,16 @@
     document.addEventListener('keydown', function(event) {
         if (event.key === 'Escape') {
             const modal = document.getElementById('subjectModal');
+            const sidebar = document.getElementById('sidebar');
+            
+            // إغلاق المودال إذا كان مفتوحاً
             if (modal.classList.contains('show')) {
                 modal.classList.remove('show');
                 setTimeout(() => modal.style.display = 'none', 300);
+            }
+            // إغلاق القائمة الجانبية إذا كانت مفتوحة
+            else if (sidebar.classList.contains('show')) {
+                toggleSidebar();
             }
         }
     });
