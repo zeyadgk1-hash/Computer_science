@@ -125,24 +125,58 @@
             gap: 10px;
         }
         
-        .navbar-logo {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            object-fit: contain;
-            border: 2px solid var(--gray-light);
+        /* زر القائمة الجانبية (الهامبرجر) */
+        .hamburger-menu {
+            background: none;
+            border: none;
             cursor: pointer;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            padding: 10px;
+            border-radius: 12px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hamburger-menu:hover {
+            background: var(--gray-light);
+            transform: scale(1.05);
+        }
+        
+        .hamburger-menu:active {
+            transform: scale(0.95);
+        }
+        
+        .hamburger-menu span {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
             transition: var(--transition);
         }
         
-        .navbar-logo:hover {
-            transform: scale(1.1);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            border-color: var(--accent);
+        .hamburger-menu:hover span {
+            background: var(--accent);
         }
         
-        .navbar-logo:active {
-            transform: scale(1.05);
+        /* تأثيرات للزر عند فتح القائمة */
+        .sidebar.show + #sidebar-overlay ~ nav .hamburger-menu span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .sidebar.show + #sidebar-overlay ~ nav .hamburger-menu span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .sidebar.show + #sidebar-overlay ~ nav .hamburger-menu span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
         }
         
         /* القائمة الجانبية */
@@ -829,9 +863,14 @@
                 font-size: 0.7rem;
             }
             
-            .navbar-logo {
-                width: 35px;
-                height: 35px;
+            .hamburger-menu {
+                width: 45px;
+                height: 45px;
+            }
+            
+            .hamburger-menu span {
+                width: 24px;
+                height: 2.5px;
             }
             
             .sidebar {
@@ -871,6 +910,17 @@
             
             .hero-subtitle {
                 font-size: 1.2rem;
+            }
+            
+            .hamburger-menu {
+                width: 40px;
+                height: 40px;
+                gap: 5px;
+            }
+            
+            .hamburger-menu span {
+                width: 22px;
+                height: 2px;
             }
             
             .sidebar {
@@ -935,12 +985,16 @@
                 color: #f1f5f9;
             }
             
-            .navbar-logo {
-                border-color: #475569;
+            .hamburger-menu:hover {
+                background: #334155;
             }
             
-            .navbar-logo:hover {
-                border-color: var(--accent);
+            .hamburger-menu span {
+                background: #f1f5f9;
+            }
+            
+            .hamburger-menu:hover span {
+                background: var(--accent);
             }
             
             .progress-container {
@@ -974,8 +1028,12 @@
                 <span class="app-tag">بوابة الطالب الذكية</span>
             </div>
             <div class="user-profile">
-                <!-- اللوجو (الصورة) هو زر القائمة الجانبية -->
-                <img src="uni-logo.png" alt="شعار الجامعة" class="navbar-logo" onclick="toggleSidebar()">
+                <!-- زر القائمة الجانبية (الهامبرجر) -->
+                <button class="hamburger-menu" onclick="toggleSidebar()" aria-label="فتح القائمة الجانبية">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
         </div>
     </nav>
@@ -1189,12 +1247,13 @@
     document.addEventListener('click', function(event) {
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('sidebar-overlay');
-        const logo = document.querySelector('.navbar-logo');
+        const hamburger = document.querySelector('.hamburger-menu');
         
-        // إذا كانت القائمة مفتوحة، والمستخدم نقر خارج القائمة (وليس على اللوجو)
+        // إذا كانت القائمة مفتوحة، والمستخدم نقر خارج القائمة (وليس على زر الهامبرجر)
         if (sidebar.classList.contains('show') && 
             !sidebar.contains(event.target) && 
-            event.target !== logo &&
+            event.target !== hamburger &&
+            !hamburger.contains(event.target) &&
             overlay.classList.contains('show')) {
             toggleSidebar();
         }
