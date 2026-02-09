@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منشئ الاختبارات الذكي بالذكاء الاصطناعي</title>
+    <title>تلخيص المحاضرات الذكي - منشئ التلخيص بالذكاء الاصطناعي</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -404,6 +404,84 @@
             font-size: 1rem;
         }
         
+        /* مميزات البرومبت */
+        .features-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+        
+        .features-card:hover {
+            border-color: var(--success);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .features-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .features-header i {
+            font-size: 2.5rem;
+            color: var(--success);
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), transparent);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .features-header h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            font-weight: 900;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .feature-item {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .feature-item:hover {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), transparent);
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+        
+        .feature-item h3 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        
+        .feature-item p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+        
         /* الفوتر */
         .footer {
             text-align: center;
@@ -438,24 +516,6 @@
             transform: translateX(0);
         }
         
-        /* مؤشر الموسيقى الخفي */
-        .music-indicator {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            color: var(--accent);
-            font-size: 1.5rem;
-            z-index: 9999;
-            animation: pulse 2s infinite;
-            opacity: 0.7;
-        }
-        
-        @keyframes pulse {
-            0% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.1); }
-            100% { opacity: 0.3; transform: scale(1); }
-        }
-        
         /* تحسينات للجوال */
         @media (max-width: 768px) {
             .hero-section {
@@ -488,7 +548,8 @@
             }
             
             .prompt-card,
-            .instructions-card {
+            .instructions-card,
+            .features-card {
                 padding: 20px;
             }
             
@@ -516,10 +577,8 @@
                 font-size: 0.9rem;
             }
             
-            .music-indicator {
-                bottom: 15px;
-                left: 15px;
-                font-size: 1.3rem;
+            .features-grid {
+                grid-template-columns: 1fr;
             }
         }
         
@@ -539,7 +598,8 @@
                 gap: 10px;
             }
             
-            .instructions-header {
+            .instructions-header,
+            .features-header {
                 flex-direction: column;
                 text-align: center;
                 gap: 10px;
@@ -554,12 +614,6 @@
             .instruction-number {
                 align-self: center;
             }
-            
-            .music-indicator {
-                bottom: 10px;
-                left: 10px;
-                font-size: 1.2rem;
-            }
         }
         
         /* تحسينات للوضع الداكن */
@@ -571,6 +625,7 @@
             
             .prompt-card,
             .instructions-card,
+            .features-card,
             .footer {
                 background: #1e293b;
                 color: #f1f5f9;
@@ -578,7 +633,9 @@
             
             .prompt-card h2,
             .instructions-card h2,
-            .instruction-text h3 {
+            .features-card h2,
+            .instruction-text h3,
+            .feature-item h3 {
                 color: #f1f5f9;
             }
             
@@ -591,7 +648,8 @@
                 color: #cbd5e1;
             }
             
-            .instruction-item {
+            .instruction-item,
+            .feature-item {
                 background: #0f172a;
             }
             
@@ -612,15 +670,15 @@
         <div class="nav-container">
             <div class="logo">
                 <span class="uni-name">جامعة المنصورة الجديدة</span>
-                <span class="app-tag">منشئ الاختبارات الذكي</span>
+                <span class="app-tag">منشئ تلخيص المحاضرات الذكي</span>
             </div>
         </div>
     </nav>
 
     <header class="hero-section">
-        <h1>مفيش فلوس اشتري API 😭</h1>
-        <div class="hero-subtitle">تعالا هساعدك يا بشمهندس</div>
-        <p class="hero-description">انسخ البرومبت ده وكلم Gemini وحول محاضراتك لاختبارات تفاعلية ذكية</p>
+        <h1>محاضراتك طويلة ومملة؟ 😴</h1>
+        <div class="hero-subtitle">جبت لك البرومبت السحري للتلخيص 🪄</div>
+        <p class="hero-description">انسخ البرومبت ده وكلم Gemini وحول محاضراتك لتلاخيص تفاعلية ممتعة تشرح كل حاجة ببساطة</p>
     </header>
 
     <main class="container">
@@ -629,31 +687,31 @@
             <!-- بطاقة البرومبت -->
             <div class="prompt-card">
                 <div class="card-header">
-                    <h2>البرومبت السحري ✨</h2>
+                    <h2>البرومبت السحري للتلخيص 📚</h2>
                     <span class="tag">انسخ وارسل لـ Gemini</span>
                 </div>
                 
                 <p style="margin-bottom: 15px; color: var(--gray); font-size: 1.1rem;">
-                    ابعتله الكلمتين دول وقوله انا تبع زياد ابراهيم وهو هيعمل معاك احلى واجب
+                    هذا البرومبت يحولك لخبير أكاديمي محترف يحول المحاضرات المملة لتلاخيص شيقة وممتعة تضمن 100% فهم!
                 </p>
                 
                 <div class="prompt-frame">
                     <div class="prompt-content">
-You are an expert Interactive Academic Tutor. Your task is to analyze the lecture I will provide and quiz me on it.
-Important: You must communicate with the user entirely in ARABIC.
-Step 1: Start by welcoming the student in a friendly way and ask them to provide the following details (in Arabic):
-مستوى الصعوبة: (سهل، متوسط، صعب، أو متدرج).
-لغة الأسئلة: (عربي، إنجليزي، أو لغتين معاً).
-نوع الأسئلة: (اختيار من متعدد، صح وغلط، أو خليط).
-عدد الأسئلة المطلوبة.
-Step 2 (The Interactive Quiz):
-Once the student provides the settings and the lecture text, present ONLY ONE question at a time.
-Wait for the student's response.
-If the answer is correct: Celebrate with a motivating and witty Arabic phrase (e.g., 'إجابة عبقرية! استمر يا بطل!').
-If the answer is incorrect: Say 'للأسف، الإجابة غير صحيحة' and then provide a beautiful, simplified, and engaging explanation in Arabic to help them understand the mistake.
-After the explanation, move to the next question.
-Step 3: At the end, provide a summary of the score and a final encouraging message.
-Confirm you understand by greeting the user in Arabic and asking for the settings now.
+You are the Ultimate Academic Explainer. Your mission is to transform a boring lecture into an exciting, clear, and highly engaging summary that guarantees 100% understanding.
+Instructions for Content Processing:
+The Style: Use a friendly, professional, yet 'fun' tone. Break down complex concepts into simple analogies or real-life examples.
+Language Handling:
+If the Lecture is in Arabic: Summarize it in clear, modern Arabic (Fusha or white dialect), highlighting the core concepts using bold headings and bullet points.
+If the Lecture is in English: Follow a 'Paragraph by Paragraph' approach. For every main idea:
+Write the explanation in Professional English.
+Immediately follow it with a Beautiful Arabic Translation/Summary of that specific part.
+The Structure:
+The 'Big Picture': Start with a 2-line summary of what this lecture is actually about.
+Key Concepts: Break the lecture into digestible sections.
+The 'Why it Matters': Explain why this information is useful in real life.
+Final Summary: A 'Cheat Sheet' (table or list) for quick revision.
+Visual Layout: Use emojis, bold text, and clear spacing to make the text scannable and easy on the eye.
+Wait for me to provide the lecture content, then start your magic!
                     </div>
                 </div>
                 
@@ -663,7 +721,53 @@ Confirm you understand by greeting the user in Arabic and asking for the setting
                 </button>
             </div>
             
-            <!-- بطاقة التعليمات -->
+            <!-- مميزات البرومبت -->
+            <div class="features-card">
+                <div class="features-header">
+                    <i class="fas fa-star"></i>
+                    <h2>ليه البرومبت ده جامد؟ ✨</h2>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">🧠</div>
+                        <h3>فهم 100% مضمون</h3>
+                        <p>يحول المفاهيم المعقدة لمصطلحات بسيطة وأمثلة من الحياة الواقعية تضمن الفهم الكامل</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">🌍</div>
+                        <h3>تعدد اللغات</h3>
+                        <p>يعمل مع المحاضرات العربية والإنجليزية ويوفر شرح مزدوج باللغتين معاً</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">🎯</div>
+                        <h3>هيكل منظم</h3>
+                        <p>يوفر ملخص كامل مع شيت المراجعة النهائي لتراجع قبل الامتحان في دقائق</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">💡</div>
+                        <h3>تطبيقات عملية</h3>
+                        <p>يركز على "ليه المعلومة دي مهمة" وازاي تطبقها في الحياة الواقعية</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">📊</div>
+                        <h3>تصميم مرئي</h3>
+                        <p>يستخدم الإيموجي والعناوين الواضحة والتبويب علشان يكون سهل القراءة</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">⚡</div>
+                        <h3>سرعة فائقة</h3>
+                        <p>محاضرة 3 ساعات تتحول لتلخيص منظم في دقائق قليلة</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- قسم التعليمات -->
             <div class="instructions-card">
                 <div class="instructions-header">
                     <i class="fas fa-graduation-cap"></i>
@@ -698,16 +802,24 @@ Confirm you understand by greeting the user in Arabic and asking for the setting
                     <li class="instruction-item">
                         <div class="instruction-number">4</div>
                         <div class="instruction-text">
-                            <h3>ابدأ المحادثة</h3>
-                            <p>Gemini هيرد عليك بالعربي ويطلب منك إعدادات الاختبار، بعدها حط النص اللي عايز تذاكره</p>
+                            <h3>حط نص المحاضرة</h3>
+                            <p>انسخ نص المحاضرة اللي عايز تلخصها والصقها بعد البرومبت</p>
                         </div>
                     </li>
                     
                     <li class="instruction-item">
                         <div class="instruction-number">5</div>
                         <div class="instruction-text">
-                            <h3>استمتع بالاختبار التفاعلي</h3>
-                            <p>هتلاقي نفسك بتحل اختبار تفاعلي مع تصحيح فوري وشرح لأخطائك!</p>
+                            <h3>استلم التلخيص الرهيب</h3>
+                            <p>Gemini هيبدا يطلع لك تلخيص منظم، ممتع، وبيشرح كل حاجة ببساطة!</p>
+                        </div>
+                    </li>
+                    
+                    <li class="instruction-item">
+                        <div class="instruction-number">6</div>
+                        <div class="instruction-text">
+                            <h3>حفظ ومراجعة</h3>
+                            <p>احفظ التلخيص واستخدم شيت المراجعة النهائي علشان تراجع قبل الامتحان</p>
                         </div>
                     </li>
                 </ol>
@@ -723,127 +835,30 @@ Confirm you understand by greeting the user in Arabic and asking for the setting
 
     <footer class="footer">
         <p>جامعة المنصورة الجديدة - إعداد الطالب زياد ابراهيم</p>
-        <p style="margin-top: 10px; font-size: 0.8rem; color: var(--accent);">"ما فيش فلوس API؟ مش مشكلة، عندك حل مجاني أحسن!" 😄</p>
+        <p style="margin-top: 10px; font-size: 0.8rem; color: var(--accent);">"محاضرات طويلة؟ مش مشكلة، عندك برومبت يلخصها ويشرحها أحسن من الدكتور نفسه!" 😄</p>
     </footer>
 
-    <!-- ملف الصوت - يعمل تلقائياً فور فتح الصفحة -->
-    <audio id="backgroundAudio" autoplay loop>
-        <source src="money.mp3" type="audio/mpeg">
-        <source src="money.ogg" type="audio/ogg">
-    </audio>
-
     <script>
-        // كود تشغيل الصوت تلقائياً فور فتح الصفحة
-        document.addEventListener('DOMContentLoaded', function() {
-            const audio = document.getElementById('backgroundAudio');
-            
-            // إعدادات الصوت
-            audio.volume = 0.3; // مستوى صوت منخفض (هادئ)
-            audio.muted = false;
-            audio.preload = "auto"; // تحميل مسبق
-            
-            console.log("🎵 جاري تشغيل الموسيقى تلقائياً...");
-            
-            // محاولة تشغيل الصوت فوراً
-            const playAudio = () => {
-                const playPromise = audio.play();
-                
-                if (playPromise !== undefined) {
-                    playPromise
-                        .then(() => {
-                            console.log("✅ الموسيقى تشتغل تلقائياً!");
-                            addMusicIndicator();
-                        })
-                        .catch(error => {
-                            console.log("⚠️ المتصفح منع التشغيل التلقائي. جاري المحاولة بطرق أخرى...", error);
-                            
-                            // خطة بديلة 1: المحاولة بعد تأخير
-                            setTimeout(() => {
-                                audio.play().catch(e => {
-                                    console.log("محاولة تأخير فشلت:", e);
-                                });
-                            }, 500);
-                            
-                            // خطة بديلة 2: تشغيل عند أي تفاعل
-                            const playOnInteraction = () => {
-                                audio.play().then(() => {
-                                    console.log("✅ الموسيقى تشتغل بعد تفاعل المستخدم!");
-                                    removeEventListeners();
-                                }).catch(e => console.log("فشل:", e));
-                            };
-                            
-                            // إضافة مستمعي الأحداث
-                            ['click', 'touchstart', 'keydown', 'mousemove'].forEach(event => {
-                                document.addEventListener(event, playOnInteraction, { once: true });
-                            });
-                            
-                            // إزالة المستمعين بعد النجاح
-                            function removeEventListeners() {
-                                ['click', 'touchstart', 'keydown', 'mousemove'].forEach(event => {
-                                    document.removeEventListener(event, playOnInteraction);
-                                });
-                            }
-                        });
-                }
-            };
-            
-            // بدء تشغيل الصوت بعد تحميل الصفحة مباشرة
-            setTimeout(playAudio, 100);
-            
-            // محاولة إضافية بعد تحميل الصفحة بالكامل
-            window.addEventListener('load', () => {
-                setTimeout(playAudio, 300);
-            });
-            
-            // إعادة تشغيل الصوت إذا توقف
-            setInterval(() => {
-                if (audio.paused && document.visibilityState === 'visible') {
-                    audio.play().catch(e => {
-                        // تجاهل الأخطاء
-                    });
-                }
-            }, 3000); // كل 3 ثواني
-        });
-        
-        // إضافة مؤشر الموسيقى الخفي
-        function addMusicIndicator() {
-            const indicator = document.createElement('div');
-            indicator.className = 'music-indicator';
-            indicator.innerHTML = '<i class="fas fa-music"></i>';
-            document.body.appendChild(indicator);
-            
-            // إخفاء المؤشر بعد 10 ثواني
-            setTimeout(() => {
-                indicator.style.transition = 'opacity 2s ease';
-                indicator.style.opacity = '0';
-                setTimeout(() => {
-                    if (indicator.parentNode) {
-                        document.body.removeChild(indicator);
-                    }
-                }, 2000);
-            }, 10000);
-        }
-        
         // نسخ البرومبت
         const copyBtn = document.getElementById('copyBtn');
         const copyNotification = document.getElementById('copyNotification');
         
         copyBtn.addEventListener('click', function() {
-            const promptText = `You are an expert Interactive Academic Tutor. Your task is to analyze the lecture I will provide and quiz me on it.
-Important: You must communicate with the user entirely in ARABIC.
-Step 1: Start by welcoming the student in a friendly way and ask them to provide the following details (in Arabic):
-مستوى الصعوبة: (سهل، متوسط، صعب، أو متدرج).
-لغة الأسئلة: (عربي، إنجليزي، أو لغتين معاً).
-نوع الأسئلة: (اختيار من متعدد، صح وغلط، أو خليط).
-عدد الأسئلة المطلوبة.
-Step 2 (The Interactive Quiz):
-Once the student provides the settings and the lecture text, present ONLY ONE question at a time.
-Wait for the student's response.
-If the answer is correct: Celebrate with a motivating and witty Arabic phrase (e.g., 'إجابة عبقرية! استمر يا بطل!').
-If the answer is incorrect: Say 'للأسف، الإجابة غير صحيحة' and then provide a beautiful, simplified, and engaging explanation in Arabic to help them understand the mistake.
-After the explanation, move to the next question.
-Step 3: At the end, provide a summary of the score and a final encouraging message.
-Confirm you understand by greeting the user in Arabic and asking for the settings now.`;
+            const promptText = `You are the Ultimate Academic Explainer. Your mission is to transform a boring lecture into an exciting, clear, and highly engaging summary that guarantees 100% understanding.
+Instructions for Content Processing:
+The Style: Use a friendly, professional, yet 'fun' tone. Break down complex concepts into simple analogies or real-life examples.
+Language Handling:
+If the Lecture is in Arabic: Summarize it in clear, modern Arabic (Fusha or white dialect), highlighting the core concepts using bold headings and bullet points.
+If the Lecture is in English: Follow a 'Paragraph by Paragraph' approach. For every main idea:
+Write the explanation in Professional English.
+Immediately follow it with a Beautiful Arabic Translation/Summary of that specific part.
+The Structure:
+The 'Big Picture': Start with a 2-line summary of what this lecture is actually about.
+Key Concepts: Break the lecture into digestible sections.
+The 'Why it Matters': Explain why this information is useful in real life.
+Final Summary: A 'Cheat Sheet' (table or list) for quick revision.
+Visual Layout: Use emojis, bold text, and clear spacing to make the text scannable and easy on the eye.
+Wait for me to provide the lecture content, then start your magic!`;
             
             // نسخ إلى الحافظة
             navigator.clipboard.writeText(promptText).then(() => {
@@ -886,7 +901,7 @@ Confirm you understand by greeting the user in Arabic and asking for the setting
         
         // تحريك البطاقات عند التمرير
         document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.prompt-card, .instructions-card');
+            const cards = document.querySelectorAll('.prompt-card, .instructions-card, .features-card');
             
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry, index) => {
@@ -916,14 +931,16 @@ Confirm you understand by greeting the user in Arabic and asking for the setting
             this.style.transform = 'translateY(0) scale(1)';
         });
         
-        // متابعة حالة الصوت والصفحة
-        document.addEventListener('visibilitychange', function() {
-            const audio = document.getElementById('backgroundAudio');
-            if (document.visibilityState === 'visible' && audio.paused) {
-                audio.play().catch(e => {
-                    // تجاهل الأخطاء
-                });
-            }
+        // إضافة تأثيرات للعناصر المميزة
+        const featureItems = document.querySelectorAll('.feature-item');
+        featureItems.forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
         });
     </script>
 </body>
