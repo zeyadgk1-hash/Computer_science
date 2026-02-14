@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>منصة الإدارة | جامعة المنصورة الجديدة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+      body {
+        font-family: 'Cairo', sans-serif;
+        background-color: #F9FAFB; /* Light background */
+        color: #111827; /* Dark text */
+        transition: background-color 0.5s ease;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+      }
+      
+      /* Desktop Specific Optimizations */
+      @media (min-width: 1024px) {
+        .desktop-max-width {
+          max-width: 1440px !important;
+          margin-left: auto !important;
+          margin-right: auto !important;
+        }
+        .hero-title-scale {
+          font-size: clamp(2.5rem, 5vw, 5.5rem) !important;
+          line-height: 1.4 !important; 
+          letter-spacing: -0.02em;
+        }
+      }
+
+      /* Ruby Red Gradient Text */
+      .text-ruby-gradient {
+        background: linear-gradient(to bottom, #FF4D4D 0%, #9B111E 50%, #5E0A12 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* Ruby Glow Effects */
+      .ruby-glow {
+        box-shadow: 0 10px 40px rgba(155, 17, 30, 0.1);
+      }
+      .ruby-border {
+        border: 1px solid rgba(155, 17, 30, 0.2);
+      }
+
+      @keyframes shimmer {
+        0% { background-position: 0 0; }
+        100% { background-position: 40px 0; }
+      }
+      .animate-shimmer {
+        animation: shimmer 1.5s linear infinite;
+      }
+
+      @keyframes fade-in {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      .animate-fade-in {
+        animation: fade-in 0.6s ease-out forwards;
+      }
+
+      @keyframes slide-up {
+        from { opacity: 0; transform: translateY(40px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-slide-up {
+        animation: slide-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      @keyframes scale-in {
+        from { opacity: 0; transform: scale(0.9); }
+        to { opacity: 1; transform: scale(1); }
+      }
+      .animate-scale-in {
+        animation: scale-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      }
+
+      @media print {
+        .no-print { display: none !important; }
+        body { background-color: white !important; color: black !important; }
+      }
+
+      /* Premium Red Scrollbar */
+      ::-webkit-scrollbar { width: 6px; height: 6px; }
+      ::-webkit-scrollbar-track { background: #F3F4F6; }
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(to bottom, #9B111E, #5E0A12);
+        border-radius: 10px;
+      }
+
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+      ::selection { background-color: #9B111E; color: #fff; }
+      * { -webkit-tap-highlight-color: transparent; }
+
+      .glass-card {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(155, 17, 30, 0.1);
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              ruby: {
+                50: '#FFF1F2',
+                100: '#FFE4E6',
+                200: '#FECDD3',
+                300: '#FDA4AF',
+                400: '#FB7185',
+                500: '#9B111E', // Primary Ruby Red
+                600: '#7E1019',
+                700: '#5E0A12',
+                800: '#4A080E',
+                900: '#310509',
+              },
+              light: {
+                50: '#F9FAFB',
+                100: '#F3F4F6',
+                200: '#E5E7EB',
+                300: '#D1D5DB',
+              },
+              dark: {
+                900: '#111827',
+                800: '#1F2937',
+                700: '#374151',
+                600: '#4B5563',
+              }
+            },
+            borderRadius: {
+              '4xl': '2rem',
+              '5xl': '2.5rem',
+            }
+          }
+        }
+      }
+    </script>
+
+<link rel="stylesheet" href="/index.css">
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/"
+  }
+}
+</script>
+  <script type="module" crossorigin src="/assets/index-IJBGomVx.js"></script>
+</head>
+  <body class="bg-gray-50 text-gray-900">
+    <div id="root"></div>
+</body>
+</html>
