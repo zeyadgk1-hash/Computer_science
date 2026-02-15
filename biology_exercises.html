@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Biology I | جامعة المنصورة الجديدة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- KaTeX Core Library -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+
+    <style>
+      :root {
+        --brand-primary: #10b981;
+        --brand-dark: #064e3b;
+        --bg-light: #f0fdf4;
+      }
+      body {
+        font-family: 'Cairo', sans-serif;
+        background-color: var(--bg-light);
+        margin: 0;
+        padding: 0;
+        -webkit-tap-highlight-color: transparent;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+      
+      .btn-management {
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        font-weight: 700;
+        border-radius: 0.75rem;
+      }
+      
+      .btn-management:active {
+        transform: scale(0.98);
+      }
+
+      .q-square {
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        border-radius: 12px;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        font-size: 1.1rem;
+        border: 2px solid #e2e8f0;
+        background: white;
+        color: #64748b;
+        user-select: none;
+      }
+
+      .q-square.active {
+        background-color: var(--brand-primary) !important;
+        color: white !important;
+        border-color: var(--brand-primary) !important;
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        transform: translateY(-2px);
+      }
+
+      .q-square.answered {
+        background-color: #ecfdf5;
+        color: #059669;
+        border-color: #a7f3d0;
+      }
+
+      .q-square:hover:not(.active) {
+        border-color: var(--brand-primary);
+        color: var(--brand-primary);
+        background: #f0fdf4;
+      }
+
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      
+      .math-inline { display: inline-flex; align-items: center; font-weight: 700; color: inherit; }
+      .katex { font-size: 1.1em; color: inherit; }
+
+      @keyframes slideIn {
+        from { opacity: 0; transform: translateX(20px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+      .animate-slide-in { animation: slideIn 0.3s ease-out forwards; }
+      
+      .sidebar-portal {
+        scrollbar-width: thin;
+        scrollbar-color: #d1fae5 transparent;
+      }
+      .sidebar-portal::-webkit-scrollbar { width: 4px; }
+      .sidebar-portal::-webkit-scrollbar-thumb { background: #d1fae5; border-radius: 10px; }
+
+      #root {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+
+<link rel="stylesheet" href="/index.css">
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/"
+  }
+}
+</script>
+  <script type="module" crossorigin src="/assets/index-BrYQ86OH.js"></script>
+</head>
+  <body>
+    <div id="root"></div>
+</body>
+</html>
