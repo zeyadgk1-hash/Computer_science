@@ -706,7 +706,7 @@
             color: #22c55e;
         }
         
-        /* المودال */
+        /* المودال - مع إضافة النجوم والطابع الرمضاني فقط */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -743,6 +743,60 @@
             animation: modalSlideUp 0.4s ease;
             position: relative;
             border: 2px solid var(--accent);
+            overflow: hidden;
+        }
+        
+        /* حاوية النجوم - إضافة جديدة فقط */
+        .stars-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .star {
+            position: absolute;
+            color: #ffd700;
+            font-size: 1.2rem;
+            filter: drop-shadow(0 0 5px gold);
+            animation: twinkle 2s infinite alternate;
+            opacity: 0;
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        /* فانوس في الخلفية - إضافة جديدة فقط */
+        .modal-lantern {
+            position: absolute;
+            bottom: -10px;
+            left: -10px;
+            font-size: 100px;
+            opacity: 0.1;
+            transform: rotate(15deg);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* عنوان رمضاني - إضافة جديدة فقط */
+        .ramadan-title {
+            color: #b8860b;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* محتوى المودال فوق النجوم */
+        .modal-content > *:not(.stars-container):not(.modal-lantern) {
+            position: relative;
+            z-index: 1;
         }
         
         @keyframes modalSlideUp {
@@ -773,6 +827,7 @@
             align-items: center;
             justify-content: center;
             transition: var(--transition);
+            z-index: 10;
         }
         
         .close-btn:hover {
@@ -1054,6 +1109,74 @@
                 border-right-color: var(--accent);
             }
         }
+        /* حاوية الزينة الرئيسية */
+/* حاوية الزينة */
+/* حاوية الزينة */
+.ramadan-bunting {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* يضمن التصاقهم بالحبل من فوق */
+    width: 100%;
+    position: relative;
+    z-index: 9999;
+    margin-bottom: -45px; /* لسحب الزينة فوق أول كارت */
+    padding: 0;
+    height: 100px;
+}
+
+/* الحبل المستقيم - يمر في أعلى الزينة بالضبط */
+.straight-rope {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #4a3427; /* لون الحبل */
+    z-index: 5;
+}
+
+/* قاعدة موحدة لكل العناصر المعلقة */
+.bunting-item {
+    position: relative;
+    top: 0; /* يلمس الحبل فوراً */
+    filter: drop-shadow(2px 3px 4px rgba(0,0,0,0.2));
+    animation: swing-item 3s ease-in-out infinite;
+    transform-origin: top center;
+}
+
+/* المثلثات */
+.triangle {
+    width: 45px !important;
+    height: auto;
+    margin: 0 2px;
+    top: -12px;
+}
+
+/* الفانوس */
+.lantern-box {
+    width: 70px;
+    margin: 0 10px;
+}
+
+.lantern-img {
+    width: 100%;
+    height: auto;
+    /* التوهج الذهبي */
+    filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.6));
+}
+
+/* حركة التأرجح الموحدة */
+@keyframes swing-item {
+    0%, 100% { transform: rotate(-2deg); }
+    50% { transform: rotate(2deg); }
+}
+
+/* تظبيط الموبايل */
+@media (max-width: 480px) {
+    .triangle { width: 30px; }
+    .lantern-box { width: 50px; }
+    .ramadan-bunting { margin-bottom: -30px; }
+}
     </style>
 </head>
 <body>
@@ -1137,7 +1260,23 @@
         <h1>أهلاً بك</h1>
         <div class="hero-subtitle">NMU - Computer Science 2026</div>
         <p class="hero-description">اختر المادة الدراسية لتبدأ رحلتك التعليمية</p>
+
     </header>
+    <div class="ramadan-bunting">
+    <div class="straight-rope"></div>
+
+    <img src="khayamiya.png" class="bunting-item triangle">
+    <img src="khayamiya.png" class="bunting-item triangle">
+    <img src="khayamiya.png" class="bunting-item triangle">
+    
+    <div class="bunting-item lantern-box">
+        <img src="lantern.png" class="lantern-img">
+    </div>
+
+    <img src="khayamiya.png" class="bunting-item triangle">
+    <img src="khayamiya.png" class="bunting-item triangle">
+    <img src="khayamiya.png" class="bunting-item triangle">
+</div>
 
     <main class="container">
         <div class="main-grid">
@@ -1278,10 +1417,20 @@
         </div>
     </main>
 
-    <!-- المودال الخاص باختيار وجهة المادة -->
+    <!-- المودال الخاص باختيار وجهة المادة - مع إضافة النجوم والفانوس الرمضاني فقط -->
     <div id="subjectModal" class="modal-overlay" onclick="if(event.target===this) toggleModal()">
         <div class="modal-content">
+            <!-- حاوية النجوم المتلألئة - إضافة جديدة -->
+            <div class="stars-container" id="starsContainer"></div>
+            
+            <!-- فانوس في الخلفية - إضافة جديدة -->
+            <div class="modal-lantern">🏮</div>
+            
             <button class="close-btn" onclick="toggleModal()">&times;</button>
+            
+            <!-- عنوان رمضاني - إضافة جديدة -->
+            <div class="ramadan-title">🌙 رمضان كريم ✨</div>
+            
             <h2>اختر وجهتك يا بشمهندس 🚀</h2>
             <div class="modal-subtitle" id="modalSubTitle">مادة الاحتمالات والإحصاء</div>
             
@@ -1302,6 +1451,11 @@
                     </div>
                 </a>
             </div>
+            
+            <!-- عبارة رمضانية - إضافة جديدة -->
+            <div style="margin-top: 20px; color: #b8860b; font-size: 0.9rem;">
+                ✨ كل عام وأنتم بخير ✨
+            </div>
         </div>
     </div>
 
@@ -1310,6 +1464,42 @@
     </footer>
 
     <script>
+    // دالة إنشاء النجوم المتلألئة - إضافة جديدة
+    function createStars() {
+        const starsContainer = document.getElementById('starsContainer');
+        if (!starsContainer) return;
+        
+        starsContainer.innerHTML = ''; // تنظيف النجوم القديمة
+        
+        // إنشاء 20 نجمة بمواقع وأحجام عشوائية
+        for (let i = 0; i < 20; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            
+            // اختيار شكل النجمة عشوائي
+            if (Math.random() > 0.5) {
+                star.innerHTML = '⭐';
+            } else {
+                star.innerHTML = '★';
+            }
+            
+            // موقع عشوائي
+            const top = Math.random() * 100;
+            const left = Math.random() * 100;
+            
+            // تأخير عشوائي للحركة
+            const delay = Math.random() * 3;
+            
+            star.style.top = top + '%';
+            star.style.left = left + '%';
+            star.style.fontSize = (0.8 + Math.random() * 1.2) + 'rem';
+            star.style.animationDelay = delay + 's';
+            star.style.animationDuration = (1 + Math.random() * 2) + 's';
+            
+            starsContainer.appendChild(star);
+        }
+    }
+    
     // دالة فتح/إغلاق القائمة الجانبية
     function toggleSidebar() {
         const sidebar = document.getElementById('sidebar');
@@ -1543,7 +1733,7 @@
         return updateProgress(subject);
     };
     
-    // إدارة المودال
+    // إدارة المودال - مع إضافة إنشاء النجوم
     function toggleModal(subject = 'stats') {
         // إغلاق القائمة الجانبية إذا كانت مفتوحة
         const sidebar = document.getElementById('sidebar');
@@ -1554,6 +1744,9 @@
         currentSubject = subject;
         const modal = document.getElementById('subjectModal');
         const modalSubTitle = document.getElementById('modalSubTitle');
+        
+        // إنشاء نجوم جديدة في كل مرة يفتح فيها المودال - إضافة جديدة
+        createStars();
         
         // تحديث عنوان المودال
         const titles = {
@@ -1813,6 +2006,9 @@
         
         // تحديث خاص للإحصاء
         updateProgress('stats');
+        
+        // إنشاء النجوم للمودال - إضافة جديدة
+        createStars();
         
         // إضافة تأثيرات عند التمرير
         const cards = document.querySelectorAll('.subject-card');
