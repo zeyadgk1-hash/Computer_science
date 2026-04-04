@@ -706,7 +706,7 @@
             color: #22c55e;
         }
         
-        /* المودال - مع إضافة النجوم والطابع الرمضاني فقط */
+        /* المودال */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -743,60 +743,6 @@
             animation: modalSlideUp 0.4s ease;
             position: relative;
             border: 2px solid var(--accent);
-            overflow: hidden;
-        }
-        
-        /* حاوية النجوم - إضافة جديدة فقط */
-        .stars-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        .star {
-            position: absolute;
-            color: #ffd700;
-            font-size: 1.2rem;
-            filter: drop-shadow(0 0 5px gold);
-            animation: twinkle 2s infinite alternate;
-            opacity: 0;
-        }
-        
-        @keyframes twinkle {
-            0% { opacity: 0.2; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1.2); }
-        }
-        
-        /* فانوس في الخلفية - إضافة جديدة فقط */
-        .modal-lantern {
-            position: absolute;
-            bottom: -10px;
-            left: -10px;
-            font-size: 100px;
-            opacity: 0.1;
-            transform: rotate(15deg);
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        /* عنوان رمضاني - إضافة جديدة فقط */
-        .ramadan-title {
-            color: #b8860b;
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-            font-weight: 700;
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* محتوى المودال فوق النجوم */
-        .modal-content > *:not(.stars-container):not(.modal-lantern) {
-            position: relative;
-            z-index: 1;
         }
         
         @keyframes modalSlideUp {
@@ -827,7 +773,6 @@
             align-items: center;
             justify-content: center;
             transition: var(--transition);
-            z-index: 10;
         }
         
         .close-btn:hover {
@@ -1192,8 +1137,8 @@
         <h1>أهلاً بك</h1>
         <div class="hero-subtitle">NMU - Computer Science 2026</div>
         <p class="hero-description">اختر المادة الدراسية لتبدأ رحلتك التعليمية</p>
-
     </header>
+
     <main class="container">
         <div class="main-grid">
             
@@ -1333,20 +1278,10 @@
         </div>
     </main>
 
-    <!-- المودال الخاص باختيار وجهة المادة - مع إضافة النجوم والفانوس الرمضاني فقط -->
+    <!-- المودال الخاص باختيار وجهة المادة -->
     <div id="subjectModal" class="modal-overlay" onclick="if(event.target===this) toggleModal()">
         <div class="modal-content">
-            <!-- حاوية النجوم المتلألئة - إضافة جديدة -->
-            <div class="stars-container" id="starsContainer"></div>
-            
-            <!-- فانوس في الخلفية - إضافة جديدة -->
-            <div class="modal-lantern">🏮</div>
-            
             <button class="close-btn" onclick="toggleModal()">&times;</button>
-            
-            <!-- عنوان رمضاني - إضافة جديدة -->
-            <div class="ramadan-title">🌙 رمضان كريم ✨</div>
-            
             <h2>اختر وجهتك يا بشمهندس 🚀</h2>
             <div class="modal-subtitle" id="modalSubTitle">مادة الاحتمالات والإحصاء</div>
             
@@ -1375,7 +1310,7 @@
     </footer>
 
     <script>
-     // دالة فتح/إغلاق القائمة الجانبية
+    // دالة فتح/إغلاق القائمة الجانبية
     function toggleSidebar() {
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('sidebar-overlay');
@@ -1608,7 +1543,7 @@
         return updateProgress(subject);
     };
     
-    // إدارة المودال - مع إضافة إنشاء النجوم
+    // إدارة المودال
     function toggleModal(subject = 'stats') {
         // إغلاق القائمة الجانبية إذا كانت مفتوحة
         const sidebar = document.getElementById('sidebar');
@@ -1619,9 +1554,6 @@
         currentSubject = subject;
         const modal = document.getElementById('subjectModal');
         const modalSubTitle = document.getElementById('modalSubTitle');
-        
-        // إنشاء نجوم جديدة في كل مرة يفتح فيها المودال - إضافة جديدة
-        createStars();
         
         // تحديث عنوان المودال
         const titles = {
@@ -1881,9 +1813,6 @@
         
         // تحديث خاص للإحصاء
         updateProgress('stats');
-        
-        // إنشاء النجوم للمودال - إضافة جديدة
-        createStars();
         
         // إضافة تأثيرات عند التمرير
         const cards = document.querySelectorAll('.subject-card');
